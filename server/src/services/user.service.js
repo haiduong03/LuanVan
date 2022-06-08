@@ -6,7 +6,7 @@ const config = require("../configs/general.config");
 const emailValid = require("email-validator");
 const passValid = require("joi-password-complexity");
 
-async function getAllUser(page = 1) {
+async function getAllUsr(page) {
 	const offset = helper.getOffset(page, config.listPerPage);
 	const rows = await db.query(`SELECT * FROM user LIMIT ?,?`, [
 		offset,
@@ -23,19 +23,18 @@ async function getAllUser(page = 1) {
 	};
 }
 
+async function findUsrId(id) {
+	return await db.query(`SELECT * FROM user where user_id=?`, [id]);
+}
+
+// async function findUsrName(name)
+
 async function checkEmailValid(user_email) {
 	return emailValid.validate(user_email);
 }
 
 async function checkPassValid(user_pass) {
-	const result = passValid().validate(user_pass);
-	// const value = result.error.details[0].message;
-	// const message = result.error.details[0].message;
-	return {
-		// message,
-		// value,
-		result,
-	};
+	return passValid().validate(user_pass);
 }
 
 async function checkPassUsr(user) {
@@ -89,12 +88,10 @@ async function register(user) {
 		message = "Created user successfully";
 	}
 
-	return {
-		message,
-	};
+	return message;
 }
 
-async function updateUsr(user) {
+async function updateUsr(id, user) {
 	const result = await db.query(
 		`UPDATE user 
 		SET user_name=?,
@@ -109,7 +106,7 @@ async function updateUsr(user) {
 			user.user_pass,
 			user.user_phone,
 			user.user_address,
-			user.user_id,
+			id,
 		],
 	);
 
@@ -119,15 +116,11 @@ async function updateUsr(user) {
 		message = "User updated successfully";
 	}
 
-	return {
-		message,
-	};
+	return message;
 }
 
-async function removeUsr(user) {
-	const result = await db.query(`DELETE FROM user WHERE user_id=?`, [
-		user.user_id,
-	]);
+async function removeUsr(id) {
+	const result = await db.query(`DELETE FROM user WHERE user_id=?`, [id]);
 
 	let message = "Error in deleting user";
 
@@ -135,18 +128,25 @@ async function removeUsr(user) {
 		message = "User deleted successfully";
 	}
 
-	return {
-		message,
-	};
+	return message;
+}
+
+async function login(user) {
+	// const result = await db.query(`DELETE FROM user WHERE user_id=?`, [id]);
+	// let message = "Error in deleting user";
+	// if (result.affectedRows) {
+	// 	message = "User deleted successfully";
+	// }
+	// return {
+	// 	message,
+	// };
 }
 
 module.exports = {
-	getAllUser,
+	getAllUsr,
+	findUsrId,
 	register,
-	checkEmailUsr,
-	checkEmailValid,
-	checkPassUsr,
-	checkPassValid,
 	updateUsr,
 	removeUsr,
+	login,
 };

@@ -5,10 +5,14 @@ const bodyParser = require("body-parser");
 const app = express();
 const port = process.env.PORT || 3000;
 const programmingLanguagesRouter = require("./src/routes/programmingLanguages.route");
+const cors = require("cors");
 
 const userRouter = require("./src/routes/user.route");
 
+app.use(cors());
+
 app.use(bodyParser.json());
+
 app.use(
 	bodyParser.urlencoded({
 		extended: true,

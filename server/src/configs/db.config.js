@@ -6,7 +6,7 @@ const db = {
 	host: "localhost",
 	user: "root",
 	password: "",
-	database: "web",
+	database: "luanvan",
 	port: 3306,
 	// ssl: {
 	//   mode: 'VERIFY_IDENTITY',
