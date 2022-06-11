@@ -30,7 +30,7 @@ app.get("/", (req, res) => {
 
 app.use("/programming-languages", programmingLanguagesRouter);
 
-app.use("/", userRouter);
+app.use("/user", userRouter);
 
 /* Error handler middleware */
 app.use((err, req, res, next) => {

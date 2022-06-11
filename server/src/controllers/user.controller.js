@@ -4,7 +4,7 @@ const user = require("../services/user.service");
 
 async function getAllUsr(req, res, next) {
 	try {
-		res.json(await user.getAllUsr(req.query.page));
+		res.json(await user.getAllUsr(req.params.page));
 	} catch (err) {
 		console.error(`Error while getting user`, err.message);
 		next(err);
@@ -13,16 +13,26 @@ async function getAllUsr(req, res, next) {
 
 async function findUsrId(req, res, next) {
 	try {
-		res.json(await user.findUsrId(req.query.id));
-		// console.log(req);
+		res.json(await user.findUsrId(req.params.id));
 	} catch (err) {
 		console.error(`Error while getting user`, err.message);
 		next(err);
 	}
 }
-async function register(req, res, next) {
+
+async function findUsrName(req, res, next) {
 	try {
-		res.json(await user.register(req.body));
+		res.json(await user.findUsrName(req.query.name));
+		// console.log(req.query.name);
+	} catch (err) {
+		console.error(`Error while getting user`, err.message);
+		next(err);
+	}
+}
+
+async function createUsr(req, res, next) {
+	try {
+		res.json(await user.createUsr(req.body));
 	} catch (err) {
 		console.error(`Error while register user`, err.message);
 		next(err);
@@ -31,7 +41,8 @@ async function register(req, res, next) {
 
 async function updateUsr(req, res, next) {
 	try {
-		res.json(await user.updateUsr(req.query.id, req.body));
+		res.json(await user.updateUsr(req.params.id, req.body));
+		// console
 	} catch (err) {
 		console.error(`Error while updating user`, err.message);
 		next(err);
@@ -40,58 +51,28 @@ async function updateUsr(req, res, next) {
 
 async function removeUsr(req, res, next) {
 	try {
-		res.json(await user.removeUsr(req.query.id));
+		res.json(await user.removeUsr(req.params.id));
 	} catch (err) {
 		console.error(`Error while updating user`, err.message);
 		next(err);
 	}
 }
 
-// async function checkPassUsr(req, res, next) {
-// 	try {
-// 		res.json(await user.checkPassUsr(req.body));
-// 	} catch (err) {
-// 		console.error(`Error: `, err.message);
-// 		next(err);
-// 	}
-// }
-
-// async function checkEmailUsr(req, res, next) {
-// 	try {
-// 		res.json(await user.checkEmailUsr(req.body));
-// 	} catch (err) {
-// 		console.error(`Error: `, err.message);
-// 		next(err);
-// 	}
-// }
-
-// async function checkEmailValid(req, res, next) {
-// 	try {
-// 		res.json(await user.checkEmailValid(req.query.email));
-// 		// console.log(req.body.user_email);
-// 	} catch (err) {
-// 		console.error(`Error: `, err.message);
-// 		next(err);
-// 	}
-// }
-
-// async function checkPassValid(req, res, next) {
-// 	try {
-// 		res.json(await user.checkPassValid(req.query.pass));
-// 	} catch (err) {
-// 		console.error(`Error: `, err.message);
-// 		next(err);
-// 	}
-// }
+async function login(req, res, next) {
+	try {
+		res.json(await user.login(req.body));
+	} catch (err) {
+		console.error(`Error while updating user`, err.message);
+		next(err);
+	}
+}
 
 module.exports = {
 	getAllUsr,
 	findUsrId,
-	register,
+	findUsrName,
+	createUsr,
 	updateUsr,
 	removeUsr,
-	// checkPassUsr,
-	// checkPassValid,
-	// checkEmailUsr,
-	// checkEmailValid,
+	login,
 };

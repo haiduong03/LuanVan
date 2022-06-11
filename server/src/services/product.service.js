@@ -1,20 +1,17 @@
 /** @format */
 
-// const { query } = require("express");
 const db = require("./db.service");
 const helper = require("../utils/helper.util");
 const config = require("../configs/general.config");
 const emailValid = require("email-validator");
 const passValid = require("joi-password-complexity");
-const jose = require("jose");
-// const dotenv = require("dotenv");
 
-async function getAllUsr(page) {
+async function getAllAdm(page) {
 	const offset = helper.getOffset(page, config.listPerPage);
-	const rows = await db.query(`SELECT * FROM user LIMIT ?,?`, [
-		offset,
-		config.listPerPage,
-	]);
+	const rows = await db.query(
+		`SELECT * FROM user WHERE user_type=1 LIMIT ?,?`,
+		[offset, config.listPerPage],
+	);
 	const data = helper.emptyOrRows(rows);
 	const meta = {
 		page,
@@ -26,18 +23,18 @@ async function getAllUsr(page) {
 	};
 }
 
-async function findUsrId(id) {
+async function findAdmId(id) {
 	return await db.query(`SELECT * FROM user where user_id=?`, [id]);
 }
 
-async function findUsrMail(email) {
+async function findAdmMail(email) {
 	return await db.query(`SELECT * FROM user where user_email=?`, [email]);
 }
 
-async function findUsrName(name) {
-	return await db.query(
-		`SELECT * FROM user where user_name LIKE ` + `N'%${name}%'`,
-	);
+async function findAdmName(name) {
+	return await db.query(`SELECT * FROM user where user_name LIKE N'%=?%'`, [
+		name,
+	]);
 }
 
 async function checkEmailValid(email) {
@@ -48,7 +45,18 @@ async function checkPassValid(password) {
 	return passValid().validate(password);
 }
 
-async function createUsr(user) {
+async function checkPassUsr(user) {
+	return await db.query(`SELECT user_pass FROM user WHERE user_email=?`, [
+		user.user_pass,
+		user.user_email,
+	]);
+}
+
+async function checkEmailUsr(email) {
+	return await db.query(`SELECT user_email FROM user WHERE user_email=?`);
+}
+
+async function register(user) {
 	const result = await db.query(
 		`INSERT INTO  user  
       (	user_name,
@@ -118,27 +126,8 @@ async function removeUsr(id) {
 	return message;
 }
 
-async function login(user) {
-	const use = await findUsrMail(user.user_email);
-	if (use && user.user_pass == use[0].user_pass) {
-		return "1";
-
-		// console.log(jose.);
-	}
-	// const data = user;
-	// jwt.SignJWT();
-	// console.log(use);
-	// console.log("upas", user.user_pass);
-	// console.log("pas", use[0].user_pass);
-}
-
 module.exports = {
-	getAllUsr,
-	findUsrId,
-	findUsrMail,
-	findUsrName,
-	createUsr,
+	register,
 	updateUsr,
 	removeUsr,
-	login,
 };

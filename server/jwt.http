@@ -1,2 +1,2 @@
-GET http://localhost:3000/getAllUsr?page=1
+GET http://localhost:3000/findUsrId/1
 

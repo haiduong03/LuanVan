@@ -4,22 +4,18 @@ const express = require("express");
 const router = express.Router();
 const user = require("../controllers/user.controller");
 
-router.get("/getAllUsr", user.getAllUsr);
+router.get("/getAllUsr/:page", user.getAllUsr);
 
-router.post("/register", user.register);
+router.post("/createUsr", user.createUsr);
 
-router.put("/update", user.updateUsr);
+router.get("/login", user.login);
 
-router.delete("/remove", user.removeUsr);
+router.put("/update/:id", user.updateUsr);
 
-router.get("/findUsrId", user.findUsrId);
+router.delete("/remove/:id", user.removeUsr);
 
-// router.get("/chkpass", user.checkPassUsr);
+router.get("/findUsrId/:id", user.findUsrId);
 
-// router.get("/chkmail", user.checkEmailUsr);
-
-// router.get("/checkEmailValid", user.checkEmailValid);
-
-// router.get("/checkPassValid", user.checkPassValid);
+router.get("/findUsrName", user.findUsrName);
 
 module.exports = router;
