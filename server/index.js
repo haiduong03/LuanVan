@@ -3,7 +3,8 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
-const port = process.env.PORT || 3000;
+require("dotenv").config();
+const port = process.env.PORT;
 const programmingLanguagesRouter = require("./src/routes/programmingLanguages.route");
 const cors = require("cors");
 
