@@ -1,14 +1,14 @@
 /** @format */
 
 const express = require("express");
-const bodyParser = require("body-parser");
 const app = express();
 require("dotenv").config();
+const bodyParser = require("body-parser");
 const port = process.env.PORT;
 const programmingLanguagesRouter = require("./src/routes/programmingLanguages.route");
 const cors = require("cors");
-
 const userRouter = require("./src/routes/user.route");
+const adminRouter = require("./src/routes/admin.route");
 
 app.use(cors());
 
@@ -33,11 +33,15 @@ app.use("/programming-languages", programmingLanguagesRouter);
 
 app.use("/user", userRouter);
 
+app.use("/admin", adminRouter);
+
 /* Error handler middleware */
 app.use((err, req, res, next) => {
 	const statusCode = err.statusCode || 500;
 	console.error(err.message, err.stack);
-	res.status(statusCode).json({ message: err.message });
+	res.status(statusCode).json({
+		message: err.message
+	});
 
 	return;
 });
