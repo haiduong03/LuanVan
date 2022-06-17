@@ -4,7 +4,7 @@ const db = require("./db.service");
 const helper = require("../utils/helper.util");
 const config = require("../configs/general.config");
 const emailValid = require("email-validator");
-const passValid = require("password-validator");
+const Valid = require("password-validator");
 require("dotenv").config();
 const bcryptjs = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -69,6 +69,10 @@ async function findUsrId(id) {
 }
 
 async function findUsrMail(email) {
+	if (await checkEmailValid(email) == false) {
+		message = "Invalid email address";
+		return message
+	}
 	return await db.query(`SELECT * FROM user where user_type = 0 AND user_email=?`, [email]);
 }
 
@@ -96,7 +100,7 @@ async function checkEmailValid(email) {
 }
 
 async function checkPassValid(password) {
-	const constructor = new passValid()
+	const constructor = new Valid()
 
 		// Add properties to it
 		.is()
@@ -119,10 +123,23 @@ async function checkPassValid(password) {
 	return constructor.validate(password); // true or false
 }
 
+async function checkPhoneValid(phone) {
+	const constructor = new Valid()
+
+		// Add properties to it
+		.is()
+		.min(10) // Minimum length 10
+		.is()
+		.max(13) // Maximum length 1
+
+	return constructor.validate(phone); // true or false
+}
+
 async function createUsr(user) {
 	const oldUsr = await findUsrMail(user.user_email);
 	const email = await checkEmailValid(user.user_email);
 	const pass = await checkPassValid(user.user_pass);
+	const phone = await checkPhoneValid((user.user_phone).toString());
 
 	if (
 		!user.user_name ||
@@ -144,6 +161,13 @@ async function createUsr(user) {
 		};
 	}
 
+	if (phone == false) {
+		message = "Phone must be number, must have min = 10, max =13";
+		return {
+			message,
+		};
+	}
+
 	if (email == false) {
 		message = "Email must have type 'abc@email.com'";
 		return {
@@ -153,7 +177,7 @@ async function createUsr(user) {
 
 	if (pass == false) {
 		message =
-			"Password must have min = 8, max =100, uppercase letters, lowercase letters, at least 2 digits, not have space";
+			"Password must have min = 8, max =100, uppercase letters, lowercase letters, at least 2 digits, no space";
 		return {
 			message,
 		};

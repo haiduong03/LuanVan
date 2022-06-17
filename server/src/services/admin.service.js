@@ -70,6 +70,10 @@ async function findAdmId(id) {
 }
 
 async function findAdmMail(email) {
+	if (await checkEmailValid(email) == false) {
+		message = "Invalid email address";
+		return message
+	}
 	return await db.query(`SELECT * FROM user where user_type = 1 AND user_email=?`, [email]);
 }
 
@@ -120,10 +124,23 @@ async function checkPassValid(password) {
 	return constructor.validate(password); // true or false
 }
 
+async function checkPhoneValid(phone) {
+	const constructor = new Valid()
+
+		// Add properties to it
+		.is()
+		.min(10) // Minimum length 10
+		.is()
+		.max(13) // Maximum length 1
+
+	return constructor.validate(phone); // true or false
+}
+
 async function createAdm(user) {
 	const oldUsr = await findAdmMail(user.user_email);
 	const email = await checkEmailValid(user.user_email);
 	const pass = await checkPassValid(user.user_pass);
+	const phone = await checkPhoneValid((user.user_phone).toString());
 
 	if (
 		!user.user_name ||
@@ -155,6 +172,13 @@ async function createAdm(user) {
 	if (pass == false) {
 		message =
 			"Password must have min = 8, max =100, uppercase letters, lowercase letters, at least 2 digits, not have space";
+		return {
+			message,
+		};
+	}
+
+	if (phone == false) {
+		message = "Phone include number, must have min = 10, max =13";
 		return {
 			message,
 		};
