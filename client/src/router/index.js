@@ -1,76 +1,94 @@
-import { createRouter, createWebHistory } from "vue-router";
-import Dashboard from "@/views/Dashboard.vue";
-import Tables from "@/views/Tables.vue";
-import Nhanvien from "@/views/Nhanvien.vue";
-import EditNhanvien from "@/views/EditNhanvien.vue";
-import Billing from "@/views/Billing.vue";
-import VirtualReality from "@/views/VirtualReality.vue";
-import Profile from "@/views/Profile.vue";
-import Rtl from "@/views/Rtl.vue";
-import SignIn from "@/views/SignIn.vue";
-import SignUp from "@/views/SignUp.vue";
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+
+Vue.use(VueRouter)
 
 const routes = [{
         path: "/",
         name: "/",
-        redirect: "/sign-in",
+        redirect: "/log-in",
     },
+    // Đường dẫn trang chủ admin - /
     {
-        path: "/dashboard",
-        name: "Dashboard",
-        component: Dashboard,
-    },
-    {
-        path: "/editnhanvien",
-        name: "EditNhanvien",
-        component: EditNhanvien,
-    },
-    {
-        path: "/tables",
-        name: "Tables",
-        component: Tables,
-    },
-    {
-        path: "/nhanvien",
-        name: "Nhanvien",
-        component: Nhanvien,
-    },
-    {
-        path: "/billing",
-        name: "Billing",
-        component: Billing,
-    },
-    {
-        path: "/virtual-reality",
-        name: "Virtual Reality",
-        component: VirtualReality,
-    },
-    {
-        path: "/profile",
-        name: "Profile",
-        component: Profile,
-    },
-    {
-        path: "/rtl-page",
-        name: "Rtl",
-        component: Rtl,
-    },
-    {
-        path: "/sign-in",
-        name: "Sign In",
-        component: SignIn,
-    },
-    {
-        path: "/sign-up",
-        name: "Sign Up",
-        component: SignUp,
-    },
-];
+        path: "/log-in",
+        name: "/login",
+        meta: {
+            layout: 'no-sidebar'
+        },
+        component: () =>
+            import ('@/pages/LogIn.vue')
 
-const router = createRouter({
-    history: createWebHistory(process.env.BASE_URL),
-    routes,
-    linkActiveClass: "active",
-});
+    },
+    {
+        path: '/home',
+        name: 'home',
+        meta: {
+            layout: 'default'
+        },
+        // component: require('@/pages/Home.vue').default
+        component: () =>
+            import ('@/pages/Home.vue')
+    },
+    {
+        path: '/users',
+        name: 'users',
+        meta: {
+            layout: 'default'
+        },
+        // component: require('@/pages/Home.vue').default
+        component: () =>
+            import ('@/pages/users/Index.vue')
+    },
 
-export default router;
+    // Đường dẫn trang chủ quản trị người dùng
+    {
+        path: '/users',
+        name: 'users',
+        meta: {
+            layout: 'default'
+        },
+        // component: require('@/pages/Home.vue').default
+        component: () =>
+            import ('@/pages/users/ListUser.vue')
+    },
+    {
+        path: '/users/:id/del',
+        name: 'user',
+        meta: {
+            layout: 'default'
+        },
+        // component: require('@/pages/Home.vue').default
+        component: () =>
+            import ('@/pages/users/_id/del.vue')
+    },
+    {
+        path: '/users/:id/edit',
+        name: 'user',
+        meta: {
+            layout: 'default'
+        },
+        // component: require('@/pages/Home.vue').default
+        component: () =>
+            import ('@/pages/users/_id/edit.vue')
+    },
+
+    // Đường dẫn trang giới thiệu
+    {
+        path: '/gioi-thieu',
+        name: 'about',
+        meta: {
+            layout: 'no-sidebar'
+        },
+        component: () =>
+            import ('@/pages/About.vue')
+    }
+]
+
+
+const router = new VueRouter({
+    mode: 'history',
+    base: process.env.BASE_URL,
+    routes
+})
+
+export default router

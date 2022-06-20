@@ -1,28 +1,44 @@
-/**
-=========================================================
-* Vue Soft UI Dashboard - v2.0.0
-=========================================================
+import Vue from 'vue'
+//import Vuex from 'vuex'
+import App from './App.vue'
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 
-* Product Page: https://creative-tim.com/product/vue-soft-ui-dashboard
-* Copyright 2022 Creative Tim (https://www.creative-tim.com)
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faCoffee } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+// Import Bootstrap and BootstrapVue CSS files (order is important)
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+import router from './router'
 
-Coded by www.creative-tim.com
+// Đăng ký component Global Layouts
+import Default from './layouts/LayoutDefault.vue'
+import NoSidebar from './layouts/LayoutNoSidebar.vue'
 
-=========================================================
+// Make BootstrapVue available throughout your project
+Vue.use(BootstrapVue)
+    // Optionally install the BootstrapVue icon components plugin
+Vue.use(IconsPlugin)
 
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
+library.add(faCoffee)
 
-import { createApp } from "vue";
-import App from "./App.vue";
-import store from "./store";
-import router from "./router";
-import "./assets/css/nucleo-icons.css";
-import "./assets/css/nucleo-svg.css";
-import SoftUIDashboard from "./soft-ui-dashboard";
+Vue.component('font-awesome-icon', FontAwesomeIcon)
 
-const appInstance = createApp(App);
-appInstance.use(store);
-appInstance.use(router);
-appInstance.use(SoftUIDashboard);
-appInstance.mount("#app");
+Vue.component('default-layout', Default)
+
+Vue.component('no-sidebar-layout', NoSidebar)
+
+Vue.config.productionTip = false
+
+// Vue.use(Vuex);
+// export default new Vuex.Store({
+//   state: {
+//     user: null
+//     token: null
+//   }
+// })
+
+new Vue({
+    router,
+    render: h => h(App)
+}).$mount('#app')
