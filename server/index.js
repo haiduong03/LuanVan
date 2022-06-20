@@ -9,6 +9,8 @@ const programmingLanguagesRouter = require("./src/routes/programmingLanguages.ro
 const cors = require("cors");
 const userRouter = require("./src/routes/user.route");
 const adminRouter = require("./src/routes/admin.route");
+const productRouter = require("./src/routes/product.route");
+
 
 app.use(cors());
 
@@ -34,6 +36,8 @@ app.use("/programming-languages", programmingLanguagesRouter);
 app.use("/user", userRouter);
 
 app.use("/admin", adminRouter);
+
+app.use("/product", productRouter);
 
 /* Error handler middleware */
 app.use((err, req, res, next) => {

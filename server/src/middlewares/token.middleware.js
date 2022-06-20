@@ -6,7 +6,9 @@ const app = express();
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
 const bcryptjs = require("bcryptjs");
-const used = require("../services/user.service");
+const usr = require("../services/user.service");
+const adm = require("../services/admin.service");
+
 
 let message = null;
 
@@ -44,8 +46,7 @@ function refreshToken(refreshToken) {
 	}
 
 	jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, data) => {
-		console.log(err, data);
-		if (err) res.sendStatus(403);
+		if (err) res.json(err);
 		const user = {
 			id: data.id,
 			email: data.email
@@ -59,21 +60,45 @@ function refreshToken(refreshToken) {
 
 async function login(req, res, next) {
 	try {
-		const use = await used.findUsrMail(req.body.user_email);
-		const pass = bcryptjs.compareSync(req.body.user_pass, use[0].user_pass);
-		if (use && pass == true && use[0].user_status == 0) {
-			const data = {
-				id: use[0].user_id,
-				email: use[0].user_email,
-			};
-			const key = jwt.sign(data, process.env.JWT_TOKEN_KEY)
-			const refresh = jwt.sign(data, process.env.JWT_REFRESH_TOKEN_KEY);
-			listToken.push(refresh);
-			res.json({
-				key,
-				refresh
-			});
+		const user = await usr.findUsrMail(req.body.user_email);
+
+		const admin = await adm.findAdmMail(req.body.user_email);
+
+		if (user.length) {
+			const passUsr = bcryptjs.compareSync(req.body.user_pass, user[0].user_pass);
+			if (passUsr == true && user[0].user_status == 0) {
+				const data = {
+					id: user[0].user_id,
+					email: user[0].user_email,
+				};
+				const key = jwt.sign(data, process.env.JWT_TOKEN_KEY)
+				const refresh = jwt.sign(data, process.env.JWT_REFRESH_TOKEN_KEY);
+				listToken.push(refresh);
+				res.json({
+					key,
+					refresh
+				});
+			}
 		}
+
+		if (admin.length) {
+			const passAdm = bcryptjs.compareSync(req.body.user_pass, admin[0].user_pass);
+			if (passAdm == true && admin[0].user_status == 0) {
+				const data = {
+					id: admin[0].user_id,
+					email: admin[0].user_email,
+				};
+				const key = jwt.sign(data, process.env.JWT_TOKEN_KEY)
+				const refresh = jwt.sign(data, process.env.JWT_REFRESH_TOKEN_KEY);
+				listToken.push(refresh);
+				res.json({
+					key,
+					refresh
+				});
+			}
+		}
+		res.json("Incorrect password");
+
 	} catch (error) {
 		next(error)
 	}

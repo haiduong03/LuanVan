@@ -151,13 +151,15 @@ async function createUsr(user) {
 		message = "Invalid value input";
 		return {
 			message,
+			user
 		};
 	}
 
-	if (oldUsr != 0 && oldUsr[0].user_status == 0) {
+	if (oldUsr.length != 0 && oldUsr[0].user_status == 0) {
 		message = "Already have user";
 		return {
 			message,
+			user
 		};
 	}
 
@@ -165,6 +167,7 @@ async function createUsr(user) {
 		message = "Phone must be number, must have min = 10, max =13";
 		return {
 			message,
+			user
 		};
 	}
 
@@ -172,6 +175,7 @@ async function createUsr(user) {
 		message = "Email must have type 'abc@email.com'";
 		return {
 			message,
+			user
 		};
 	}
 
@@ -180,6 +184,7 @@ async function createUsr(user) {
 			"Password must have min = 8, max =100, uppercase letters, lowercase letters, at least 2 digits, no space";
 		return {
 			message,
+			user
 		};
 	}
 
@@ -205,6 +210,7 @@ async function createUsr(user) {
 				user.user_address,
 			],
 		);
+
 		if (result.affectedRows) {
 			message = "Created user successfully";
 			return {
@@ -212,7 +218,6 @@ async function createUsr(user) {
 			};
 		}
 	}
-	// console.log(await findUsrMail(user.user_email));
 }
 
 async function updateUsr(id, user) {
