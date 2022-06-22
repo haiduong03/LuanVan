@@ -11,7 +11,7 @@ router.get("/get-all-adm-active/:page", token.verifyToken, admin.getAllAdmActive
 
 router.get("/get-all-adm-not-active/:page", token.verifyToken, admin.getAllAdmNotActive);
 
-router.post("/create-adm", admin.createAdm);
+router.post("/create-adm", token.verifyToken, admin.createAdm);
 
 router.put("/update-adm/:id", token.verifyToken, admin.updateAdm);
 
