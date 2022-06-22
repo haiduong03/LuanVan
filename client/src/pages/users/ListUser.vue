@@ -4,7 +4,7 @@
       <div class="card-header pb-0">
         <h6>Danh sách người dùng</h6>
         <b-button @click="showModals" variant="primary">Thêm tài khoản</b-button>
-        <signup-modal></signup-modal>
+        <adduser-modal></adduser-modal>
       </div>
       <div class="card-body px-0 pt-0 pb-2">
         <div class="table-responsive p-0">
@@ -80,7 +80,7 @@
 </template>
 
 <script>
-import SignupModal from '@/components/modals/SignupModal'
+import AdduserModal from '@/components/modals/AdduserModal'
 import axios from 'axios'
 export default {
   name: "ListUser",
@@ -91,8 +91,8 @@ export default {
       // users: [],
     };
   },
-  components: {
-    SignupModal,
+  component: {
+    AdduserModal,
   },
   mouted() {
     // this.getAllUsr();

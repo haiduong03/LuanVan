@@ -21,15 +21,22 @@
         </div>
         <div style="padding-left: 20px; padding-top: 20px">
           <b-icon scale="1.5" icon="x-diamond"></b-icon>
-          <router-link to="/about" style="text-decoration: none; color: inherit">
+          <router-link to="/products" style="text-decoration: none; color: inherit">
             <span style="font-weight: bold">
-              &nbsp; Quản lý sản phẩm</span>
+              &nbsp; Sản phẩm</span>
+          </router-link>
+        </div>
+                <div style="padding-left: 20px; padding-top: 20px">
+          <b-icon scale="1.5" icon="box-seam"></b-icon>
+          <router-link to="/products" style="text-decoration: none; color: inherit">
+            <span style="font-weight: bold">
+              &nbsp; Loại sản phẩm</span>
           </router-link>
         </div>
         <div style="padding-left: 20px; padding-top: 20px">
-          <b-icon scale="1.5" icon="file-bar-graph-fill"></b-icon>
+          <b-icon scale="1.5" icon="cart-check-fill"></b-icon>
           <router-link to="/about" style="text-decoration: none; color: inherit">
-            <span style="font-weight: bold"> &nbsp; Báo cáo</span>
+            <span style="font-weight: bold"> &nbsp; Đơn hàng</span>
           </router-link>
         </div>
         <div style="padding-left: 20px; padding-top: 20px">

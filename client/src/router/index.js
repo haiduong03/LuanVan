@@ -28,6 +28,17 @@ const routes = [{
         // component: require('@/pages/Home.vue').default
         component: () =>
             import ('@/pages/Home.vue')
+            //, beforeEnter: ifAuthenticated,
+    },
+    {
+        path: '/test',
+        name: 'test',
+        meta: {
+            layout: 'default'
+        },
+        // component: require('@/pages/Home.vue').default
+        component: () =>
+            import ('@/pages/test.vue')
     },
     {
         path: '/users',
@@ -52,6 +63,16 @@ const routes = [{
             import ('@/pages/users/ListUser.vue')
     },
     {
+        path: '/users/adduser/',
+        name: 'users-adduser',
+        meta: {
+            layout: 'default'
+        },
+        // component: require('@/pages/Home.vue').default
+        component: () =>
+            import ('@/pages/users/AddUser.vue')
+    },
+    {
         path: '/users/:id/del',
         name: 'user',
         meta: {
@@ -70,6 +91,26 @@ const routes = [{
         // component: require('@/pages/Home.vue').default
         component: () =>
             import ('@/pages/users/_id/edit.vue')
+    },
+    {
+        path: '/products',
+        name: 'products',
+        meta: {
+            layout: 'default'
+        },
+        // component: require('@/pages/Home.vue').default
+        component: () =>
+            import ('@/pages/products/Index.vue')
+    },
+    {
+        path: '/products/addproduct/',
+        name: 'products-addproduct',
+        meta: {
+            layout: 'default'
+        },
+        // component: require('@/pages/Home.vue').default
+        component: () =>
+            import ('@/pages/products/AddProduct.vue')
     },
 
     // Đường dẫn trang giới thiệu
@@ -92,3 +133,17 @@ const router = new VueRouter({
 })
 
 export default router
+
+// const ifAuthenticated = (to, from, next) => {
+//     if (localStorage.getItem(token)) {
+//         next();
+//         return;
+//     }
+//     router.push({
+//         name: 'login',
+//         params: {
+//             returnTo: to.path,
+//             query: to.query,
+//         },
+//     });
+// };

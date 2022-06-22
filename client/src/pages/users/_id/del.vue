@@ -50,9 +50,10 @@ export default {
   methods: {
     async del() {
       //console.log(this.$route.params.id)
-         const token = localStorage.token; 
+      const token = localStorage.token;
+      console.log(token)
       this.data = await axios.delete(
-        `http://localhost:3000/user/remove/${this.$route.params.id}`,{
+        `http://localhost:3000/user/remove-usr/${this.$route.params.id}`,{
                 headers: {
                     "Access-Control-Allow-Origin": "*",
                     // "Content-type": "Application/json",
@@ -60,8 +61,6 @@ export default {
                 }
            }
       );
-      //console.log(this.data)
-      //console.log(this.data.data[0])
   },
   }
 }
