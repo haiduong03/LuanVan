@@ -16,17 +16,19 @@ let listToken = [];
 
 function verifyToken(req, res, next) {
 	const header = req.headers.authorization;
-	const token = header.split(" ")[1];
-	if (!token) {
+
+	console.log(header);
+	if (!header) {
 		message = "Not accepted";
-		res.json({
+		return res.json({
 			message
 		});
 	}
+
+	const token = header.split(" ")[1];
 	jwt.verify(token, process.env.JWT_TOKEN_KEY, (err, data) => {
-		console.log(err, data);
 		if (err)
-			res.json(err);
+			return res.json(err);
 		next()
 	});
 }
@@ -97,6 +99,7 @@ async function login(req, res, next) {
 				});
 			}
 		}
+
 		res.json("Incorrect password");
 
 	} catch (error) {

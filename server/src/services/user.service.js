@@ -221,33 +221,7 @@ async function createUsr(user) {
 }
 
 async function updateUsr(id, user) {
-	const result = await db.query(
-		`UPDATE user 
-		SET user_name=?,
-			user_email=?,
-			user_pass=?,
-			user_phone=?, 
-			user_address=? 
-			WHERE user_type = 0 AND user_id=?`,
-		[
-			user.user_name,
-			user.user_email,
-			user.user_pass,
-			user.user_phone,
-			user.user_address,
-			id,
-		],
-	);
 
-	message = "Error in updating user";
-
-	if (result.affectedRows) {
-		message = "User updated successfully";
-	}
-
-	return {
-		message,
-	};
 }
 
 async function removeUsr(id) {

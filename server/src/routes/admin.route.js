@@ -17,17 +17,17 @@ router.put("/update-adm/:id", token.verifyToken, admin.updateAdm);
 
 router.delete("/remove-adm/:id", token.verifyToken, admin.removeAdm);
 
-router.post("/find-adm-id/:id", token.verifyToken, admin.findAdmId);
+router.get("/find-adm-id/:id", token.verifyToken, admin.findAdmId);
 
-router.post("/find-adm-name", token.verifyToken, admin.findAdmName);
+router.get("/find-adm-name", token.verifyToken, admin.findAdmName);
 
-router.post("/find-adm-mail", token.verifyToken, admin.findAdmMail);
+router.get("/find-adm-mail", token.verifyToken, admin.findAdmMail);
 
-router.post("/find-adm-phone", token.verifyToken, admin.findAdmPhone);
+router.get("/find-adm-phone", token.verifyToken, admin.findAdmPhone);
 
-router.post("/find-adm-not-active", token.verifyToken, admin.findAdmNotActive);
+router.get("/find-adm-not-active", token.verifyToken, admin.findAdmNotActive);
 
-router.post("/find-adm-active", token.verifyToken, admin.findAdmActive);
+router.get("/find-adm-active", token.verifyToken, admin.findAdmActive);
 
 router.post("/login", token.login);
 
