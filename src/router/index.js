@@ -53,8 +53,8 @@ const routes = [{
 
     // Đường dẫn trang chủ quản trị người dùng
     {
-        path: '/users',
-        name: 'users',
+        path: '/users/listuser',
+        name: 'users-listuser',
         meta: {
             layout: 'default'
         },
@@ -73,14 +73,14 @@ const routes = [{
             import ('@/pages/users/AddUser.vue')
     },
     {
-        path: '/users/:id/del',
+        path: '/users/:id/editNV',
         name: 'user',
         meta: {
             layout: 'default'
         },
         // component: require('@/pages/Home.vue').default
         component: () =>
-            import ('@/pages/users/_id/del.vue')
+            import ('@/pages/users/_id/editNV.vue')
     },
     {
         path: '/users/:id/edit',
@@ -112,7 +112,37 @@ const routes = [{
         component: () =>
             import ('@/pages/products/AddProduct.vue')
     },
+    {
+        path: '/products/listpro',
+        name: 'products-listpro',
+        meta: {
+            layout: 'default'
+        },
+        // component: require('@/pages/Home.vue').default
+        component: () =>
+            import ('@/pages/products/ListPro.vue')
+    },
+    {
+        path: '/products/addtypepro/',
+        name: 'products-addtypepro',
+        meta: {
+            layout: 'default'
+        },
+        // component: require('@/pages/Home.vue').default
+        component: () =>
+            import ('@/pages/products/AddTypePro.vue')
+    },
 
+    {
+        path: '/products/:id/editlistpro',
+        name: 'products',
+        meta: {
+            layout: 'default'
+        },
+        // component: require('@/pages/Home.vue').default
+        component: () =>
+            import ('@/pages/products/_id/editlistpro.vue')
+    },
     // Đường dẫn trang giới thiệu
     {
         path: '/gioi-thieu',

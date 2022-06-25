@@ -8,14 +8,14 @@
       </main>
     </div>
 
-    <footer-bar />
+    <!-- <footer-bar /> -->
   </div>
 </template>
 
 <script>
 // Import thành phần (components) NavBar, FooterBar để sử dụng
 import NavBar from '@/components/NavBar'
-import FooterBar from '@/components/FooterBar'
+//import FooterBar from '@/components/FooterBar'
 
 // Để sử dụng được các thẻ (tag) của các component tương ứng
 // <nav-bar />     -> component NavBar
@@ -24,7 +24,7 @@ import FooterBar from '@/components/FooterBar'
 export default {
   components: {
     NavBar,
-    FooterBar
+    //FooterBar
   }
 }
 </script>

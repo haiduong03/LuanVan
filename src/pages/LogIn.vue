@@ -18,8 +18,10 @@
                   <b-form-group id="input-group-2" label="Mật khẩu :" label-for="input-2">
                     <b-form-input id="input-2" type="password" placeholder="Mật khẩu" required  v-model="user_pass"></b-form-input>
                   </b-form-group>
-                  <!-- <router-link :to="`/home`" ></router-link> -->
-                  <b-button class="container" type="submit" variant="primary">Đăng nhập</b-button>
+                  <router-link :to="`/users`" >
+                  <b-button class="container" type="submit" variant="primary">Đăng nhập               
+                  </b-button>                
+                  </router-link>
                   <b-button class="container" type="reset" variant="danger">Hủy bỏ</b-button>
                 </b-form>
               </div>
@@ -48,7 +50,16 @@ export default {
         user_pass: this.user_pass,
       });
       console.log(res.data.key);
-       localStorage.setItem('token', res.data.key);
+       localStorage.setItem('token', res.data.key)
+this.$swal({
+  position: 'top-end',
+  icon: 'success',
+  title: 'Your work has been saved',
+  showConfirmButton: false,
+  timer: 5000
+})
+
+
     }
   },
 };

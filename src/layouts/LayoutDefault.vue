@@ -1,13 +1,13 @@
 <template>
-  <div class="LayoutDefault">
+  <div class="LayoutDefault" style="background-color: #ccc;">
     <nav-bar />
 
-    <div class="mt-3">
-      <div class="row">
-        <div class="col-md-2">
+    <div>
+      <div class="row" style="background-color: #ccc;">
+        <div class="col-md-2" style="background-color: rgba(255, 255, 255, 0);">
           <side-bar />
         </div>
-        <div class="col-md-10" style="border: 2px solid black;">
+        <div class="col-md-10" style="background-color: rgba(255, 255, 255, 0);border: 0px solid black;">
           <main class="LayoutDefault__main">
             <slot />
           </main>
@@ -15,7 +15,7 @@
       </div>
     </div>
 
-    <footer-bar />
+    <!-- <footer-bar /> -->
   </div>
 </template>
 
@@ -23,7 +23,7 @@
 // Import thành phần (components) NavBar, SideBar, FooterBar để sử dụng
 import NavBar from "../components/NavBar"
 import SideBar from "@/components/SideBar";
-import FooterBar from "@/components/FooterBar";
+//import FooterBar from "@/components/FooterBar";
 
 // Để sử dụng được các thẻ (tag) của các component tương ứng
 // <nav-bar />     -> component NavBar
@@ -34,7 +34,7 @@ export default {
   components: {
     NavBar,
     SideBar,
-    FooterBar,
+   // FooterBar,
   },
 };
 </script>

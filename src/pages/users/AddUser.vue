@@ -62,11 +62,13 @@ name: "AddUser",
             user_pass: this.user_pass,
             user_phone: this.user_phone,
             user_address: this.user_address,
+            
             user_type: 1,
   },
   );
         console.log(result);
     },
+ 
 
   }
  

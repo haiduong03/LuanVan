@@ -6,7 +6,7 @@
       <b-nav-item href="#">Home</b-nav-item>
 
       <b-nav-item-dropdown text="User">
-        <b-dropdown-item href="#">Account</b-dropdown-item>
+        <b-dropdown-item ><router-link :to="'/log-in'">Login</router-link></b-dropdown-item>
         <b-dropdown-item href="#">Settings</b-dropdown-item>
       </b-nav-item-dropdown>
     </b-navbar-nav>

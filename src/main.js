@@ -1,4 +1,5 @@
 import Vue from 'vue'
+
 //import Vuex from 'vuex'
 import App from './App.vue'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
@@ -11,9 +12,21 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import router from './router'
 
+
 // Đăng ký component Global Layouts
 import Default from './layouts/LayoutDefault.vue'
 import NoSidebar from './layouts/LayoutNoSidebar.vue'
+
+
+// CommonJS
+
+import VueSweetalert2 from 'vue-sweetalert2'
+import 'sweetalert2/dist/sweetalert2.min.css'
+
+// // If you don't need the styles, do not connect
+
+
+Vue.use(VueSweetalert2);
 
 // Make BootstrapVue available throughout your project
 Vue.use(BootstrapVue)
