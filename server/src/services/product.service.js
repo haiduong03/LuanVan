@@ -246,7 +246,7 @@ async function addBrand(brand) {
 		(TEN, TRANGTHAI)
 		VALUES
 		(?,0)`,
-		[brand]);
+		[brand.toUpperCase()]);
 
 	if (result.affectedRows) {
 		message = "THÊM THÀNH CÔNG";
@@ -279,6 +279,8 @@ async function removeBrand(id) {
 
 async function addProductDetails(product) {
 	message = "THÊM KHÔNG THÀNH CÔNG";
+	const img = upload.single(product.ANH.filename);
+
 	const result = await db.query(
 		`INSERT INTO CHITIET_SP
 		(SANPHAM_ID, CPU, RAM, HEDIEUHANH, OCUNG, ANH, MOTA, GIA)
@@ -290,7 +292,7 @@ async function addProductDetails(product) {
 			product.RAM,
 			product.HEDIEUHANH,
 			product.OCUNG,
-			product.ANH,
+			img,
 			product.MOTA,
 			product.GIA
 		]);

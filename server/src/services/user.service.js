@@ -131,18 +131,12 @@ async function checkPhoneValid(phone) {
 async function createUsr(user) {
 	const oldUsr = await findUsrMail(user.EMAIL);
 	const email = await checkEmailValid(user.EMAIL);
-	const pass = await checkPassValid(user.EMAIL);
+	const pass = await checkPassValid(user.PASS);
 	const phone = await checkPhoneValid((user.SODIENTHOAI).toString());
 
 	message = "TẠO THẤT BẠI";
 
-	if (
-		!user.TEN ||
-		!user.EMAIL ||
-		!user.PASS ||
-		!user.SODIENTHOAI ||
-		!user.DIACHI
-	) {
+	if (!user.TEN || !user.EMAIL || !user.PASS || !user.SODIENTHOAI || !user.DIACHI) {
 		message = "KHÔNG ĐƯỢC ĐỂ TRỐNG";
 		return {
 			message,
@@ -150,7 +144,7 @@ async function createUsr(user) {
 		};
 	}
 
-	if (oldUsr.length != 0 && oldUsr[0].user_status == 0) {
+	if (oldUsr.length != 0 && oldUsr[0].TRANGTHAI == 0) {
 		message = "ĐÃ CÓ NGƯỜI DÙNG";
 		return {
 			message,
@@ -186,11 +180,12 @@ async function createUsr(user) {
 	if (oldUsr == 0 && pass == true && email == true) {
 		const salt = bcryptjs.genSaltSync(parseInt(process.env.SALT));
 		const hash = bcryptjs.hashSync(user.PASS, salt);
+
 		const result = await db.query(
 			`INSERT INTO  NGUOIDUNG
-			(EMAIL, PASS, SODIENTHOAI, DIACHI, GIOITINH, LOAI, TRANGTHAI)
-			VALUES
-			( ?, ?, ?, ?, 0, 0)`,
+				(TEN ,EMAIL, PASS, SODIENTHOAI, DIACHI, GIOITINH, LOAI, TRANGTHAI)
+				VALUES
+				( ?, ?, ?, ?, ?, ?, 0, 0)`,
 			[
 				user.TEN,
 				user.EMAIL,
