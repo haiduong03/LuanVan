@@ -16,23 +16,21 @@ let listToken = [];
 
 function verifyToken(req, res, next) {
 
-	// const header = req.headers.authorization;
+	const header = req.headers.authorization;
 
-	// if (!header) {
-	// 	message = "kHÔNG CHẤP NHẬN";
-	// 	return res.json({
-	// 		message
-	// 	});
-	// }
+	if (!header) {
+		message = "kHÔNG CHẤP NHẬN";
+		return res.json({
+			message
+		});
+	}
 
-	// const token = header.split(" ")[1];
-	// jwt.verify(token, process.env.JWT_TOKEN_KEY, (err, data) => {
-	// 	if (err)
-	// 		return res.json(err);
-	// 	next()
-	// });
-
-	console.log(req.body);
+	const token = header.split(" ")[1];
+	jwt.verify(token, process.env.JWT_TOKEN_KEY, (err, data) => {
+		if (err)
+			return res.json(err);
+		next()
+	});
 }
 
 function refreshToken(refreshToken) {
