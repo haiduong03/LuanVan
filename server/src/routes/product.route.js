@@ -4,36 +4,50 @@ const product = require("../controllers/product.controller");
 const token = require("../middlewares/token.middleware");
 
 
-router.get("/get-all-list-pro/:page", token.verifyToken, product.getAllListPro);
+router.get("/get-all-pro", token.verifyToken, product.getAllPro);
 
-router.get("/get-all-list-pro-active/:page", token.verifyToken, product.getAllListProActive);
+router.get("/get-all-pro-active", product.getAllProActive);
 
-router.get("/get-all-list-pro-not-active/:page", token.verifyToken, product.getAllListProNotActive);
+router.get("/get-all-pro-not-active", token.verifyToken, product.getAllProNotActive);
 
-router.get("/find-list-id/:id", token.verifyToken, product.findListId);
+router.get("/find-pro", product.findPro);
 
-router.get("/find-list-name", token.verifyToken, product.findListName);
+router.get("/find-pro-by-brand", product.findProByBrand);
 
-router.get("/add-list-product", token.verifyToken, product.addListProduct);
+router.get("/find-pro-by-category", product.findProByCategory);
 
-router.put("/update-list-product", token.verifyToken, product.updateListProduct);
+router.post("/add-product", token.verifyToken, product.addProduct);
 
-router.delete("/remove-list-product/:id", token.verifyToken, product.removeListProduct);
+router.put("/update-product", token.verifyToken, product.updateProduct);
 
-router.get("/get-all-prod/:page", token.verifyToken, product.getAllProd);
+router.delete("/remove-product", token.verifyToken, product.removeProduct);
 
-router.get("/get-all-prod-active/:page", token.verifyToken, product.getAllProdActive);
+router.get("/get-all-brand", token.verifyToken, product.getAllBrand);
 
-router.get("/get-all-prod-not-active/:page", token.verifyToken, product.getAllProdNotActive);
+router.get("/get-all-brand-active", product.getAllBrandActive);
 
-router.get("/find-pro-id/:id", token.verifyToken, product.findProId);
+router.get("/get-all-brand-not-active", token.verifyToken, product.getAllBrandNotTActive);
 
-router.get("/find-pro-name", token.verifyToken, product.findProName);
+router.post("/add-brand", token.verifyToken, product.addBrand);
 
-router.get("/create-product", token.verifyToken, product.createProduct);
+router.put("/update-brand", token.verifyToken, product.updatedBrand);
 
-router.put("/updated-product", token.verifyToken, product.updatedProduct);
+router.delete("/remove-brand", token.verifyToken, product.removeBrand);
 
-router.delete("/remove-product/:id", token.verifyToken, product.removeProduct);
+router.post("/add-product-details", token.verifyToken, product.addProductDetails);
+
+router.put("/update-product-details", token.verifyToken, product.updateProductDetails);
+
+router.get("/add-category", token.verifyToken, product.addCategory);
+
+router.post("/update-category", token.verifyToken, product.updateCategory);
+
+router.put("/remove-category", token.verifyToken, product.removeCategory);
+
+router.get("/get-all-category", token.verifyToken, product.getAllCategory);
+
+router.get("/get-all-category-active", token.verifyToken, product.getAllCategoryActive);
+
+router.get("/get-all-category-not-active", token.verifyToken, product.getAllCategoryNotTActive);
 
 module.exports = router;

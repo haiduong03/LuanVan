@@ -13,87 +13,93 @@ let message = null;
 
 let listToken = [];
 
-async function getAllAdm(page) {
-	const offset = helper.getOffset(page, config.listPerPage);
-	const rows = await db.query(`SELECT * FROM user WHERE user_type = 1 LIMIT ?,?`, [
-		offset,
-		config.listPerPage,
-	]);
-	const data = helper.emptyOrRows(rows);
-	const meta = {
-		page,
-	};
+async function getAllAdm() {
+	// const offset = helper.getOffset(page, config.listPerPage);
+	// const rows = await db.query(`SELECT * FROM user WHERE user_type = 1 LIMIT ?,?`, [
+	// 	offset,
+	// 	config.listPerPage,
+	// ]);
+	// const data = helper.emptyOrRows(rows);
+	// const meta = {
+	// 	page,
+	// };
 
-	return {
-		data,
-		meta,
-	};
+	// return {
+	// 	data,
+	// 	meta,
+	// };
+	return await db.query(`SELECT * FROM NGUOIDUNG WHERE LOAI = 1`);
 }
 
-async function getAllAdmActive(page) {
-	const offset = helper.getOffset(page, config.listPerPage);
-	const rows = await db.query(`SELECT * FROM user WHERE user_type = 1 AND user_status = 0 LIMIT ?,?`, [
-		offset,
-		config.listPerPage,
-	]);
-	const data = helper.emptyOrRows(rows);
-	const meta = {
-		page,
-	};
+async function getAllAdmActive() {
+	// const offset = helper.getOffset(page, config.listPerPage);
+	// const rows = await db.query(`SELECT * FROM user WHERE user_type = 1 AND user_status = 0 LIMIT ?,?`, [
+	// 	offset,
+	// 	config.listPerPage,
+	// ]);
+	// const data = helper.emptyOrRows(rows);
+	// const meta = {
+	// 	page,
+	// };
 
-	return {
-		data,
-		meta,
-	};
+	// return {
+	// 	data,
+	// 	meta,
+	// };
+	return await db.query(
+		`SELECT * FROM NGUOIDUNG WHERE LOAI = 1 AND TRANGTHAI = 0`,
+	);
 }
 
-async function getAllAdmNotActive(page) {
-	const offset = helper.getOffset(page, config.listPerPage);
-	const rows = await db.query(`SELECT * FROM user WHERE user_type = 1 AND user_status = 1 LIMIT ?,?`, [
-		offset,
-		config.listPerPage,
-	]);
-	const data = helper.emptyOrRows(rows);
-	const meta = {
-		page,
-	};
+async function getAllAdmNotActive() {
+	// const offset = helper.getOffset(page, config.listPerPage);
+	// const rows = await db.query(`SELECT * FROM user WHERE user_type = 1 AND user_status = 1 LIMIT ?,?`, [
+	// 	offset,
+	// 	config.listPerPage,
+	// ]);
+	// const data = helper.emptyOrRows(rows);
+	// const meta = {
+	// 	page,
+	// };
 
-	return {
-		data,
-		meta,
-	};
+	// return {
+	// 	data,
+	// 	meta,
+	// };
+	return await db.query(
+		`SELECT * FROM NGUOIDUNG WHERE LOAI = 1 AND TRANGTHAI = 1`,
+	);
 }
-
 
 async function findAdmId(id) {
-	return await db.query(`SELECT * FROM user where user_type = 1 AND user_id=?`, [id]);
+	return await db.query(`SELECT * FROM NGUOIDUNG WHERE LOAI = 1 AND ID = ?`, [
+		id,
+	]);
 }
 
 async function findAdmMail(email) {
-	if (await checkEmailValid(email) == false) {
-		message = "Invalid email address";
-		return message
+	if ((await checkEmailValid(email)) == false) {
+		message = "EMAIL PHẢI CÓ DẠNG ABC@EMAIL.COM";
+		return message;
 	}
-	return await db.query(`SELECT * FROM user where user_type = 1 AND user_email=?`, [email]);
+	return await db.query(
+		`SELECT * FROM NGUOIDUNG WHERE LOAI = 1 AND EMAIL = ?`,
+		[email],
+	);
 }
 
 async function findAdmName(name) {
 	const value = name.replace(/ /g, "%");
 	return await db.query(
-		`SELECT * FROM user where user_type = 1 AND user_name LIKE N'%${value}%'`
+		`SELECT * FROM NGUOIDUNG WHERE LOAI = 1 AND TEN LIKE N'%${value}%'`,
 	);
 }
 
 async function findAdmPhone(phone) {
-	return await db.query(`SELECT * FROM user where user_type = 1 AND user_email=?`, [phone]);
-}
-
-async function findAdmNotActive() {
-	return await db.query(`SELECT * FROM user where user_type = 1 AND user_status=?`, [1]);
-}
-
-async function findAdmActive() {
-	return await db.query(`SELECT * FROM user where user_type = 1 AND user_status=?`, [0]);
+	return await db.query(
+		`SELECT * FROM NGUOIDUNG WHERE LOAI = 1 AND  SODIENTHOAI = ?`,
+		[phone],
+	);
 }
 
 async function checkEmailValid(email) {
@@ -131,137 +137,107 @@ async function checkPhoneValid(phone) {
 		.is()
 		.min(10) // Minimum length 10
 		.is()
-		.max(13) // Maximum length 1
+		.max(13); // Maximum length 1
 
 	return constructor.validate(phone); // true or false
 }
 
 async function createAdm(user) {
-	const oldUsr = await findAdmMail(user.user_email);
-	const email = await checkEmailValid(user.user_email);
-	const pass = await checkPassValid(user.user_pass);
-	const phone = await checkPhoneValid((user.user_phone).toString());
+	const oldUsr = await findAdmMail(user.EMAIL);
+	const email = await checkEmailValid(user.EMAIL);
+	const pass = await checkPassValid(user.EMAIL);
+	const phone = await checkPhoneValid(user.SODIENTHOAI.toString());
+
+	message = "TẠO THẤT BẠI";
 
 	if (
-		!user.user_name ||
-		!user.user_email ||
-		!user.user_pass ||
-		!user.user_phone ||
-		!user.user_address
+		!user.TEN ||
+		!user.EMAIL ||
+		!user.PASS ||
+		!user.SODIENTHOAI ||
+		!user.DIACHI ||
+		!user.GIOITINH
 	) {
-		message = "Invalid value input";
+		message = "KHÔNG ĐƯỢC ĐỂ TRỐNG";
 		return {
 			message,
+			user,
 		};
 	}
 
-	if (oldUsr != 0 && oldUsr.user_status == 0) {
-		message = "Already have user";
+	if (oldUsr.length != 0 && oldUsr[0].user_status == 0) {
+		message = "ĐÃ CÓ NGƯỜI DÙNG";
 		return {
 			message,
+			user,
+		};
+	}
+
+	if (phone == false) {
+		message = "SỐ ĐIỆN THOẠI PHẢI CÓ ĐỘ DÀI TỪ 10 ĐẾN 13";
+		return {
+			message,
+			user,
 		};
 	}
 
 	if (email == false) {
-		message = "Email must have type 'abc@email.com'";
+		message = "EMAIL PHẢI CÓ DẠNG 'ABC@EMAIL.COM'";
 		return {
 			message,
+			user,
 		};
 	}
 
 	if (pass == false) {
 		message =
-			"Password must have min = 8, max =100, uppercase letters, lowercase letters, at least 2 digits, not have space";
+			"MẬT KHẨU PHẢI CÓ ĐỘ DÀI TỪ 8 ĐẾN 100, CHỮ CÁI THƯỜNG, CHỮ CÁI IN HOA, 2 KÍ TỰ ĐẶC BIỆT VÀ KHÔNG CÓ KHOẢNG TRỐNG";
 		return {
 			message,
+			user,
 		};
 	}
-
-	if (phone == false) {
-		message = "Phone include number, must have min = 10, max =13";
-		return {
-			message,
-		};
-	}
-
-	// if (oldUsr != 0 && oldUsr.user_status == 1) {
-	// 	const result = await db.query(
-	// 		`UPDATE user
-	// 		SET user_name=?,
-	// 			user_pass=?,
-	// 			user_phone=?,
-	// 			user_address=?,
-	// 			user_status=?
-	// 			WHERE user_email=?`,
-	// 		[
-	// 			user.user_name,
-	// 			user.user_pass,
-	// 			user.user_phone,
-	// 			user.user_address,
-	// 			0,
-	// 			user.user_email,
-	// 		],
-	// 	);
-	// 	if (result.affectedRows) {
-	// 		message = "Created user successfully";
-	// 		return { message };
-	// 	}
-	// }
 
 	if (oldUsr == 0 && pass == true && email == true) {
 		const salt = bcryptjs.genSaltSync(parseInt(process.env.SALT));
-		const hash = bcryptjs.hashSync(user.user_pass, salt);
+		const hash = bcryptjs.hashSync(user.PASS, salt);
 		const result = await db.query(
-			`INSERT INTO  user
-	  (	user_name,
-	    user_email,
-	    user_pass,
-	    user_phone,
-	    user_address,
-		user_type,
-		user_status)
-	  VALUES
-	  (?, ?, ?, ?, ?, 1, 0)`,
+			`INSERT INTO  NGUOIDUNG
+			(EMAIL, PASS, SODIENTHOAI, DIACHI, GIOITINH, LOAI, TRANGTHAI)
+			VALUES
+			( ?, ?, ?, ?, 1, 0)`,
 			[
-				user.user_name,
-				user.user_email,
+				user.TEN,
+				user.EMAIL,
 				hash,
-				user.user_phone,
-				user.user_address,
+				user.SODIENTHOAI,
+				user.DIACHI,
+				user.GIOITINH,
 			],
 		);
+
 		if (result.affectedRows) {
-			message = "Created user successfully";
-			return {
-				message,
-			};
+			message = "TẠO THÀNH CÔNG";
 		}
 	}
+
+	return {
+		message,
+	};
 }
 
 async function updateAdm(id, user) {
+	message = "CẬP NHẬT THẤT BẠI";
+
 	const result = await db.query(
-		`UPDATE user 
-		SET user_name=?,
-			user_email=?,
-			user_pass=?,
-			user_phone=?, 
-			user_address=? 
-			WHERE user_type = 1 AND user_id=?`,
-		[
-			user.user_name,
-			user.user_email,
-			user.user_pass,
-			user.user_phone,
-			user.user_address,
-			id,
-		],
+		`UPDATE NGUOIDUNG 
+			SET TEN = ?, SODIENTHOAI = ?, DIACHI = ?, GIOITINH = ?
+		WHERE LOAI = 1 AND ID = ?`,
+		[user.TEN, user.SODIENTHOAI, user.DIACHI, user.GIOITINH, id],
 	);
 
-	message = "Error in updating user";
-
 	if (result.affectedRows) {
-		message = "User updated successfully";
+		message = "CẬP NHẬT THÀNH CÔNG";
 	}
 
 	return {
@@ -271,15 +247,14 @@ async function updateAdm(id, user) {
 
 async function removeAdm(id) {
 	const result = await db.query(
-		`UPDATE user 
-		SET user_status = 1 WHERE user_type = 1 AND user_id=?`,
+		`UPDATE NGUOIDUNG SET TRANGTHAI = 1 WHERE LOAI = 1 AND ID = ?`,
 		[id],
 	);
 
-	message = "Error in deleting user";
+	message = "XÓA THẤT BẠI";
 
 	if (result.affectedRows) {
-		message = "User deleted successfully";
+		message = "XÓA THÀNH CÔNG";
 	}
 
 	return {
@@ -295,8 +270,6 @@ module.exports = {
 	findAdmMail,
 	findAdmName,
 	findAdmPhone,
-	findAdmNotActive,
-	findAdmActive,
 	createAdm,
 	updateAdm,
 	removeAdm,

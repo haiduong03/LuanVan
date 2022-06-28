@@ -5,7 +5,7 @@ const user = require("../services/user.service");
 
 async function getAllUsr(req, res, next) {
 	try {
-		res.json(await user.getAllUsr(req.params.page));
+		res.json(await user.getAllUsr());
 	} catch (err) {
 		console.error(`Error`, err.message);
 		next(err);
@@ -14,7 +14,7 @@ async function getAllUsr(req, res, next) {
 
 async function getAllUsrActive(req, res, next) {
 	try {
-		res.json(await user.getAllUsrActive(req.params.page));
+		res.json(await user.getAllUsrActive());
 	} catch (err) {
 		console.error(`Error`, err.message);
 		next(err);
@@ -23,7 +23,7 @@ async function getAllUsrActive(req, res, next) {
 
 async function getAllUsrNotActive(req, res, next) {
 	try {
-		res.json(await user.getAllUsrNotActive(req.params.page));
+		res.json(await user.getAllUsrNotActive());
 	} catch (err) {
 		console.error(`Error`, err.message);
 		next(err);
@@ -33,7 +33,7 @@ async function getAllUsrNotActive(req, res, next) {
 
 async function findUsrId(req, res, next) {
 	try {
-		res.json(await user.findUsrId(req.params.id));
+		res.json(await user.findUsrId(req.body.ID));
 	} catch (err) {
 		console.error(`Error`, err.message);
 		next(err);
@@ -42,7 +42,7 @@ async function findUsrId(req, res, next) {
 
 async function findUsrName(req, res, next) {
 	try {
-		res.json(await user.findUsrName(req.query.name));
+		res.json(await user.findUsrName(req.body.TEN));
 	} catch (err) {
 		console.error(`Error`, err.message);
 		next(err);
@@ -51,7 +51,7 @@ async function findUsrName(req, res, next) {
 
 async function findUsrMail(req, res, next) {
 	try {
-		res.json(await user.findUsrMail(req.query.name));
+		res.json(await user.findUsrMail(req.body.EMAIL));
 	} catch (err) {
 		console.error(`Error`, err.message);
 		next(err);
@@ -60,25 +60,7 @@ async function findUsrMail(req, res, next) {
 
 async function findUsrPhone(req, res, next) {
 	try {
-		res.json(await user.findUsrPhone(req.query.name));
-	} catch (err) {
-		console.error(`Error`, err.message);
-		next(err);
-	}
-}
-
-async function findUsrNotActive(req, res, next) {
-	try {
-		res.json(await user.findUsrNotActive(req.query.name));
-	} catch (err) {
-		console.error(`Error`, err.message);
-		next(err);
-	}
-}
-
-async function findUsrActive(req, res, next) {
-	try {
-		res.json(await user.findUsrActive(req.query.name));
+		res.json(await user.findUsrPhone(req.body.SODIENTHOAI));
 	} catch (err) {
 		console.error(`Error`, err.message);
 		next(err);
@@ -96,8 +78,7 @@ async function createUsr(req, res, next) {
 
 async function updateUsr(req, res, next) {
 	try {
-		res.json(await user.updateUsr(req.params.id, req.body));
-		// console
+		res.json(await user.updateUsr(req.body.ID, req.body));
 	} catch (err) {
 		console.error(`Error`, err.message);
 		next(err);
@@ -106,7 +87,7 @@ async function updateUsr(req, res, next) {
 
 async function removeUsr(req, res, next) {
 	try {
-		res.json(await user.removeUsr(req.params.id));
+		res.json(await user.removeUsr(req.body.ID));
 	} catch (err) {
 		console.error(`Error`, err.message);
 		next(err);
@@ -122,8 +103,6 @@ module.exports = {
 	findUsrMail,
 	findUsrName,
 	findUsrPhone,
-	findUsrNotActive,
-	findUsrActive,
 	createUsr,
 	updateUsr,
 	removeUsr,

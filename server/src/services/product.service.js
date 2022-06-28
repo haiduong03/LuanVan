@@ -7,285 +7,404 @@ const Valid = require("password-validator");
 
 let message = null;
 
-async function getAllListPro(page) {
-	const offset = helper.getOffset(page, config.listPerPage);
-	const rows = await db.query(
-		`SELECT * FROM list LIMIT ?,?`,
-		[offset, config.listPerPage],
+async function getAllPro() {
+	// const offset = helper.getOffset(page, config.listPerPage);
+	// const rows = await db.query(
+	// 	`SELECT * FROM list LIMIT ?,?`,
+	// 	[offset, config.listPerPage],
+	// );
+	// const data = helper.emptyOrRows(rows);
+	// const meta = {
+	// 	page,
+	// };
+
+	// return {
+	// 	data,
+	// 	meta,
+	// };
+	return db.query(
+		`SELECT
+			SP.ID,
+			DM.TEN AS LOAI,
+			H.TEN AS HANG,
+			SP.TEN AS TENSP,
+			CT.CPU,
+			CT.RAM,
+			CT.HEDIEUHANH,
+			CT.OCUNG,
+			CT.ANH,
+			CT.MOTA,
+			SP.TRANGTHAI
+		FROM
+			SANPHAM SP
+			JOIN DANHMUC DM ON DM.ID = SP.DANHMUCSP
+			JOIN CHITIET_SP CT ON SP.ID = CT.SANPHAM_ID
+			JOIN HANG H ON H.ID = SP.HANGSP`
 	);
-	const data = helper.emptyOrRows(rows);
-	const meta = {
-		page,
-	};
-
-	return {
-		data,
-		meta,
-	};
 }
 
-async function getAllListProActive(page) {
-	const offset = helper.getOffset(page, config.listPerPage);
-	const rows = await db.query(
-		`SELECT * FROM list WHERE list_status = 0 LIMIT ?,?`,
-		[offset, config.listPerPage],
+async function getAllProActive(page) {
+	return db.query(
+		`SELECT
+			SP.ID,
+			DM.TEN AS LOAI,
+			H.TEN AS HANG,
+			SP.TEN AS TENSP,
+			CT.CPU,
+			CT.RAM,
+			CT.HEDIEUHANH,
+			CT.OCUNG,
+			CT.ANH,
+			CT.MOTA,
+			SP.TRANGTHAI
+		FROM
+			SANPHAM SP
+			JOIN DANHMUC DM ON DM.ID = SP.DANHMUCSP
+			JOIN CHITIET_SP CT ON SP.ID = CT.SANPHAM_ID
+			JOIN HANG H ON H.ID = SP.HANGSP
+		WHERE
+			SP.TRANGTHAI = 0`
 	);
-	const data = helper.emptyOrRows(rows);
-	const meta = {
-		page,
-	};
-
-	return {
-		data,
-		meta,
-	};
 }
 
-async function getAllListProNotActive(page) {
-	const offset = helper.getOffset(page, config.listPerPage);
-	const rows = await db.query(
-		`SELECT * FROM list WHERE list_status = 1 LIMIT ?,?`,
-		[offset, config.listPerPage],
+async function getAllProNotActive(page) {
+	return db.query(
+		`SELECT
+			SP.ID,
+			DM.TEN AS LOAI,
+			H.TEN AS HANG,
+			SP.TEN AS TENSP,
+			CT.CPU,
+			CT.RAM,
+			CT.HEDIEUHANH,
+			CT.OCUNG,
+			CT.ANH,
+			CT.MOTA,
+			SP.TRANGTHAI
+		FROM
+			SANPHAM SP
+			JOIN DANHMUC DM ON DM.ID = SP.DANHMUCSP
+			JOIN CHITIET_SP CT ON SP.ID = CT.SANPHAM_ID
+			JOIN HANG H ON H.ID = SP.HANGSP
+		WHERE
+			SP.TRANGTHAI = 1`
 	);
-	const data = helper.emptyOrRows(rows);
-	const meta = {
-		page,
-	};
-
-	return {
-		data,
-		meta,
-	};
 }
 
-async function findListId(id) {
-	return await db.query(`SELECT * FROM list where product_id=?`, [id]);
-}
-
-async function findListName(name) {
-	return await db.query(`SELECT * FROM list where list_name = ?'`, [name]);
-}
-
-async function addListProduct(name) {
-	const oldProd = await findListName(name);
-
-	if (!name) {
-		message = "Invalid list name";
-		return message;
-	}
-
-	if (oldProd != 0) {
-		message = "Already have";
-		return message;
-	}
-
-	await db.query(`INSERT INTO list list_name VALUES = ?`, [name]);
-	message = "Success";
-	return message;
-}
-
-async function updateListProduct(id, name) {
-	if (!name) {
-		message = "Invalid list name";
-		return message;
-	}
-	return await db.query(`UPDATE list SET list_name = ? WHERE list_id = ?`, [name, id]);
-}
-
-async function removeListProduct(id) {
-	return await db.query(`UPDATE list SET list_status = 1 WHERE list_id = ?`, [id]);
-}
-
-async function getAllProd(page) {
-	const offset = helper.getOffset(page, config.listPerPage);
-	const rows = await db.query(
-		`SELECT * FROM product LIMIT ?,?`,
-		[offset, config.listPerPage],
-	);
-	const data = helper.emptyOrRows(rows);
-	const meta = {
-		page,
-	};
-
-	return {
-		data,
-		meta,
-	};
-}
-
-async function getAllProdActive(page) {
-	const offset = helper.getOffset(page, config.listPerPage);
-	const rows = await db.query(
-		`SELECT * FROM product WHERE product_status = 0 LIMIT ?,?`,
-		[offset, config.listPerPage],
-	);
-	const data = helper.emptyOrRows(rows);
-	const meta = {
-		page,
-	};
-
-	return {
-		data,
-		meta,
-	};
-}
-
-async function getAllProdNotActive(page) {
-	const offset = helper.getOffset(page, config.listPerPage);
-	const rows = await db.query(
-		`SELECT * FROM product WHERE product_status = 1 LIMIT ?,?`,
-		[offset, config.listPerPage],
-	);
-	const data = helper.emptyOrRows(rows);
-	const meta = {
-		page,
-	};
-
-	return {
-		data,
-		meta,
-	};
-}
-
-async function checkPriceValid(price) {
-	const constructor = new Valid()
-
-		// Add properties to it
-		.is()
-		.min(6) // Minimum length 6
-		.is()
-		.max(12) // Maximum length 12
-
-	return constructor.validate(phone); // true or false
-}
-
-async function findProId(id) {
-	return await db.query(`SELECT * FROM product where product_id=?`, [id]);
-}
-
-async function findProName(name) {
+async function findPro(name) {
 	const value = name.replace(/ /g, "%");
-	return await db.query(`SELECT * FROM product where product_name LIKE N'%${value}%'`);
+	return await db.query(
+		`SELECT
+			SP.ID,
+			DM.TEN AS LOAI,
+			H.TEN AS HANG,
+			SP.TEN AS TENSP,
+			CT.CPU,
+			CT.RAM,
+			CT.HEDIEUHANH,
+			CT.OCUNG,
+			CT.ANH,
+			CT.MOTA,
+			SP.TRANGTHAI
+		FROM
+			SANPHAM SP
+			JOIN DANHMUC DM ON DM.ID = SP.DANHMUCSP
+			JOIN CHITIET_SP CT ON SP.ID = CT.SANPHAM_ID
+			JOIN HANG H ON H.ID = SP.HANGSP
+		WHERE
+			SP.TEN LIKE N'%${value}% OR
+			H.TEN LIKE N'%${value}% AND
+			SP.TRANGTHAI = 0`);
 }
 
-async function createProduct(product) {
-	const oldPro = await findProName(product.product_name);
-	const price = await checkPriceValid((product.price).toString())
+async function findProByBrand(id) {
+	return await db.query(
+		`SELECT
+			SP.ID,
+			DM.TEN AS LOAI,
+			H.TEN AS HANG,
+			SP.TEN AS TENSP,
+			CT.CPU,
+			CT.RAM,
+			CT.HEDIEUHANH,
+			CT.OCUNG,
+			CT.ANH,
+			CT.MOTA,
+			SP.TRANGTHAI
+		FROM
+			SANPHAM SP
+			JOIN DANHMUC DM ON DM.ID = SP.DANHMUCSP
+			JOIN CHITIET_SP CT ON SP.ID = CT.SANPHAM_ID
+			JOIN HANG H ON H.ID = SP.HANGSP
+		WHERE
+			H.ID = ? AND
+			SP.TRANGTHAI = 0`, [id]);
+}
 
-	if (
-		!product.product_name ||
-		!product.product_decryption ||
-		!product.product_price ||
-		!product.product_img ||
-		!product.list_id
-	) {
-		message = "Invalid product";
-		return message;
-	}
+async function findProByCategory(id) {
+	return await db.query(
+		`SELECT
+			SP.ID,
+			DM.TEN AS LOAI,
+			H.TEN AS HANG,
+			SP.TEN AS TENSP,
+			CT.CPU,
+			CT.RAM,
+			CT.HEDIEUHANH,
+			CT.OCUNG,
+			CT.ANH,
+			CT.MOTA,
+			SP.TRANGTHAI
+		FROM
+			SANPHAM SP
+			JOIN DANHMUC DM ON DM.ID = SP.DANHMUCSP
+			JOIN CHITIET_SP CT ON SP.ID = CT.SANPHAM_ID
+			JOIN HANG H ON H.ID = SP.HANGSP
+		WHERE
+			DM.ID = ? AND
+			SP.TRANGTHAI = 0`, [id]);
+}
 
-	if (price == false) {
-		message = "Price must be number, min = 6, max = 13";
-		return message;
-	}
+async function findProNameExist(name) {
+	return await db.query(`SELECT TEN FROM SANPHAM WHERE TEN = ?`, [name]);
+}
 
-	if (oldPro != 0) {
-		message = "Product already exists";
-		return message;
+async function addProduct(product) {
+	message = "THÊM KHÔNG THÀNH CÔNG";
+
+	const oldProd = await findProNameExist(product.TEN);
+
+	if (oldProd.length != 0) {
+		message = "ĐÃ CÓ SẢN PHẨM";
 	}
 
 	const result = await db.query(
-		`INSERT INTO product
-		( 	product_name,
-			product_decryption,
-			product_price,
-			product_img,
-			list_id,
-			product_status  )
+		`INSERT INTO SANPHAM
+			(TEN, DANHMUCSP, HANGSP, TRANGTHAI)
 		VALUES
-		( ? , ? , ? , ?)`,
-		[
-			product.product_name,
-			product.product_decryption,
-			product.product_price,
-			product.product_img,
-			product.list_id,
-			0,
-		],
-	);
-
-	message = "Error in creating product";
+			(?,?,?,0)`,
+		[product.TEN, product.DANHMUCSP, product.HANGSP]);
 
 	if (result.affectedRows) {
-		message = "Created product successfully";
+		message = "THÊM THÀNH CÔNG";
 	}
 
 	return message;
 }
 
-async function updatedProduct(product) {
-	const result = await db.query(
-		`UPDATE product 
-		SET product_name=?,
-		product_decryption=?,
-		product_price=?,
-		product_img=?,
-		list_id=?
-		WHERE product_id =?`,
-		[
-			product.product_name,
-			product.product_decryption,
-			product.product_price,
-			product.product_img,
-			product.list_id,
-			product.product_id,
-		],
-	);
+async function updateProduct(id, product) {
+	message = "SỬA KHÔNG THÀNH CÔNG";
 
-	message = "Error in updating product";
+	const result = await db.query(
+		`UPDATE SANPHAM 
+			SET TEN = ?, DANHMUCSP = ?, HANGSP  = ?
+		WHERE 
+			ID = ?`,
+		[product.TEN, product.DANHMUCSP, product.HANGSP, product.ID]);
 
 	if (result.affectedRows) {
-		message = "Product updated successfully";
+		message = "SỬA THÀNH CÔNG";
 	}
 
-	return {
-		message,
-	};
+	return message;
 }
 
 async function removeProduct(id) {
-	const result = await db.query(
-		`UPDATE product 
-		SET product_status = 1 WHERE product_id=?`,
-		[id],
-	);
+	return await db.query(`UPDATE SANPHAM SET TRANGTHAI = 1 WHERE ID = ?`, [id]);
+}
 
-	message = "Error in deleting product";
+async function getAllBrand() {
+	return await db.query(`SELECT * FROM HANG`)
+}
 
-	if (result.affectedRows) {
-		message = "Product deleted successfully";
+async function getAllBrandActive() {
+	return await db.query(`SELECT * FROM HANG WHERE TRANGTHAI = 0`)
+}
+
+async function getAllBrandNotTActive() {
+	return await db.query(`SELECT * FROM HANG WHERE TRANGTHAI = 1`)
+}
+
+async function findBrandNameExist(brand) {
+	return await db.query(`SELECT * FROM SANPHAM WHERE TEN = ?`, [brand]);
+}
+
+async function addBrand(brand) {
+	message = "THÊM KHÔNG THÀNH CÔNG";
+	const oldBrand = await findBrandNameExist(brand.TEN);
+
+	if (oldBrand.length != 0) {
+		message = "ĐÃ CÓ HÃNG";
 	}
 
-	return {
-		message,
-	};
+	const result = await db.query(
+		`INSERT INTO HANG
+		(TEN, TRANGTHAI)
+		VALUES
+		(?,0)`,
+		[brand]);
+
+	if (result.affectedRows) {
+		message = "THÊM THÀNH CÔNG";
+	}
+
+	return message;
+
+}
+
+async function updatedBrand(id, brand) {
+	message = "SỬA KHÔNG THÀNH CÔNG";
+
+	const result = await db.query(
+		`UPDATE HANG 
+			SET TEN = ?
+		WHERE 
+			ID = ?`,
+		[brand, id]);
+
+	if (result.affectedRows) {
+		message = "SỬA THÀNH CÔNG";
+	}
+
+	return message;
+}
+
+async function removeBrand(id) {
+	return await db.query(`UPDATE HANG SET TRANGTHAI = 1 WHERE ID = ?`, [id]);
+}
+
+async function addProductDetails(product) {
+	message = "THÊM KHÔNG THÀNH CÔNG";
+	const result = await db.query(
+		`INSERT INTO CHITIET_SP
+		(SANPHAM_ID, CPU, RAM, HEDIEUHANH, OCUNG, ANH, MOTA, GIA)
+		VALUES
+		(?,?,?,?,?,?,?,?)`,
+		[
+			product.ID,
+			product.CPU,
+			product.RAM,
+			product.HEDIEUHANH,
+			product.OCUNG,
+			product.ANH,
+			product.MOTA,
+			product.GIA
+		]);
+
+	if (result.affectedRows) {
+		message = "THÊM THÀNH CÔNG";
+	}
+
+	return message;
+}
+
+async function updateProductDetails(id, product) {
+	message = "SỬA KHÔNG THÀNH CÔNG";
+	const result = await db.query(
+		`UPDATE CHITIET_SP
+			SET CPU = ?, RAM = ?, HEDIEUHANH = ?, OCUNG = ?, ANH = ?, MOTA = ?, GIA = ?
+		WHERE SANPHAM_ID = ?)`,
+		[
+			product.CPU,
+			product.RAM,
+			product.HEDIEUHANH,
+			product.OCUNG,
+			product.ANH,
+			product.MOTA,
+			product.GIA,
+			id,
+		]);
+
+	if (result.affectedRows) {
+		message = "SỬA THÀNH CÔNG";
+	}
+
+	return message;
+}
+
+async function findCategoryNameExist(category) {
+	return await db.query(`SELECT * FROM DANHMUC WHERE TEN = ?`, [category]);
+}
+
+async function addCategory(category) {
+	message = "THÊM KHÔNG THÀNH CÔNG";
+	const oldBrand = await findCategoryNameExist(category);
+
+	if (oldBrand.length != 0) {
+		message = "ĐÃ CÓ HÃNG";
+	}
+
+	const result = await db.query(
+		`INSERT INTO DANHMUC
+		(TEN, TRANGTHAI)
+		VALUES
+		(?,0)`,
+		[category]);
+
+	if (result.affectedRows) {
+		message = "THÊM THÀNH CÔNG";
+	}
+
+	return message;
+
+}
+
+async function updateCategory(id, category) {
+	message = "SỬA KHÔNG THÀNH CÔNG";
+
+	const result = await db.query(
+		`UPDATE DANHMUC 
+		SET TEN = ?
+	WHERE 
+		ID = ?`,
+		[category, id]);
+
+	if (result.affectedRows) {
+		message = "SỬA THÀNH CÔNG";
+	}
+
+	return message;
+}
+
+async function removeCategory(id) {
+	return await db.query(`UPDATE DANHMUC SET TRANGTHAI = 1 WHERE ID = ?`, [id]);
+}
+
+async function getAllCategory() {
+	return await db.query(`SELECT * FROM DANHMUC`)
+}
+
+async function getAllCategoryActive() {
+	return await db.query(`SELECT * FROM DANHMUC WHERE TRANGTHAI = 0`)
+}
+
+async function getAllCategoryNotTActive() {
+	return await db.query(`SELECT * FROM DANHMUC WHERE TRANGTHAI = 1`)
 }
 
 
 module.exports = {
-	getAllListPro,
-	getAllListProActive,
-	getAllListProNotActive,
-	findListId,
-	findListName,
-	addListProduct,
-	updateListProduct,
-	removeListProduct,
-	getAllProd,
-	getAllProdActive,
-	getAllProdNotActive,
-	findProId,
-	findProName,
-	createProduct,
-	updatedProduct,
-	removeProduct
+	getAllPro,
+	getAllProActive,
+	getAllProNotActive,
+	findPro,
+	findProByBrand,
+	findProByCategory,
+	addCategory,
+	updateCategory,
+	removeCategory,
+	addProduct,
+	updateProduct,
+	removeProduct,
+	getAllBrand,
+	getAllBrandActive,
+	getAllBrandNotTActive,
+	addBrand,
+	updatedBrand,
+	removeBrand,
+	addProductDetails,
+	updateProductDetails,
+	getAllCategory,
+	getAllCategoryActive,
+	getAllCategoryNotTActive
 };
