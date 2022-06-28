@@ -4,6 +4,10 @@ const db = require("./db.service");
 const helper = require("../utils/helper.util");
 const config = require("../configs/general.config");
 const Valid = require("password-validator");
+const multer = require('multer');
+const upload = multer({
+	dest: '/src/uploads/'
+});
 
 let message = null;
 

@@ -100,7 +100,7 @@ async function login(req, res, next) {
 			}
 		}
 
-		res.json("Incorrect password");
+		res.json("SAI MẬT KHẨU");
 
 	} catch (error) {
 		next(error)
