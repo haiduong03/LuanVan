@@ -30,7 +30,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <label for="inputState">Thương hiệu</label>
-                                    <select v-model="ID" class="form-control">
+                                    <select v-model="form.ID" class="form-control">
                                         <option v-for="(use, index) in danhSachThuongHieu" :key="index" :value="use.ID">
                                             {{ use.TEN }}</option>
                                     </select>
@@ -109,6 +109,7 @@ export default {
             form: {
                 TEN: null,
                 SOLUONG: null,
+                danhSachThuongHieu:[],
             },
         };
     },
@@ -123,12 +124,27 @@ export default {
             }
         },
     },
-
+mounted() {
+        this.solieu();
+    },
     methods: {
         onFileChange(e) {
             this.form.fileName = e.target.files[0];
             this.form.fileName = e.target.files[0].name;
             this.form.selectedFile = e.target.files[0];
+        },
+        async solieu() {
+            const token = localStorage.token;
+            this.data = await axios.get(`http://localhost:3000/product/get-all-brand-active`, {
+                headers: {
+                    "Access-Control-Allow-Origin": "*",
+                    // "Content-type": "Application/json",
+                    "Authorization": `Bearer ${token}`
+                }
+            });
+             console.log(this.data.data);
+          //  console.log(this.data.data.data);
+            this.danhSachThuongHieu = this.data.data;
         },
         //      onCreate() {
         // //       try {
