@@ -1,57 +1,66 @@
+/*!
+
+ =========================================================
+ * Vue Light Bootstrap Dashboard - v2.0.0 (Bootstrap 4)
+ =========================================================
+
+ * Product Page: http://www.creative-tim.com/product/light-bootstrap-dashboard
+ * Copyright 2019 Creative Tim (http://www.creative-tim.com)
+ * Licensed under MIT (https://github.com/creativetimofficial/light-bootstrap-dashboard/blob/master/LICENSE.md)
+
+ =========================================================
+
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+ */
 import Vue from 'vue'
-
-//import Vuex from 'vuex'
+import VueRouter from 'vue-router'
 import App from './App.vue'
-import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faCoffee } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-// Import Bootstrap and BootstrapVue CSS files (order is important)
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
-import router from './router'
+// LightBootstrap plugin
+import LightBootstrap from './light-bootstrap-main'
 
+// router setup
+import routes from './routes/routes'
 
-// Đăng ký component Global Layouts
-import Default from './layouts/LayoutDefault.vue'
-import NoSidebar from './layouts/LayoutNoSidebar.vue'
+import Vuelidate from 'vuelidate'
 
 
-// CommonJS
+import './registerServiceWorker'
+// plugin setup
+import JwPagination from 'jw-vue-pagination'
 
-import VueSweetalert2 from 'vue-sweetalert2'
-import 'sweetalert2/dist/sweetalert2.min.css'
+import Paginate from 'vuejs-paginate'
+Vue.component('paginate', Paginate)
+Vue.component('jw-pagination', JwPagination)
+Vue.use(VueRouter)
+Vue.use(LightBootstrap)
+Vue.use(Vuelidate)
+    // configure router
+const router = new VueRouter({
+    routes, // short for routes: routes
+    linkActiveClass: 'nav-item active',
+    scrollBehavior: (to) => {
+        if (to.hash) {
+            return { selector: to.hash }
+        } else {
+            return { x: 0, y: 0 }
+        }
+    }
+})
 
-// // If you don't need the styles, do not connect
-
-
-Vue.use(VueSweetalert2);
-
-// Make BootstrapVue available throughout your project
-Vue.use(BootstrapVue)
-    // Optionally install the BootstrapVue icon components plugin
-Vue.use(IconsPlugin)
-
-library.add(faCoffee)
-
-Vue.component('font-awesome-icon', FontAwesomeIcon)
-
-Vue.component('default-layout', Default)
-
-Vue.component('no-sidebar-layout', NoSidebar)
-
-Vue.config.productionTip = false
-
-// Vue.use(Vuex);
-// export default new Vuex.Store({
-//   state: {
-//     user: null
-//     token: null
-//   }
-// })
-
+/* eslint-disable no-new */
 new Vue({
-    router,
-    render: h => h(App)
-}).$mount('#app')
+        el: '#app',
+        render: h => h(App),
+        router
+    })
+    // new Vue({
+    //     el: '#app',
+    //     methods: {
+    //         clickCallback: function(pageNum) {
+    //             console.log(pageNum)
+    //         }
+    //     }
+
+// })

@@ -1,36 +1,38 @@
 <template>
-  <div id="app" class="App">
-    <!-- Sử dụng <component> :is để kiểm tra và yêu cầu VueJS:
-      - Tương ứng với Component nào thì sẽ hiển thị layout tương ứng
-    -->
-    <component :is="layout">
-      <router-view />
-    </component>
+  <div :class="{'nav-open': $sidebar.showSidebar}">
+    <notifications></notifications>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-// Khai báo layout mặc định là default
-const defaultLayout = "default";
-
-export default {
-  computed: {
-    layout() {
-      // Sử dụng this.$route.meta.layout để kiểm tra xem trong route có khai báo meta tương ứng hay không?
-      // Nếu không có khai báo layout -> sẽ hiển thị layout default
-      return (this.$route.meta.layout || defaultLayout) + "-layout";
-    },
-  },
-  created() {
-    // nothing defined here (when this.$route.path is other than "/")
-    console.log(this.$route, this.$route.meta.layout);
-  },
-  updated() {
-    // something defined here whatever the this.$route.path
-    console.log(this.$route, this.$route.meta.layout);
-  },
-};
+  export default {}
 </script>
+<style lang="scss">
+  .vue-notifyjs.notifications{
+    .list-move {
+      transition: transform 0.3s, opacity 0.4s;
+    }
+    .list-item {
+      display: inline-block;
+      margin-right: 10px;
 
-<style>
+    }
+    .list-enter-active {
+      transition: transform 0.2s ease-in, opacity 0.4s ease-in;
+    }
+    .list-leave-active {
+      transition: transform 1s ease-out, opacity 0.4s ease-out;
+    }
+
+    .list-enter {
+      opacity: 0;
+      transform: scale(1.1);
+
+    }
+    .list-leave-to {
+      opacity: 0;
+      transform: scale(1.2, 0.7);
+    }
+  }
 </style>
