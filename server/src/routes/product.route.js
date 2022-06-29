@@ -10,7 +10,7 @@ router.get("/get-all-pro-active", product.getAllProActive);
 
 router.get("/get-all-pro-not-active", token.verifyToken, product.getAllProNotActive);
 
-router.get("/find-pro", product.findPro);
+router.get("/find-pro-by-name", product.findProByName);
 
 router.get("/find-pro-by-brand", product.findProByBrand);
 
@@ -38,11 +38,11 @@ router.post("/add-product-details", token.verifyToken, product.addProductDetails
 
 router.put("/update-product-details", token.verifyToken, product.updateProductDetails);
 
-router.get("/add-category", token.verifyToken, product.addCategory);
+router.post("/add-category", token.verifyToken, product.addCategory);
 
-router.post("/update-category", token.verifyToken, product.updateCategory);
+router.put("/update-category", token.verifyToken, product.updateCategory);
 
-router.put("/remove-category", token.verifyToken, product.removeCategory);
+router.delete("/remove-category", token.verifyToken, product.removeCategory);
 
 router.get("/get-all-category", token.verifyToken, product.getAllCategory);
 

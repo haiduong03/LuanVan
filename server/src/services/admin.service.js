@@ -4,7 +4,7 @@ const db = require("./db.service");
 const helper = require("../utils/helper.util");
 const config = require("../configs/general.config");
 const emailValid = require("email-validator");
-const passValid = require("password-validator");
+const Valid = require("password-validator");
 require("dotenv").config();
 const bcryptjs = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -107,7 +107,7 @@ async function checkEmailValid(email) {
 }
 
 async function checkPassValid(password) {
-	const constructor = new passValid()
+	const constructor = new Valid()
 
 		// Add properties to it
 		.is()
@@ -132,21 +132,21 @@ async function checkPassValid(password) {
 
 async function checkPhoneValid(phone) {
 	const constructor = new Valid()
-
 		// Add properties to it
 		.is()
 		.min(10) // Minimum length 10
 		.is()
-		.max(13); // Maximum length 1
+		.max(13); // Maximum length 13
 
-	return constructor.validate(phone); // true or false
+	return constructor.validate(phone) // true or false
 }
 
 async function createAdm(user) {
+
 	const oldUsr = await findAdmMail(user.EMAIL);
 	const email = await checkEmailValid(user.EMAIL);
-	const pass = await checkPassValid(user.EMAIL);
-	const phone = await checkPhoneValid(user.SODIENTHOAI.toString());
+	const pass = await checkPassValid(user.PASS);
+	const phone = await checkPhoneValid((user.SODIENTHOAI).toString());
 
 	message = "TẠO THẤT BẠI";
 
@@ -155,8 +155,7 @@ async function createAdm(user) {
 		!user.EMAIL ||
 		!user.PASS ||
 		!user.SODIENTHOAI ||
-		!user.DIACHI ||
-		!user.GIOITINH
+		!user.DIACHI
 	) {
 		message = "KHÔNG ĐƯỢC ĐỂ TRỐNG";
 		return {

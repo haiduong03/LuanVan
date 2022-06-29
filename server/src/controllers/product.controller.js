@@ -30,9 +30,9 @@ async function getAllProNotActive(req, res, next) {
     }
 }
 
-async function findPro(req, res, next) {
+async function findProByName(req, res, next) {
     try {
-        res.json(await product.findPro(req.body.TEN));
+        res.json(await product.findProByName(req.body.TEN));
     } catch (err) {
         console.error(`Error`, err.message);
         next(err);
@@ -113,7 +113,7 @@ async function getAllBrandNotTActive(req, res, next) {
 
 async function addBrand(req, res, next) {
     try {
-        res.json(await product.addBrand(req.body.TEN));
+        res.json(await product.addBrand(req.body.TEN.toUpperCase()));
     } catch (err) {
         console.error(`Error`, err.message);
         next(err);
@@ -122,7 +122,7 @@ async function addBrand(req, res, next) {
 
 async function updatedBrand(req, res, next) {
     try {
-        res.json(await product.updatedBrand(req.body.ID, req.body.TEN));
+        res.json(await product.updatedBrand(req.body.ID, req.body.TEN.toUpperCase()));
     } catch (err) {
         console.error(`Error`, err.message);
         next(err);
@@ -149,7 +149,7 @@ async function addProductDetails(req, res, next) {
 
 async function updateProductDetails(req, res, next) {
     try {
-        res.json(await product.updateProductDetails(req.body));
+        res.json(await product.updateProductDetails(req.body.SANPHAM_ID, req.body));
     } catch (err) {
         console.error(`Error`, err.message);
         next(err);
@@ -158,7 +158,7 @@ async function updateProductDetails(req, res, next) {
 
 async function addCategory(req, res, next) {
     try {
-        res.json(await product.addCategory(req.body));
+        res.json(await product.addCategory(req.body.TEN.toUpperCase()));
     } catch (err) {
         console.error(`Error`, err.message);
         next(err);
@@ -167,7 +167,7 @@ async function addCategory(req, res, next) {
 
 async function updateCategory(req, res, next) {
     try {
-        res.json(await product.updateCategory(req.body.ID, req.body));
+        res.json(await product.updateCategory(req.body.ID, req.body.TEN.toUpperCase()));
     } catch (err) {
         console.error(`Error`, err.message);
         next(err);
@@ -214,7 +214,7 @@ module.exports = {
     getAllPro,
     getAllProActive,
     getAllProNotActive,
-    findPro,
+    findProByName,
     findProByBrand,
     findProByCategory,
     addProduct,

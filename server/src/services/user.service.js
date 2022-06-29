@@ -118,7 +118,6 @@ async function checkPassValid(password) {
 
 async function checkPhoneValid(phone) {
 	const constructor = new Valid()
-
 		// Add properties to it
 		.is()
 		.min(10) // Minimum length 10
@@ -230,6 +229,11 @@ async function updateUsr(id, user) {
 		message,
 	};
 }
+
+// async function changePassUsr(email, oldPass, newPass) {
+// 	const use = await findUsrMail(email);
+
+// }
 
 async function removeUsr(id) {
 	const result = await db.query(`UPDATE NGUOIDUNG SET TRANGTHAI = 1 WHERE LOAI = 0 AND ID = ?`, [id]);

@@ -16,8 +16,8 @@ let listToken = [];
 
 function verifyToken(req, res, next) {
 
-	const header = req.headers.authorization;
 
+	const header = req.headers.authorization;
 	if (!header) {
 		message = "kHÔNG CHẤP NHẬN";
 		return res.json({

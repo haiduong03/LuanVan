@@ -95,7 +95,7 @@ async function getAllProNotActive(page) {
 	);
 }
 
-async function findPro(name) {
+async function findProByName(name) {
 	const value = name.replace(/ /g, "%");
 	return await db.query(
 		`SELECT
@@ -116,8 +116,8 @@ async function findPro(name) {
 			JOIN CHITIET_SP CT ON SP.ID = CT.SANPHAM_ID
 			JOIN HANG H ON H.ID = SP.HANGSP
 		WHERE
-			SP.TEN LIKE N'%${value}% OR
-			H.TEN LIKE N'%${value}% AND
+			SP.TEN LIKE N'%${value}%' OR
+			H.TEN LIKE N'%${value}%' AND
 			SP.TRANGTHAI = 0`);
 }
 
@@ -176,7 +176,7 @@ async function findProNameExist(name) {
 async function addProduct(product) {
 	message = "THÊM KHÔNG THÀNH CÔNG";
 
-	const oldProd = await findProNameExist(product.TEN);
+	const oldProd = await findProNameExist(product.TEN.toUpperCase());
 
 	if (oldProd.length != 0) {
 		message = "ĐÃ CÓ SẢN PHẨM";
@@ -187,7 +187,7 @@ async function addProduct(product) {
 			(TEN, DANHMUCSP, HANGSP, TRANGTHAI)
 		VALUES
 			(?,?,?,0)`,
-		[product.TEN, product.DANHMUCSP, product.HANGSP]);
+		[product.TEN.toUpperCase(), product.DANHMUCSP, product.HANGSP]);
 
 	if (result.affectedRows) {
 		message = "THÊM THÀNH CÔNG";
@@ -235,7 +235,8 @@ async function findBrandNameExist(brand) {
 
 async function addBrand(brand) {
 	message = "THÊM KHÔNG THÀNH CÔNG";
-	const oldBrand = await findBrandNameExist(brand.TEN);
+
+	const oldBrand = await findBrandNameExist(brand);
 
 	if (oldBrand.length != 0) {
 		message = "ĐÃ CÓ HÃNG";
@@ -246,7 +247,7 @@ async function addBrand(brand) {
 		(TEN, TRANGTHAI)
 		VALUES
 		(?,0)`,
-		[brand.toUpperCase()]);
+		[brand]);
 
 	if (result.affectedRows) {
 		message = "THÊM THÀNH CÔNG";
@@ -274,12 +275,18 @@ async function updatedBrand(id, brand) {
 }
 
 async function removeBrand(id) {
-	return await db.query(`UPDATE HANG SET TRANGTHAI = 1 WHERE ID = ?`, [id]);
+	message = "XÓA KHÔNG THÀNH CÔNG"
+	const result = await db.query(`UPDATE HANG SET TRANGTHAI = 1 WHERE ID = ?`, [id]);
+	if (result.affectedRows) {
+		message = "XÓA THÀNH CÔNG";
+	}
+
+	return message;
 }
 
 async function addProductDetails(product) {
 	message = "THÊM KHÔNG THÀNH CÔNG";
-	const img = upload.single(product.ANH.filename);
+	// // const img = upload.single(product.ANH.filename);
 
 	const result = await db.query(
 		`INSERT INTO CHITIET_SP
@@ -287,12 +294,12 @@ async function addProductDetails(product) {
 		VALUES
 		(?,?,?,?,?,?,?,?)`,
 		[
-			product.ID,
-			product.CPU,
+			product.SANPHAM_ID,
+			product.CPU.toUpperCase(),
 			product.RAM,
-			product.HEDIEUHANH,
+			product.HEDIEUHANH.toUpperCase(),
 			product.OCUNG,
-			img,
+			product.ANH,
 			product.MOTA,
 			product.GIA
 		]);
@@ -373,7 +380,13 @@ async function updateCategory(id, category) {
 }
 
 async function removeCategory(id) {
-	return await db.query(`UPDATE DANHMUC SET TRANGTHAI = 1 WHERE ID = ?`, [id]);
+	message = "XÓA KHÔNG THÀNH CÔNG"
+	const result = await db.query(`UPDATE DANHMUC SET TRANGTHAI = 1 WHERE ID = ?`, [id]);
+	if (result.affectedRows) {
+		message = "XÓA THÀNH CÔNG";
+	}
+
+	return message;
 }
 
 async function getAllCategory() {
@@ -393,7 +406,7 @@ module.exports = {
 	getAllPro,
 	getAllProActive,
 	getAllProNotActive,
-	findPro,
+	findProByName,
 	findProByBrand,
 	findProByCategory,
 	addCategory,

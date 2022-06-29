@@ -70,6 +70,7 @@ async function findAdmPhone(req, res, next) {
 async function createAdm(req, res, next) {
     try {
         res.json(await admin.createAdm(req.body));
+        // console.log(req.body)
     } catch (err) {
         console.error(`Error`, err.message);
         next(err);
