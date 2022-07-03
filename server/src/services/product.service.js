@@ -4,9 +4,9 @@ const db = require("./db.service");
 const helper = require("../utils/helper.util");
 const config = require("../configs/general.config");
 const Valid = require("password-validator");
-const multer = require('multer');
+const multer = require("multer");
 const upload = multer({
-	dest: '/src/uploads/'
+	dest: "/src/uploads/",
 });
 
 let message = null;
@@ -43,7 +43,7 @@ async function getAllPro() {
 			SANPHAM SP
 			JOIN DANHMUC DM ON DM.ID = SP.DANHMUCSP
 			JOIN CHITIET_SP CT ON SP.ID = CT.SANPHAM_ID
-			JOIN HANG H ON H.ID = SP.HANGSP`
+			JOIN HANG H ON H.ID = SP.HANGSP`,
 	);
 }
 
@@ -67,7 +67,7 @@ async function getAllProActive(page) {
 			JOIN CHITIET_SP CT ON SP.ID = CT.SANPHAM_ID
 			JOIN HANG H ON H.ID = SP.HANGSP
 		WHERE
-			SP.TRANGTHAI = 0`
+			SP.TRANGTHAI = 0`,
 	);
 }
 
@@ -91,7 +91,7 @@ async function getAllProNotActive(page) {
 			JOIN CHITIET_SP CT ON SP.ID = CT.SANPHAM_ID
 			JOIN HANG H ON H.ID = SP.HANGSP
 		WHERE
-			SP.TRANGTHAI = 1`
+			SP.TRANGTHAI = 1`,
 	);
 }
 
@@ -118,7 +118,8 @@ async function findProByName(name) {
 		WHERE
 			SP.TEN LIKE N'%${value}%' OR
 			H.TEN LIKE N'%${value}%' AND
-			SP.TRANGTHAI = 0`);
+			SP.TRANGTHAI = 0`,
+	);
 }
 
 async function findProByBrand(id) {
@@ -142,7 +143,9 @@ async function findProByBrand(id) {
 			JOIN HANG H ON H.ID = SP.HANGSP
 		WHERE
 			H.ID = ? AND
-			SP.TRANGTHAI = 0`, [id]);
+			SP.TRANGTHAI = 0`,
+		[id],
+	);
 }
 
 async function findProByCategory(id) {
@@ -166,7 +169,9 @@ async function findProByCategory(id) {
 			JOIN HANG H ON H.ID = SP.HANGSP
 		WHERE
 			DM.ID = ? AND
-			SP.TRANGTHAI = 0`, [id]);
+			SP.TRANGTHAI = 0`,
+		[id],
+	);
 }
 
 async function findProNameExist(name) {
@@ -174,26 +179,37 @@ async function findProNameExist(name) {
 }
 
 async function addProduct(product) {
-	message = "THÊM KHÔNG THÀNH CÔNG";
-
-	const oldProd = await findProNameExist(product.TEN.toUpperCase());
-
-	if (oldProd.length != 0) {
-		message = "ĐÃ CÓ SẢN PHẨM";
-	}
-
-	const result = await db.query(
-		`INSERT INTO SANPHAM
-			(TEN, DANHMUCSP, HANGSP, TRANGTHAI)
-		VALUES
-			(?,?,?,0)`,
-		[product.TEN.toUpperCase(), product.DANHMUCSP, product.HANGSP]);
-
-	if (result.affectedRows) {
-		message = "THÊM THÀNH CÔNG";
-	}
-
-	return message;
+	// message = "THÊM KHÔNG THÀNH CÔNG";
+	// const oldProd = await findProNameExist(product.TEN.toUpperCase());
+	// if (oldProd.length != 0) {
+	// 	message = "ĐÃ CÓ SẢN PHẨM";
+	// }
+	// upload.single();
+	// const result = await db.query(
+	// 	`INSERT INTO SANPHAM
+	// 		(TEN,HEDIEUHANH,THUONGHIEU,CPU,THONGTINCPU,GIA,OCUNG,DUNGLUONGOCUNG,RAM,DUNGLUONGRAM,SOLUONGSP,ANH)
+	// 	VALUES
+	// 		(?,?,?,?,?,?,?,?,?,?,?,?)`,
+	// 	[
+	// 		product.TEN,
+	// 		product.HEDIEUHANH,
+	// 		product.THUONGHIEU,
+	// 		product.CPU,
+	// 		product.THONGTINCPU,
+	// 		product.GIA,
+	// 		product.OCUNG,
+	// 		product.DUNGLUONGOCUNG,
+	// 		product.RAM,
+	// 		product.DUNGLUONGRAM,
+	// 		product.SOLUONGSP,
+	// 		product.ANH,
+	// 	],
+	// );
+	// if (result.affectedRows) {
+	// 	message = "THÊM THÀNH CÔNG";
+	// }
+	// return message;
+	// console.log(product);
 }
 
 async function updateProduct(id, product) {
@@ -204,7 +220,8 @@ async function updateProduct(id, product) {
 			SET TEN = ?, DANHMUCSP = ?, HANGSP  = ?
 		WHERE 
 			ID = ?`,
-		[product.TEN, product.DANHMUCSP, product.HANGSP, product.ID]);
+		[product.TEN, product.DANHMUCSP, product.HANGSP, product.ID],
+	);
 
 	if (result.affectedRows) {
 		message = "SỬA THÀNH CÔNG";
@@ -218,15 +235,15 @@ async function removeProduct(id) {
 }
 
 async function getAllBrand() {
-	return await db.query(`SELECT * FROM HANG`)
+	return await db.query(`SELECT * FROM HANG`);
 }
 
 async function getAllBrandActive() {
-	return await db.query(`SELECT * FROM HANG WHERE TRANGTHAI = 0`)
+	return await db.query(`SELECT * FROM HANG WHERE TRANGTHAI = 0`);
 }
 
 async function getAllBrandNotTActive() {
-	return await db.query(`SELECT * FROM HANG WHERE TRANGTHAI = 1`)
+	return await db.query(`SELECT * FROM HANG WHERE TRANGTHAI = 1`);
 }
 
 async function findBrandNameExist(brand) {
@@ -247,14 +264,14 @@ async function addBrand(brand) {
 		(TEN, TRANGTHAI)
 		VALUES
 		(?,0)`,
-		[brand]);
+		[brand],
+	);
 
 	if (result.affectedRows) {
 		message = "THÊM THÀNH CÔNG";
 	}
 
 	return message;
-
 }
 
 async function updatedBrand(id, brand) {
@@ -265,7 +282,8 @@ async function updatedBrand(id, brand) {
 			SET TEN = ?
 		WHERE 
 			ID = ?`,
-		[brand, id]);
+		[brand, id],
+	);
 
 	if (result.affectedRows) {
 		message = "SỬA THÀNH CÔNG";
@@ -275,8 +293,10 @@ async function updatedBrand(id, brand) {
 }
 
 async function removeBrand(id) {
-	message = "XÓA KHÔNG THÀNH CÔNG"
-	const result = await db.query(`UPDATE HANG SET TRANGTHAI = 1 WHERE ID = ?`, [id]);
+	message = "XÓA KHÔNG THÀNH CÔNG";
+	const result = await db.query(`UPDATE HANG SET TRANGTHAI = 1 WHERE ID = ?`, [
+		id,
+	]);
 	if (result.affectedRows) {
 		message = "XÓA THÀNH CÔNG";
 	}
@@ -301,8 +321,9 @@ async function addProductDetails(product) {
 			product.OCUNG,
 			product.ANH,
 			product.MOTA,
-			product.GIA
-		]);
+			product.GIA,
+		],
+	);
 
 	if (result.affectedRows) {
 		message = "THÊM THÀNH CÔNG";
@@ -326,7 +347,8 @@ async function updateProductDetails(id, product) {
 			product.MOTA,
 			product.GIA,
 			id,
-		]);
+		],
+	);
 
 	if (result.affectedRows) {
 		message = "SỬA THÀNH CÔNG";
@@ -352,14 +374,14 @@ async function addCategory(category) {
 		(TEN, TRANGTHAI)
 		VALUES
 		(?,0)`,
-		[category]);
+		[category],
+	);
 
 	if (result.affectedRows) {
 		message = "THÊM THÀNH CÔNG";
 	}
 
 	return message;
-
 }
 
 async function updateCategory(id, category) {
@@ -370,7 +392,8 @@ async function updateCategory(id, category) {
 		SET TEN = ?
 	WHERE 
 		ID = ?`,
-		[category, id]);
+		[category, id],
+	);
 
 	if (result.affectedRows) {
 		message = "SỬA THÀNH CÔNG";
@@ -380,8 +403,11 @@ async function updateCategory(id, category) {
 }
 
 async function removeCategory(id) {
-	message = "XÓA KHÔNG THÀNH CÔNG"
-	const result = await db.query(`UPDATE DANHMUC SET TRANGTHAI = 1 WHERE ID = ?`, [id]);
+	message = "XÓA KHÔNG THÀNH CÔNG";
+	const result = await db.query(
+		`UPDATE DANHMUC SET TRANGTHAI = 1 WHERE ID = ?`,
+		[id],
+	);
 	if (result.affectedRows) {
 		message = "XÓA THÀNH CÔNG";
 	}
@@ -390,17 +416,16 @@ async function removeCategory(id) {
 }
 
 async function getAllCategory() {
-	return await db.query(`SELECT * FROM DANHMUC`)
+	return await db.query(`SELECT * FROM DANHMUC`);
 }
 
 async function getAllCategoryActive() {
-	return await db.query(`SELECT * FROM DANHMUC WHERE TRANGTHAI = 0`)
+	return await db.query(`SELECT * FROM DANHMUC WHERE TRANGTHAI = 0`);
 }
 
 async function getAllCategoryNotTActive() {
-	return await db.query(`SELECT * FROM DANHMUC WHERE TRANGTHAI = 1`)
+	return await db.query(`SELECT * FROM DANHMUC WHERE TRANGTHAI = 1`);
 }
-
 
 module.exports = {
 	getAllPro,
@@ -425,5 +450,5 @@ module.exports = {
 	updateProductDetails,
 	getAllCategory,
 	getAllCategoryActive,
-	getAllCategoryNotTActive
+	getAllCategoryNotTActive,
 };

@@ -142,12 +142,10 @@ async function checkPhoneValid(phone) {
 }
 
 async function createAdm(user) {
-
 	const oldUsr = await findAdmMail(user.EMAIL);
 	const email = await checkEmailValid(user.EMAIL);
 	const pass = await checkPassValid(user.PASS);
 	const phone = await checkPhoneValid((user.SODIENTHOAI).toString());
-
 	message = "TẠO THẤT BẠI";
 
 	if (
@@ -164,7 +162,7 @@ async function createAdm(user) {
 		};
 	}
 
-	if (oldUsr.length != 0 && oldUsr[0].user_status == 0) {
+	if (oldUsr.length != 0 && oldUsr[0].TRANGTHAI == 0) {
 		message = "ĐÃ CÓ NGƯỜI DÙNG";
 		return {
 			message,
@@ -202,9 +200,9 @@ async function createAdm(user) {
 		const hash = bcryptjs.hashSync(user.PASS, salt);
 		const result = await db.query(
 			`INSERT INTO  NGUOIDUNG
-			(EMAIL, PASS, SODIENTHOAI, DIACHI, GIOITINH, LOAI, TRANGTHAI)
+			(TEN, EMAIL, PASS, SODIENTHOAI, DIACHI, GIOITINH, LOAI, TRANGTHAI)
 			VALUES
-			( ?, ?, ?, ?, 1, 0)`,
+			(?,?, ?, ?, ?, ?, 1, 0)`,
 			[
 				user.TEN,
 				user.EMAIL,
@@ -217,12 +215,12 @@ async function createAdm(user) {
 
 		if (result.affectedRows) {
 			message = "TẠO THÀNH CÔNG";
+			return {
+				message,
+			};
 		}
-	}
 
-	return {
-		message,
-	};
+	}
 }
 
 async function updateAdm(id, user) {

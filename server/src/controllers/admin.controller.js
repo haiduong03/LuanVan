@@ -33,7 +33,7 @@ async function getAllAdmNotActive(req, res, next) {
 
 async function findAdmId(req, res, next) {
     try {
-        res.json(await admin.findAdmId(req.body.ID));
+        res.json(await admin.findAdmId(req.params.ID));
     } catch (err) {
         console.error(`Error`, err.message);
         next(err);
@@ -42,7 +42,7 @@ async function findAdmId(req, res, next) {
 
 async function findAdmMail(req, res, next) {
     try {
-        res.json(await admin.findAdmMail(req.body.EMAIL));
+        res.json(await admin.findAdmMail(req.params.EMAIL));
     } catch (err) {
         console.error(`Error`, err.message);
         next(err);
@@ -51,7 +51,7 @@ async function findAdmMail(req, res, next) {
 
 async function findAdmName(req, res, next) {
     try {
-        res.json(await admin.findAdmName(req.body.TEN));
+        res.json(await admin.findAdmName(req.params.NAME));
     } catch (err) {
         console.error(`Error`, err.message);
         next(err);
@@ -60,7 +60,7 @@ async function findAdmName(req, res, next) {
 
 async function findAdmPhone(req, res, next) {
     try {
-        res.json(await admin.findAdmPhone(req.body.SODIENTHOAI));
+        res.json(await admin.findAdmPhone(req.params.PHONE));
     } catch (err) {
         console.error(`Error`, err.message);
         next(err);
@@ -79,7 +79,7 @@ async function createAdm(req, res, next) {
 
 async function updateAdm(req, res, next) {
     try {
-        res.json(await admin.updateAdm(req.body.ID, req.body));
+        res.json(await admin.updateAdm(req.params.ID, req.body));
     } catch (err) {
         console.error(`Error`, err.message);
         next(err);
@@ -88,7 +88,7 @@ async function updateAdm(req, res, next) {
 
 async function removeAdm(req, res, next) {
     try {
-        res.json(await admin.removeAdm(req.body.ID));
+        res.json(await admin.removeAdm(req.params.ID));
     } catch (err) {
         console.error(`Error`, err.message);
         next(err);

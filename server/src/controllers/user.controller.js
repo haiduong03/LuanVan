@@ -33,7 +33,7 @@ async function getAllUsrNotActive(req, res, next) {
 
 async function findUsrId(req, res, next) {
 	try {
-		res.json(await user.findUsrId(req.body.ID));
+		res.json(await user.findUsrId(req.params.ID));
 	} catch (err) {
 		console.error(`Error`, err.message);
 		next(err);
@@ -42,7 +42,7 @@ async function findUsrId(req, res, next) {
 
 async function findUsrName(req, res, next) {
 	try {
-		res.json(await user.findUsrName(req.body.TEN));
+		res.json(await user.findUsrName(req.params.NAME));
 	} catch (err) {
 		console.error(`Error`, err.message);
 		next(err);
@@ -51,7 +51,7 @@ async function findUsrName(req, res, next) {
 
 async function findUsrMail(req, res, next) {
 	try {
-		res.json(await user.findUsrMail(req.body.EMAIL));
+		res.json(await user.findUsrMail(req.params.EMAIL));
 	} catch (err) {
 		console.error(`Error`, err.message);
 		next(err);
@@ -60,7 +60,7 @@ async function findUsrMail(req, res, next) {
 
 async function findUsrPhone(req, res, next) {
 	try {
-		res.json(await user.findUsrPhone(req.body.SODIENTHOAI));
+		res.json(await user.findUsrPhone(req.params.PHONE));
 	} catch (err) {
 		console.error(`Error`, err.message);
 		next(err);
@@ -78,7 +78,7 @@ async function createUsr(req, res, next) {
 
 async function updateUsr(req, res, next) {
 	try {
-		res.json(await user.updateUsr(req.body.ID, req.body));
+		res.json(await user.updateUsr(req.params.ID, req.body));
 	} catch (err) {
 		console.error(`Error`, err.message);
 		next(err);
@@ -87,7 +87,7 @@ async function updateUsr(req, res, next) {
 
 async function removeUsr(req, res, next) {
 	try {
-		res.json(await user.removeUsr(req.body.ID));
+		res.json(await user.removeUsr(req.params.ID));
 	} catch (err) {
 		console.error(`Error`, err.message);
 		next(err);
