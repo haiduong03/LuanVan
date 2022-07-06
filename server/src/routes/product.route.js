@@ -9,7 +9,7 @@ router.get("/get-all-product", token.verifyToken, product.getAllPro);
 
 router.get("/get-all-product-active", product.getAllProActive);
 
-router.get("/find-product-by-id/:id", token.verifyToken, product.findProById);
+router.get("/find-product-by-id/:id", product.findProById);
 
 router.get("/find-product-by-name", product.findProByName);
 
