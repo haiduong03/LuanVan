@@ -41,7 +41,7 @@
                             </tbody>
                         </table>
                         <div style="text-align: center">
-                            <jw-pagination :pageSize="10" :items="listCPU" @changePage="onChangePageCpu"
+                            <jw-pagination :pageSize="10" :items="listCPU" @changePage="onChangePage"
                                 :labels="customLabels">
                             </jw-pagination>
                         </div>
@@ -86,7 +86,7 @@
                             </tbody>
                         </table>
                         <div style="text-align: center">
-                            <jw-pagination :pageSize="10" :items="listRAM" @changePage="onChangePageRam"
+                            <jw-pagination :pageSize="10" :items="listRAM" @changePage="onChangePage"
                                 :labels="customLabels">
                             </jw-pagination>
                         </div>
@@ -205,6 +205,7 @@
     </div>
 </template>
 <script>
+// import Paginate from 'vuejs-paginate'
 import axios from "axios";
 import LTable from "src/components/Table.vue";
 import Card from "src/components/Cards/Card.vue";
@@ -221,6 +222,7 @@ export default {
     components: {
         LTable,
         Card,
+        // Paginate,
     },
     data() {
         return {
@@ -229,8 +231,7 @@ export default {
             TENRAM: null,
             listRAM: [],
             users: [],
-            pageOfcpu: [],
-            pageOfram: [],
+            pageOfitems: [],
             customLabels
         };
     },
@@ -240,16 +241,9 @@ export default {
     },
 
     methods: {
-        onChangePageCpu(page) {
-            this.pageOfcpu = page;
+        onChangePage(pageOfitems) {
+            this.pageOfitems = pageOfitems;
         },
-
-        onChangePageRam(pageOfitems) {
-            this.pageOfram = pageOfitems;
-        },
-        // onChangePageCpu(pageOfitems) {
-        //     this.pageOfcpu = pageOfitems;
-        // },
 
         async listCpu() {
             const result = await axios.get(`http://localhost:3000/product/get-all-cpu`);

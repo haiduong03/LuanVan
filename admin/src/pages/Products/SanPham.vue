@@ -113,7 +113,14 @@ export default {
     },
 
     async listSP() {
-      const result = await axios.get(`http://localhost:3000/product/get-all-product`);
+      const token = localStorage.token;
+      const result = await axios.get(`http://localhost:3000/product/get-all-product`, {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          // "Content-type": "Application/json",
+          "Authorization": `Bearer ${token}`
+        }
+      });
       this.products = result.data;
     },
 

@@ -6,7 +6,7 @@
         <ul class="nav navbar-nav mr-auto">
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <input type="text">
+              <!-- <input type="text"> -->
               <i class="nc-icon nc-zoom-split"></i>
               <span class="d-lg-block">&nbsp;Tìm kiếm</span>
             </a>
