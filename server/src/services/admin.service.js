@@ -138,14 +138,14 @@ async function checkPhoneValid(phone) {
 		.is()
 		.max(13); // Maximum length 13
 
-	return constructor.validate(phone) // true or false
+	return constructor.validate(phone); // true or false
 }
 
 async function createAdm(user) {
 	const oldUsr = await findAdmMail(user.EMAIL);
 	const email = await checkEmailValid(user.EMAIL);
 	const pass = await checkPassValid(user.PASS);
-	const phone = await checkPhoneValid((user.SODIENTHOAI).toString());
+	const phone = await checkPhoneValid(user.SODIENTHOAI.toString());
 	message = "TẠO THẤT BẠI";
 
 	if (
@@ -219,7 +219,6 @@ async function createAdm(user) {
 				message,
 			};
 		}
-
 	}
 }
 
@@ -259,6 +258,23 @@ async function removeAdm(id) {
 	};
 }
 
+async function activeAdm(id) {
+	const result = await db.query(
+		`UPDATE NGUOIDUNG SET TRANGTHAI = 0 WHERE LOAI = 1 AND ID = ?`,
+		[id],
+	);
+
+	message = "KÍCH HOẠT THẤT BẠI";
+
+	if (result.affectedRows) {
+		message = "KÍCH HOẠT THÀNH CÔNG";
+	}
+
+	return {
+		message,
+	};
+}
+
 module.exports = {
 	getAllAdm,
 	getAllAdmActive,
@@ -270,4 +286,5 @@ module.exports = {
 	createAdm,
 	updateAdm,
 	removeAdm,
+	activeAdm,
 };

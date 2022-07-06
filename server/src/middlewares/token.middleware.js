@@ -16,8 +16,8 @@ let listToken = [];
 function verifyToken(req, res, next) {
 	const header = req.headers.authorization;
 	if (!header) {
-		message = "kHÔNG CHẤP NHẬN";
-		res.json({
+		message = "KHÔNG CHẤP NHẬN";
+		return res.json({
 			message,
 		});
 	}
@@ -25,7 +25,7 @@ function verifyToken(req, res, next) {
 	jwt.verify(token, process.env.JWT_TOKEN_KEY, (err, data) => {
 		if (err) {
 			message = err;
-			res.json({
+			return res.json({
 				message,
 			});
 		}

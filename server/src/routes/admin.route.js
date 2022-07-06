@@ -9,13 +9,19 @@ router.get("/get-all-adm", token.verifyToken, admin.getAllAdm);
 
 router.get("/get-all-adm-active", token.verifyToken, admin.getAllAdmActive);
 
-router.get("/get-all-adm-not-active", token.verifyToken, admin.getAllAdmNotActive);
+router.get(
+	"/get-all-adm-not-active",
+	token.verifyToken,
+	admin.getAllAdmNotActive,
+);
 
 router.post("/create-adm", token.verifyToken, admin.createAdm);
 
 router.put("/update-adm/:ID", token.verifyToken, admin.updateAdm);
 
 router.delete("/remove-adm/:ID", token.verifyToken, admin.removeAdm);
+
+router.get("/active-adm/:ID", token.verifyToken, admin.activeAdm);
 
 router.get("/find-adm-id/:ID", token.verifyToken, admin.findAdmId);
 

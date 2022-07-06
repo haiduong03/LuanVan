@@ -1,129 +1,152 @@
-import DashboardLayout from '../layout/DashboardLayout.vue'
+import DashboardLayout from "../layout/DashboardLayout.vue";
 // GeneralViews
-import NotFound from '../pages/NotFoundPage.vue'
+import NotFound from "../pages/NotFoundPage.vue";
 
 // Admin pages
-import Overview from 'src/pages/Overview.vue'
-import UserProfile from 'src/pages/UserProfile.vue'
-import TableList from 'src/pages/TableList.vue'
-import Typography from 'src/pages/Typography.vue'
-import Icons from 'src/pages/Icons.vue'
-import Maps from 'src/pages/Maps.vue'
-import Notifications from 'src/pages/Notifications.vue'
-import Upgrade from 'src/pages/Upgrade.vue'
-import UserIndex from 'src/pages/Users/Index.vue'
-import UserNhanvien from 'src/pages/Users/Nhanvien.vue'
-import UserKhachhang from 'src/pages/Users/Khachhang.vue'
-import UserEdit from 'src/pages/Users/_id/chinhsuaNV.vue'
-import UserAdd from 'src/pages/Users/ThemNV.vue'
-import DangNhapUser from 'src/pages/DangNhap.vue'
-import SanPhamDanhSach from 'src/pages/Products/SanPham.vue'
-import SanPhamThem from 'src/pages/Products/ThemSanPham.vue'
-const routes = [{
-    path: '/',
+import Overview from "src/pages/Overview.vue";
+import UserProfile from "src/pages/UserProfile.vue";
+import TableList from "src/pages/TableList.vue";
+import Typography from "src/pages/Typography.vue";
+import Icons from "src/pages/Icons.vue";
+import Maps from "src/pages/Maps.vue";
+import Notifications from "src/pages/Notifications.vue";
+import Upgrade from "src/pages/Upgrade.vue";
+import UserIndex from "src/pages/Users/Index.vue";
+import Nhanvien from "src/pages/Users/Nhanvien.vue";
+import EditNV from "src/pages/Users/_id/chinhsuaNV.vue";
+import AddNV from "src/pages/Users/ThemNV.vue";
+import Khachhang from "src/pages/Users/Khachhang.vue";
+import EditKH from "src/pages/Users/_id/chinhsuaKH.vue";
+import AddKH from "src/pages/Users/ThemKH.vue";
+import DangNhapUser from "src/pages/DangNhap.vue";
+import SanPhamDanhSach from "src/pages/Products/SanPham.vue";
+import SanPhamThem from "src/pages/Products/ThemSanPham.vue";
+import LinhKien from "src/pages/Products/LinhKien.vue";
+
+const routes = [
+  {
+    path: "/",
     component: DashboardLayout,
-    redirect: '/admin/overview'
+    redirect: "/admin/overview",
   },
   {
-    path: '/admin',
+    path: "/admin",
     component: DashboardLayout,
-    redirect: '/admin/overview',
-    children: [{
-        path: 'overview',
-        name: 'Overview',
-        component: Overview
+    redirect: "/admin/overview",
+    children: [
+      {
+        path: "overview",
+        name: "Overview",
+        component: Overview,
       },
       {
-        path: 'user',
-        name: 'User',
-        component: UserProfile
+        path: "user",
+        name: "User",
+        component: UserProfile,
       },
       {
-        path: 'table-list',
-        name: 'Table List',
-        component: TableList
+        path: "table-list",
+        name: "Table List",
+        component: TableList,
       },
       {
-        path: 'typography',
-        name: 'Typography',
-        component: Typography
+        path: "typography",
+        name: "Typography",
+        component: Typography,
       },
       {
-        path: 'icons',
-        name: 'Icons',
-        component: Icons
+        path: "icons",
+        name: "Icons",
+        component: Icons,
       },
       {
-        path: 'maps',
-        name: 'Maps',
-        component: Maps
+        path: "maps",
+        name: "Maps",
+        component: Maps,
       },
       {
-        path: 'notifications',
-        name: 'Notifications',
-        component: Notifications
+        path: "notifications",
+        name: "Notifications",
+        component: Notifications,
       },
       {
-        path: 'upgrade',
-        name: 'Upgrade to PRO',
-        component: Upgrade
-      }
-    ]
+        path: "upgrade",
+        name: "Upgrade to PRO",
+        component: Upgrade,
+      },
+    ],
   },
   {
-    path: '/quanlyuser',
+    path: "/quanlyuser",
     component: DashboardLayout,
-    children: [{
-        path: 'userslist',
-        name: 'UsersList',
-        component: UserIndex
+    children: [
+      {
+        path: "userslist",
+        name: "UsersList",
+        component: UserIndex,
       },
       {
-        path: 'nhanvien',
-        name: 'Nhanvien',
-        component: UserNhanvien
+        path: "nhanvien",
+        name: "Nhanvien",
+        component: Nhanvien,
       },
       {
-        path: 'khachhang',
-        name: 'Khachhang',
-        component: UserKhachhang
+        path: ":id/chinhsuaNV",
+        name: "chinhsuaNV",
+        component: EditNV,
       },
       {
-        path: ':id/chinhsuaNV',
-        name: 'chinhsuaNV',
-        component: UserEdit
+        path: "themnv",
+        name: "ThemNV",
+        component: AddNV,
       },
       {
-        path: 'themnv',
-        name: 'ThemNV',
-        component: UserAdd
+        path: "khachhang",
+        name: "Khachhang",
+        component: Khachhang,
       },
-    ]
+      {
+        path: ":id/chinhsuakh",
+        name: "chinhsuaKH",
+        component: EditKH,
+      },
+      {
+        path: "themkh",
+        name: "ThemKH",
+        component: AddKH,
+      },
+    ],
   },
   {
-    path: '/quanlysanpham',
+    path: "/quanlysanpham",
     component: DashboardLayout,
-    children: [{
-        path: 'sanpham',
-        name: 'SanPham',
-        component: SanPhamDanhSach
+    children: [
+      {
+        path: "sanpham",
+        name: "SanPham",
+        component: SanPhamDanhSach,
       },
       {
-        path: 'themsanpham',
-        name: 'ThemSanPham',
-        component: SanPhamThem
+        path: "linhkien",
+        name: "LinhKien",
+        component: LinhKien,
       },
-    ]
+      {
+        path: "themsanpham",
+        name: "ThemSanPham",
+        component: SanPhamThem,
+      },
+    ],
   },
   {
-    path: '/dangnhap',
+    path: "/dangnhap",
     component: DangNhapUser,
   },
   {
-    path: '*',
-    component: NotFound
-  }
-]
+    path: "*",
+    component: NotFound,
+  },
+];
 
 /**
  * Asynchronously load view (Webpack Lazy loading compatible)
@@ -134,4 +157,4 @@ function view(name) {
    return res;
 };**/
 
-export default routes
+export default routes;
