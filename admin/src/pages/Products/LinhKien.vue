@@ -41,11 +41,9 @@
                             </tbody>
                         </table>
                         <div style="text-align: center">
-<<<<<<< HEAD
-                            <jw-pagination :pageSize="5" :items="listCPU" @changePage="onChangePageCpu"
-=======
-                            <jw-pagination :pageSize="10" :items="listCPU" @changePage="onChangePage"
->>>>>>> 3b31f4ed3fca05c17be641425e962367d754b7bd
+
+                            <jw-pagination :pageSize="5" :items="listCPU" @changePage="onChangePageCpu"></jw-pagination>
+                   <jw-pagination :pageSize="10" :items="listCPU" @changePage="onChangePage">
                                 :labels="customLabels">
                             </jw-pagination>
                         </div>
@@ -235,11 +233,8 @@ export default {
             TENRAM: null,
             listRAM: [],
             users: [],
-<<<<<<< HEAD
             pageOfcpu: [],
             pageOfram: [],
-=======
->>>>>>> 3b31f4ed3fca05c17be641425e962367d754b7bd
             pageOfitems: [],
             customLabels
         };
@@ -251,14 +246,11 @@ export default {
 
     methods: {
         onChangePage(pageOfitems) {
-<<<<<<< HEAD
       this.pageOfitems = pageOfitems;
     },
         onChangePageCpu(page) {
             this.pageOfcpu = page;
-=======
             this.pageOfitems = pageOfitems;
->>>>>>> 3b31f4ed3fca05c17be641425e962367d754b7bd
         },
 
         async listCpu() {

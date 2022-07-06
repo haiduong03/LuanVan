@@ -26,7 +26,10 @@ import SanPhamThem from "src/pages/Products/ThemSanPham.vue";
 import LinhKien from "src/pages/Products/LinhKien.vue";
 
 import TrangChu from "src/pages/TrangChu/Index.vue";
-import ChiTietSP from "src/pages/Products/_id/chitietSP.vue";
+import ChiTietSP from "src/pages/Products/_id/chitietsp.vue";
+
+import GioHang from "src/pages/Cart/GioHang.vue";
+import ThanhToan from "src/pages/Cart/ThanhToan.vue";
 
 const routes = [
     //   {
@@ -164,7 +167,22 @@ const routes = [
                 component: ChiTietSP,
             },
 
-        ]
+        ],
+    },
+    {
+        path: "/giohang",
+        component: IndexLayout,
+        children: [{
+                path: "giohang",
+                name: "GioHang",
+                component: GioHang,
+            },
+            {
+                path: "thanhtoan",
+                name: "thanhToan",
+                component: ThanhToan,
+            },
+        ],
     },
     {
         path: "/dangnhap",

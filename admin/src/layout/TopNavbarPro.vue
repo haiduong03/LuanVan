@@ -54,7 +54,7 @@
                   >
                   <router-link
                     style="text-decoration: none; color: inherit;"
-                    to="/cart/cartlist"
+                    to="/giohang/giohang"
                     ><i
                       style="font-weight: bold; margin-top:8px; font-size:25px; color:#6610f2"
                       class="nc-icon nc-cart-simple"

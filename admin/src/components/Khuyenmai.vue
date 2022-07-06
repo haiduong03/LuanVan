@@ -82,8 +82,9 @@ export default {
 
   methods: {
     async listSP() {
-      const result = await axios.get(`http://localhost:3000/product/get-all-product`);
+      const result = await axios.get(`http://localhost:3000/product/get-all-product-active`);
       this.products = result.data;
+      console.log(result.data)
     },
   },
 };
