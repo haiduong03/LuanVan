@@ -20,9 +20,9 @@ async function getAllProActive(req, res, next) {
 	}
 }
 
-async function findProById(req, res, next) {
+async function getAllProNotActive(req, res, next) {
 	try {
-		res.json(await product.findProById(req.params.id));
+		res.json(await product.getAllProNotActive());
 	} catch (err) {
 		console.error(`Error`, err.message);
 		next(err);
@@ -31,7 +31,7 @@ async function findProById(req, res, next) {
 
 async function findProByName(req, res, next) {
 	try {
-		res.json(await product.findProByName(req.params.name));
+		res.json(await product.findProByName(req.params.NAME));
 	} catch (err) {
 		console.error(`Error`, err.message);
 		next(err);
@@ -40,43 +40,43 @@ async function findProByName(req, res, next) {
 
 async function findProByBrand(req, res, next) {
 	try {
-		res.json(await product.findProByBrand(req.params.brand));
+		res.json(await product.findProByBrand(req.params.ID));
 	} catch (err) {
 		console.error(`Error`, err.message);
 		next(err);
 	}
 }
 
-async function findProByCpu(req, res, next) {
+async function findProByCategory(req, res, next) {
 	try {
-		res.json(await product.findProByCpu(req.params.cpu));
+		res.json(await product.findProByCategory(req.params.ID));
 	} catch (err) {
 		console.error(`Error`, err.message);
 		next(err);
 	}
 }
 
-async function findProByRam(req, res, next) {
+async function addProduct(req, res, next) {
 	try {
-		res.json(await product.findProByRam(req.params.ram));
+		res.json(await product.addProduct(req.body));
 	} catch (err) {
 		console.error(`Error`, err.message);
 		next(err);
 	}
 }
 
-async function findProByOS(req, res, next) {
+async function updateProduct(req, res, next) {
 	try {
-		res.json(await product.findProByOS(req.params.os));
+		res.json(await product.updateProduct(req.params.ID, req.body));
 	} catch (err) {
 		console.error(`Error`, err.message);
 		next(err);
 	}
 }
 
-async function findProByDrive(req, res, next) {
+async function removeProduct(req, res, next) {
 	try {
-		res.json(await product.findProByDrive(req.params.drive));
+		res.json(await product.removeProduct(req.params.ID));
 	} catch (err) {
 		console.error(`Error`, err.message);
 		next(err);
@@ -92,119 +92,123 @@ async function getAllBrand(req, res, next) {
 	}
 }
 
+async function getAllBrandActive(req, res, next) {
+	try {
+		res.json(await product.getAllBrandActive());
+	} catch (err) {
+		console.error(`Error`, err.message);
+		next(err);
+	}
+}
+
+async function getAllBrandNotTActive(req, res, next) {
+	try {
+		res.json(await product.getAllBrandNotTActive());
+	} catch (err) {
+		console.error(`Error`, err.message);
+		next(err);
+	}
+}
+
 async function addBrand(req, res, next) {
 	try {
-		res.json(await product.addBrand(req.params.name));
+		res.json(await product.addBrand(req.params.TEN.toUpperCase()));
 	} catch (err) {
 		console.error(`Error`, err.message);
 		next(err);
 	}
 }
 
-async function getAllCpu(req, res, next) {
+async function updatedBrand(req, res, next) {
 	try {
-		res.json(await product.getAllCpu());
+		res.json(
+			await product.updatedBrand(req.params.ID, req.body.TEN.toUpperCase()),
+		);
 	} catch (err) {
 		console.error(`Error`, err.message);
 		next(err);
 	}
 }
 
-async function addCpu(req, res, next) {
+async function removeBrand(req, res, next) {
 	try {
-		res.json(await product.addCpu(req.params.name));
-		// console.log(req.params.name);
+		res.json(await product.removeBrand(req.params.ID));
 	} catch (err) {
 		console.error(`Error`, err.message);
 		next(err);
 	}
 }
 
-async function getAllRam(req, res, next) {
+async function addProductDetails(req, res, next) {
 	try {
-		res.json(await product.getAllRam());
+		res.json(await product.addProductDetails(req.body));
 	} catch (err) {
 		console.error(`Error`, err.message);
 		next(err);
 	}
 }
 
-async function addRam(req, res, next) {
+async function updateProductDetails(req, res, next) {
 	try {
-		res.json(await product.addRam(req.params.name));
+		res.json(
+			await product.updateProductDetails(req.params.SANPHAM_ID, req.body),
+		);
 	} catch (err) {
 		console.error(`Error`, err.message);
 		next(err);
 	}
 }
 
-async function getAllDrive(req, res, next) {
+async function addCategory(req, res, next) {
 	try {
-		res.json(await product.getAllDrive());
+		res.json(await product.addCategory(req.params.TEN.toUpperCase()));
 	} catch (err) {
 		console.error(`Error`, err.message);
 		next(err);
 	}
 }
 
-async function addDrive(req, res, next) {
+async function updateCategory(req, res, next) {
 	try {
-		res.json(await product.addDrive(req.params.name));
+		res.json(
+			await product.updateCategory(req.body.ID, req.body.TEN.toUpperCase()),
+		);
 	} catch (err) {
 		console.error(`Error`, err.message);
 		next(err);
 	}
 }
 
-async function getAllOS(req, res, next) {
+async function removeCategory(req, res, next) {
 	try {
-		res.json(await product.getAllOS());
+		res.json(await product.removeCategory(req.body.ID));
 	} catch (err) {
 		console.error(`Error`, err.message);
 		next(err);
 	}
 }
 
-async function addOS(req, res, next) {
+async function getAllCategory(req, res, next) {
 	try {
-		res.json(await product.addOS(req.params.name));
+		res.json(await product.getAllCategory());
 	} catch (err) {
 		console.error(`Error`, err.message);
 		next(err);
 	}
 }
 
-async function addProduct(req, res, next) {
+async function getAllCategoryActive(req, res, next) {
 	try {
-		res.json(await product.addProduct(req.body));
-		// console.log(req.body);
+		res.json(await product.getAllCategoryActive());
 	} catch (err) {
 		console.error(`Error`, err.message);
 		next(err);
 	}
 }
 
-async function updateProduct(req, res, next) {
+async function getAllCategoryNotTActive(req, res, next) {
 	try {
-		res.json(await product.updateProduct(req.params.id, req.body));
-	} catch (err) {
-		console.error(`Error`, err.message);
-		next(err);
-	}
-}
-
-async function removeProduct(req, res, next) {
-	try {
-		res.json(await product.removeProduct(req.params.id));
-	} catch (err) {
-		console.error(`Error`, err.message);
-		next(err);
-	}
-}
-
-async function activeProduct(req, res, next) {
-	try {
-		res.json(await product.activeProduct(req.params.id));
+		res.json(await product.getAllCategoryNotTActive());
 	} catch (err) {
 		console.error(`Error`, err.message);
 		next(err);
@@ -214,25 +218,25 @@ async function activeProduct(req, res, next) {
 module.exports = {
 	getAllPro,
 	getAllProActive,
-	findProById,
+	getAllProNotActive,
 	findProByName,
 	findProByBrand,
-	findProByCpu,
-	findProByRam,
-	findProByOS,
-	findProByDrive,
-	getAllBrand,
-	addBrand,
-	getAllCpu,
-	addCpu,
-	getAllRam,
-	addRam,
-	getAllDrive,
-	addDrive,
-	getAllOS,
-	addOS,
+	findProByCategory,
 	addProduct,
 	updateProduct,
 	removeProduct,
-	activeProduct,
+	getAllBrand,
+	getAllBrandActive,
+	getAllBrandNotTActive,
+	addBrand,
+	updatedBrand,
+	removeBrand,
+	addProductDetails,
+	updateProductDetails,
+	addCategory,
+	updateCategory,
+	removeCategory,
+	getAllCategory,
+	getAllCategoryActive,
+	getAllCategoryNotTActive,
 };
