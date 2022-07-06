@@ -26,7 +26,7 @@
                   <th>Email</th>
                   <th>Họ tên</th>
                   <th>SĐT</th>
-                  <th>Địa chỉ</th>
+                  <!-- <th>Địa chỉ</th> -->
                   <th>Giới tính</th>
                   <th>Trạng thái</th>
                   <!-- <th></th> -->
@@ -39,7 +39,7 @@
                   <td>{{ use.EMAIL }}</td>
                   <td>{{ use.TEN }}</td>
                   <td>{{ use.SODIENTHOAI }}</td>
-                  <td>{{ use.DIACHI }}</td>
+                  <!-- <td>{{ use.DIACHI }}</td> -->
                   <template v-if="use.GIOITINH == 0">
                     <td>Nam</td>
                   </template>

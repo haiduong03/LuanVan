@@ -41,7 +41,9 @@
                             </tbody>
                         </table>
                         <div style="text-align: center">
-                            <jw-pagination :pageSize="10" :items="listCPU" @changePage="onChangePage"
+
+                            <jw-pagination :pageSize="5" :items="listCPU" @changePage="onChangePageCpu"></jw-pagination>
+                   <jw-pagination :pageSize="10" :items="listCPU" @changePage="onChangePage">
                                 :labels="customLabels">
                             </jw-pagination>
                         </div>
@@ -231,6 +233,8 @@ export default {
             TENRAM: null,
             listRAM: [],
             users: [],
+            pageOfcpu: [],
+            pageOfram: [],
             pageOfitems: [],
             customLabels
         };
@@ -242,12 +246,17 @@ export default {
 
     methods: {
         onChangePage(pageOfitems) {
+      this.pageOfitems = pageOfitems;
+    },
+        onChangePageCpu(page) {
+            this.pageOfcpu = page;
             this.pageOfitems = pageOfitems;
         },
 
         async listCpu() {
             const result = await axios.get(`http://localhost:3000/product/get-all-cpu`);
             this.listCPU = result.data;
+           // console.log(result.data)
         },
 
         async addCpu() {

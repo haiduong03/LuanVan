@@ -23,10 +23,10 @@
                 <th style="text-align: center">Hình ảnh</th>
                 <th style="text-align: center">Thương hiệu</th>
                 <th style="text-align: center">Tên sản phẩm</th>
-                <th style="text-align: center">Hệ điều hành</th>
+                <!-- <th style="text-align: center">Hệ điều hành</th>
                 <th style="text-align: center">Cpu</th>
                 <th style="text-align: center">Ram</th>
-                <th style="text-align: center">Ổ cứng</th>
+                <th style="text-align: center">Ổ cứng</th> -->
                 <!-- <th style="text-align: center">Mô tả</th> -->
                 <th style="text-align: center">Giá</th>
                 <th style="text-align: center">Tình trạng</th>
@@ -40,10 +40,10 @@
                 </td>
                 <td>{{ product.THUONGHIEU }}</td>
                 <td>{{ product.TEN }}</td>
-                <td>{{ product.HEDIEUHANH }}</td>
+                <!-- <td>{{ product.HEDIEUHANH }}</td>
                 <td>{{ product.CPU + " " + product.THONGTINCPU }}</td>
                 <td>{{ product.OCUNG + " " + product.DUNGLUONGOCUNG }}GB</td>
-                <td>{{ product.RAM + " " + product.DUNGLUONGRAM }}GB</td>
+                <td>{{ product.RAM + " " + product.DUNGLUONGRAM }}GB</td> -->
                 <!-- <td>{{ product.MOTA }}</td> -->
                 <td>{{ product.GIA | numeral("0,0") }} VND</td>
                 <template v-if="product.TRANGTHAI == 0">
@@ -122,6 +122,7 @@ export default {
         }
       });
       this.products = result.data;
+      // console.log(result.data)
     },
 
     async deleteSP(id) {
