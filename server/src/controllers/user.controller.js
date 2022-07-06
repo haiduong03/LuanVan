@@ -1,6 +1,5 @@
 /** @format */
 
-
 const user = require("../services/user.service");
 
 async function getAllUsr(req, res, next) {
@@ -29,7 +28,6 @@ async function getAllUsrNotActive(req, res, next) {
 		next(err);
 	}
 }
-
 
 async function findUsrId(req, res, next) {
 	try {
@@ -94,6 +92,14 @@ async function removeUsr(req, res, next) {
 	}
 }
 
+async function activeUsr(req, res, next) {
+	try {
+		res.json(await user.activeUsr(req.params.ID));
+	} catch (err) {
+		console.error(`Error`, err.message);
+		next(err);
+	}
+}
 
 module.exports = {
 	getAllUsr,
@@ -106,4 +112,5 @@ module.exports = {
 	createUsr,
 	updateUsr,
 	removeUsr,
+	activeUsr,
 };

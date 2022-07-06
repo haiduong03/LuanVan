@@ -1,136 +1,8 @@
-<<<<<<< HEAD
-import DashboardLayout from '../layout/DashboardLayout.vue'
-=======
 import DashboardLayout from "../layout/DashboardLayout.vue";
-import IndexLayout from "../layout/IndexLayout.vue";
->>>>>>> ec144a17e2507032e38485aea96b37e404076f88
 // GeneralViews
-import NotFound from '../pages/NotFoundPage.vue'
+import NotFound from "../pages/NotFoundPage.vue";
 
 // Admin pages
-<<<<<<< HEAD
-import Overview from 'src/pages/Overview.vue'
-import UserProfile from 'src/pages/UserProfile.vue'
-import TableList from 'src/pages/TableList.vue'
-import Typography from 'src/pages/Typography.vue'
-import Icons from 'src/pages/Icons.vue'
-import Maps from 'src/pages/Maps.vue'
-import Notifications from 'src/pages/Notifications.vue'
-import Upgrade from 'src/pages/Upgrade.vue'
-import UserIndex from 'src/pages/Users/Index.vue'
-import UserNhanvien from 'src/pages/Users/Nhanvien.vue'
-import UserKhachhang from 'src/pages/Users/Khachhang.vue'
-import UserEdit from 'src/pages/Users/_id/chinhsuaNV.vue'
-import UserAdd from 'src/pages/Users/ThemNV.vue'
-import DangNhapUser from 'src/pages/DangNhap.vue'
-import SanPhamDanhSach from 'src/pages/Products/SanPham.vue'
-import SanPhamThem from 'src/pages/Products/ThemSanPham.vue'
-const routes = [{
-    path: '/',
-    component: DashboardLayout,
-    redirect: '/admin/overview'
-  },
-  {
-    path: '/admin',
-    component: DashboardLayout,
-    redirect: '/admin/overview',
-    children: [{
-        path: 'overview',
-        name: 'Overview',
-        component: Overview
-      },
-      {
-        path: 'user',
-        name: 'User',
-        component: UserProfile
-      },
-      {
-        path: 'table-list',
-        name: 'Table List',
-        component: TableList
-      },
-      {
-        path: 'typography',
-        name: 'Typography',
-        component: Typography
-      },
-      {
-        path: 'icons',
-        name: 'Icons',
-        component: Icons
-      },
-      {
-        path: 'maps',
-        name: 'Maps',
-        component: Maps
-      },
-      {
-        path: 'notifications',
-        name: 'Notifications',
-        component: Notifications
-      },
-      {
-        path: 'upgrade',
-        name: 'Upgrade to PRO',
-        component: Upgrade
-      }
-    ]
-  },
-  {
-    path: '/quanlyuser',
-    component: DashboardLayout,
-    children: [{
-        path: 'userslist',
-        name: 'UsersList',
-        component: UserIndex
-      },
-      {
-        path: 'nhanvien',
-        name: 'Nhanvien',
-        component: UserNhanvien
-      },
-      {
-        path: 'khachhang',
-        name: 'Khachhang',
-        component: UserKhachhang
-      },
-      {
-        path: ':id/chinhsuaNV',
-        name: 'chinhsuaNV',
-        component: UserEdit
-      },
-      {
-        path: 'themnv',
-        name: 'ThemNV',
-        component: UserAdd
-      },
-    ]
-  },
-  {
-    path: '/quanlysanpham',
-    component: DashboardLayout,
-    children: [{
-        path: 'sanpham',
-        name: 'SanPham',
-        component: SanPhamDanhSach
-      },
-      {
-        path: 'themsanpham',
-        name: 'ThemSanPham',
-        component: SanPhamThem
-      },
-    ]
-  },
-  {
-    path: '/dangnhap',
-    component: DangNhapUser,
-  },
-  {
-    path: '*',
-    component: NotFound
-  }
-]
-=======
 import Overview from "src/pages/Overview.vue";
 import UserProfile from "src/pages/UserProfile.vue";
 import TableList from "src/pages/TableList.vue";
@@ -149,177 +21,132 @@ import AddKH from "src/pages/Users/ThemKH.vue";
 import DangNhapUser from "src/pages/DangNhap.vue";
 import SanPhamDanhSach from "src/pages/Products/SanPham.vue";
 import SanPhamThem from "src/pages/Products/ThemSanPham.vue";
-
 import LinhKien from "src/pages/Products/LinhKien.vue";
 
-import TrangChu from "src/pages/TrangChu/Index.vue";
-import ChiTietSP from "src/pages/Products/_id/chitietsp.vue";
-
-import GioHang from "src/pages/Cart/GioHang.vue";
-import ThanhToan from "src/pages/Cart/ThanhToan.vue";
-
 const routes = [
-    //   {
-    //     path: "/",
-    //     component: DashboardLayout,
-    //     redirect: "/admin/overview",
-    //   },
-    {
-        path: '/',
-        component: IndexLayout,
-        redirect: '/home',
-        children: [{
-                path: 'home',
-                name: 'Home',
-                component: TrangChu
-            },
-
-        ]
-    }, {
-        path: "/admin",
-        component: DashboardLayout,
-        redirect: "/admin/overview",
-        children: [{
-                path: "overview",
-                name: "Overview",
-                component: Overview,
-            },
-            {
-                path: "user",
-                name: "User",
-                component: UserProfile,
-            },
-            {
-                path: "table-list",
-                name: "Table List",
-                component: TableList,
-            },
-            {
-                path: "typography",
-                name: "Typography",
-                component: Typography,
-            },
-            {
-                path: "icons",
-                name: "Icons",
-                component: Icons,
-            },
-            {
-                path: "maps",
-                name: "Maps",
-                component: Maps,
-            },
-            {
-                path: "notifications",
-                name: "Notifications",
-                component: Notifications,
-            },
-            {
-                path: "upgrade",
-                name: "Upgrade to PRO",
-                component: Upgrade,
-            },
-        ],
-    }, {
-        path: "/quanlyuser",
-        component: DashboardLayout,
-        children: [{
-                path: "userslist",
-                name: "UsersList",
-                component: UserIndex,
-            },
-            {
-                path: "nhanvien",
-                name: "Nhanvien",
-                component: Nhanvien,
-            },
-            {
-                path: ":id/chinhsuaNV",
-                name: "chinhsuaNV",
-                component: EditNV,
-            },
-            {
-                path: "themnv",
-                name: "ThemNV",
-                component: AddNV,
-            },
-            {
-                path: "khachhang",
-                name: "Khachhang",
-                component: Khachhang,
-            },
-            {
-                path: ":id/chinhsuakh",
-                name: "chinhsuaKH",
-                component: EditKH,
-            },
-            {
-                path: "themkh",
-                name: "ThemKH",
-                component: AddKH,
-            },
-        ],
-    }, {
-        path: "/quanlysanpham",
-        component: DashboardLayout,
-        children: [{
-                path: "sanpham",
-                name: "SanPham",
-                component: SanPhamDanhSach,
-            },
-            {
-                path: "linhkien",
-                name: "LinhKien",
-                component: LinhKien,
-            },
-            {
-                path: "themsanpham",
-                name: "ThemSanPham",
-                component: SanPhamThem,
-            },
-            // {
-            //     path: ":id/chitietsp",
-            //     name: "chitietSP",
-            //     component: ChiTietSP,
-            // },
-
-        ],
-    },
-    {
-        path: "/quanlysanpham",
-        component: IndexLayout,
-        children: [{
-                path: ":id/chitietsp",
-                name: "chitietSP",
-                component: ChiTietSP,
-            },
-
-        ],
-    },
-    {
-        path: "/giohang",
-        component: IndexLayout,
-        children: [{
-                path: "giohang",
-                name: "GioHang",
-                component: GioHang,
-            },
-            {
-                path: "thanhtoan",
-                name: "thanhToan",
-                component: ThanhToan,
-            },
-        ],
-    },
-    {
-        path: "/dangnhap",
-        component: DangNhapUser,
-    }, {
-        path: "*",
-        component: NotFound,
-    },
+  {
+    path: "/",
+    component: DashboardLayout,
+    redirect: "/admin/overview",
+  },
+  {
+    path: "/admin",
+    component: DashboardLayout,
+    redirect: "/admin/overview",
+    children: [
+      {
+        path: "overview",
+        name: "Overview",
+        component: Overview,
+      },
+      {
+        path: "user",
+        name: "User",
+        component: UserProfile,
+      },
+      {
+        path: "table-list",
+        name: "Table List",
+        component: TableList,
+      },
+      {
+        path: "typography",
+        name: "Typography",
+        component: Typography,
+      },
+      {
+        path: "icons",
+        name: "Icons",
+        component: Icons,
+      },
+      {
+        path: "maps",
+        name: "Maps",
+        component: Maps,
+      },
+      {
+        path: "notifications",
+        name: "Notifications",
+        component: Notifications,
+      },
+      {
+        path: "upgrade",
+        name: "Upgrade to PRO",
+        component: Upgrade,
+      },
+    ],
+  },
+  {
+    path: "/quanlyuser",
+    component: DashboardLayout,
+    children: [
+      {
+        path: "userslist",
+        name: "UsersList",
+        component: UserIndex,
+      },
+      {
+        path: "nhanvien",
+        name: "Nhanvien",
+        component: Nhanvien,
+      },
+      {
+        path: ":id/chinhsuaNV",
+        name: "chinhsuaNV",
+        component: EditNV,
+      },
+      {
+        path: "themnv",
+        name: "ThemNV",
+        component: AddNV,
+      },
+      {
+        path: "khachhang",
+        name: "Khachhang",
+        component: Khachhang,
+      },
+      {
+        path: ":id/chinhsuakh",
+        name: "chinhsuaKH",
+        component: EditKH,
+      },
+      {
+        path: "themkh",
+        name: "ThemKH",
+        component: AddKH,
+      },
+    ],
+  },
+  {
+    path: "/quanlysanpham",
+    component: DashboardLayout,
+    children: [
+      {
+        path: "sanpham",
+        name: "SanPham",
+        component: SanPhamDanhSach,
+      },
+      {
+        path: "linhkien",
+        name: "LinhKien",
+        component: LinhKien,
+      },
+      {
+        path: "themsanpham",
+        name: "ThemSanPham",
+        component: SanPhamThem,
+      },
+    ],
+  },
+  {
+    path: "/dangnhap",
+    component: DangNhapUser,
+  },
+  {
+    path: "*",
+    component: NotFound,
+  },
 ];
->>>>>>> ec144a17e2507032e38485aea96b37e404076f88
 
 /**
  * Asynchronously load view (Webpack Lazy loading compatible)
@@ -330,8 +157,4 @@ function view(name) {
    return res;
 };**/
 
-<<<<<<< HEAD
-export default routes
-=======
 export default routes;
->>>>>>> ec144a17e2507032e38485aea96b37e404076f88

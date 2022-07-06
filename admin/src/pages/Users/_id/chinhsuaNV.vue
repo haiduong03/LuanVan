@@ -1,163 +1,130 @@
 <template>
   <div class="content">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-8">
-          <card>
-            <h4 slot="header" class="card-title">Sửa thông tin</h4>
-            <form>
-              <div class="row">
-                <div class="col-md-3">
-                  <base-input
-                    type="text"
-                    label="Họ và Tên"
-                    placeholder="Họ và Tên"
-                    v-model="form.TEN"
-                  >
-                  </base-input>
-                </div>
-                <div class="col-md-4">
-                  <base-input
-                    type="text"
-                    label="Số điện thoại"
-                    placeholder="Số điện thoại"
-                    v-model="form.SODIENTHOAI"
-                  >
-                  </base-input>
-                </div>
+    <!-- <div class="container-fluid"> -->
+    <div class="row">
+      <div class="container col-6">
+        <card>
+          <form>
+            <div class="form-row">
+              <div class="form-group col-md-12">
+                <label for="inputEmail4">Email</label>
+                <input disabled v-model="EMAIL" type="email" class="form-control" id="inputEmail4"
+                  placeholder="abc@gmail.com">
               </div>
-              <div class="row">
-                <div class="col-md-6">
-                  <base-input
-                    type="text"
-                    label="Địa chỉ"
-                    placeholder="Địa chỉ"
-                    v-model="form.DIACHI"
-                  >
-                  </base-input>
-                </div>
-              </div> 
-              <div class="text-center">
-                <button
-                  type="submit"
-                  class="btn btn-info btn-fill float-left"
-                  @click.prevent="onUpdate()"
-                >
-                  Cập nhật thông tin
-                </button>
+            </div>
+            <!-- <div class="form-row">
+              <div class="form-group col-md-12">
+                <label for="inputPassword4">Password</label>
+                <input v-model="PASS" type="password" class="form-control" id="inputPassword4">
               </div>
-              <div class="clearfix"></div>
-            </form>
-          </card>
-        </div>
-        <div class="col-md-4">
-          <card class="card-user">
-            <img
-              slot="image"
-              src="https://ununsplash.imgix.net/photo-1431578500526-4d9613015464?fit=crop&fm=jpg&h=300&q=75&w=400"
-              alt="..."
-            />
-            <div class="author">
-              <a href="#">
-                <img class="avatar border-gray" :src="form.avatar" alt="..." />
+            </div> -->
+            <div class="form-row">
+              <div class="form-group col-md-12">
+                <label for="inputEmail4">Họ và tên</label>
+                <input v-model="TEN" type="text" class="form-control" id="inputEmail4">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-12">
+                <label for="inputPassword4">Số điện thoại</label>
+                <input v-model="SODIENTHOAI" type="number" class="form-control" id="inputPassword4">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-12">
+                <label for="inputCity">Địa chỉ</label>
+                <input v-model="DIACHI" type="text" class="form-control" id="inputCity">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-12">
+                <label for="inputCity">Giới tính</label>
 
-                <h4 class="title">
-                  {{ form.TEN }}<br />
-                  <small>{{ form.TEN }}</small>
-                </h4>
-              </a>
+                <select v-model="GIOITINH" class="form-control" id="exampleFormControlSelect1">
+                  <template v-if="GIOITINH == 0">
+                    <option selected value="0">Nam</option>
+                    <option value="1">Nữ</option>
+                  </template>
+                  <template v-else>
+                    <option value="0">Nam</option>
+                    <option selected value="1">Nữ</option>
+                  </template>
+                </select>
+              </div>
             </div>
-            <div
-              slot="footer"
-              class="text-center d-flex justify-content-center"
-            >
-              <button href="#" class="btn btn-simple">
-                <i class="fa fa-facebook-square"></i>
-              </button>
-              <button href="#" class="btn btn-simple">
-                <i class="fa fa-twitter"></i>
-              </button>
-              <button href="#" class="btn btn-simple">
-                <i class="fa fa-google-plus-square"></i>
-              </button>
+            <div class="form-group col-md-7">
+              <button @click.prevent="updateNV()" style="align:center" class="btn btn-primary btn-fill float-right">Xác
+                nhận</button>
             </div>
-          </card>
-        </div>
+          </form>
+        </card>
       </div>
-      
     </div>
+    <!-- </div> -->
   </div>
 </template>
+
 <script>
-import EditProfileForm from "../../UserProfile/EditProfileForm.vue";
-import UserCard from "../../UserProfile/UserCard.vue";
 import axios from "axios";
+// import BaseInput from '../../components/Inputs/BaseInput.vue';
 export default {
   components: {
-    EditProfileForm,
-    UserCard,
+    // BaseInput
   },
   data() {
     return {
-      data: [],
-      user: [],
-       form: {
-        TEN: null,
-        SODIENTHOAI: null,
-        DIACHI: null,
-      },
+      TEN: null,
+      EMAIL: null,
+      PASS: null,
+      SODIENTHOAI: null,
+      DIACHI: null,
+      GIOITINH: null,
     };
   },
-  created() {
-    //console.log(this.$route.params.id);
-  },
   mounted() {
-    this.solieu();
+    this.findNV()
   },
-
   methods: {
-    async solieu() {
-      console.log(this.$route.params.id)
+    async findNV() {
       const token = localStorage.token;
-      console.log(token)
-      this.data = await axios.get(
-        `http://localhost:3000/admin/find-adm-id/${this.$route.params.id}`,{
+      const result = await axios.get(`http://localhost:3000/admin/find-adm-id/${this.$route.params.id}`, {
         headers: {
           "Access-Control-Allow-Origin": "*",
           // "Content-type": "Application/json",
-          "Authorization": `Bearer ${token}`
+          "Authorization": `Bearer ${token} `
         }
-      },
-      );
-      //  $(this.$route.params.id)
-      console.log(this.data)
-      this.user = this.data.data[0];
-      this.form.TEN = this.user.TEN;      
-      this.form.SODIENTHOAI = this.user.SODIENTHOAI;
-      this.form.DIACHI = this.user.DIACHI;
+      });
+      console.log(result)
+      this.TEN = result.data[0].TEN;
+      this.SODIENTHOAI = result.data[0].SODIENTHOAI;
+      this.DIACHI = result.data[0].DIACHI;
+      this.GIOITINH = result.data[0].GIOITINH;
+
     },
-  async onUpdate() {
-
+    async updateNV() {
       const token = localStorage.token;
-      console.log(token)
-      const url =`http://localhost:3000/admin/update-adm/${this.$route.params.id}`
-
-      await axios.put( url,
-      this.form,
-      {
+      const result = await axios.put(`http://localhost:3000/admin/update-adm/${this.$route.params.id}`,
+        {
+          TEN: this.TEN,
+          SODIENTHOAI: this.SODIENTHOAI,
+          DIACHI: this.DIACHI,
+          GIOITINH: this.GIOITINH,
+        },
+        {
           headers: {
             "Access-Control-Allow-Origin": "*",
             // "Content-type": "Application/json",
             "Authorization": `Bearer ${token}`
-           }
-        },
-        // this.form,
-      );
-      alert("Chỉnh sửa thành công");
-      this.$router.push('/quanlyuser/nhanvien')
+          }
+        });
+      if (result.data.message === "CẬP NHẬT THÀNH CÔNG") {
+        alert(result.data.message);
+        this.$router.push('/quanlyuser/nhanvien')
+      }
+      else {
+        alert(result.data.message);
+      }
     },
-  },
+  }
 };
 </script>
-<style>
-</style>

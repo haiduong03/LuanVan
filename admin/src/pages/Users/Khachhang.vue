@@ -11,7 +11,7 @@
                         </template>
 
                         <div style="text-align:right">
-                            <router-link to="/quanlyuser/themnv">
+                            <router-link to="/quanlyuser/themkh">
                                 <button data-bs-toggle="modal" data-bs-target="#exampleModal"
                                     class="btn btn-primary btn-fill float-righ">
                                     Khách hàng mới
@@ -33,36 +33,44 @@
                             </thead>
                             <tbody>
                                 <tr v-for="(use, index) in pageOfitems" :key="index">
-                                    <template v-if="use.LOAI == 0">
-                                        <td>{{ index + 1 }}</td>
-                                        <td>{{ use.EMAIL }}</td>
-                                        <td>{{ use.TEN }}</td>
-                                        <td>{{ use.SODIENTHOAI }}</td>
-                                        <td>{{ use.DIACHI }}</td>
-                                        <template v-if="use.GIOITINH == 0">
-                                            <td>Nam</td>
-                                        </template>
-                                        <template v-else>
-                                            <td>Nữ</td>
-                                        </template>
+                                    <td>{{ index + 1 }}</td>
+                                    <td>{{ use.EMAIL }}</td>
+                                    <td>{{ use.TEN }}</td>
+                                    <td>{{ use.SODIENTHOAI }}</td>
+                                    <td>{{ use.DIACHI }}</td>
+                                    <template v-if="use.GIOITINH == 0">
+                                        <td>Nam</td>
+                                    </template>
+                                    <template v-else>
+                                        <td>Nữ</td>
+                                    </template>
+                                    <template v-if="use.TRANGTHAI == 0">
+                                        <td>Hoạt động</td>
+                                    </template>
+                                    <template v-else>
+                                        <td>Không hoạt động</td>
+                                    </template>
+                                    <td style="text-align: center">
                                         <template v-if="use.TRANGTHAI == 0">
-                                            <td>Hoạt động</td>
-                                        </template>
-                                        <template v-else>
-                                            <td>Không hoạt động</td>
-                                        </template>
-                                        <td style="text-align: center">
-                                            <button @click.prevent="onDel(use.ID)" type="button"
+                                            <button @click.prevent="deleteKH(use.ID)" type="button"
                                                 class="btn btn-danger btn-fill float-righ">
                                                 Xóa
                                             </button>
-                                        </td>
-                                    </template>
+                                            &nbsp;
+                                        </template>
+                                        <template v-else>
+                                            <button @click.prevent="activeKH(use.ID)" type="button"
+                                                class="btn btn-success btn-fill float-righ">
+                                                Kích hoạt
+                                            </button>
+                                        </template>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
                         <div style="text-align: center">
-                            <jw-pagination :pageSize="15" :items="users" @changePage="onChangePage">
+                            <jw-pagination :pageSize="10" :items="users" @changePage="onChangePage"
+                                :labels="customLabels">
                             </jw-pagination>
                         </div>
                     </card>
@@ -73,25 +81,34 @@
     </div>
 </template>
 <script>
-// import Paginate from 'vuejs-paginate'
+import Paginate from 'vuejs-paginate'
 import axios from "axios";
 import LTable from "src/components/Table.vue";
 import Card from "src/components/Cards/Card.vue";
+
+const customLabels = {
+    first: '<<',
+    last: '>>',
+    previous: '<',
+    next: '>'
+};
+
+
 export default {
     components: {
         LTable,
         Card,
-        //   Paginate,
+        Paginate,
     },
     data() {
         return {
-            data: [],
             users: [],
             pageOfitems: [],
+            customLabels
         };
     },
     mounted() {
-        this.solieu();
+        this.listKH();
     },
 
     methods: {
@@ -99,9 +116,9 @@ export default {
             this.pageOfitems = pageOfitems;
         },
 
-        async solieu() {
+        async listKH() {
             const token = localStorage.token;
-            this.data = await axios.get(`http://localhost:3000/user/get-all-usr`, {
+            const result = await axios.get(`http://localhost:3000/user/get-all-usr`, {
                 headers: {
                     "Access-Control-Allow-Origin": "*",
                     // "Content-type": "Application/json",
@@ -110,25 +127,41 @@ export default {
             });
             // console.log(this.data);
             //  console.log(this.data.data.data);
-            this.users = this.data.data;
+            this.users = result.data;
         },
 
-        async onDel(ID) {
-            const token = localStorage.token;
-            const result = axios.delete(`http://localhost:3000/user/remove-usr/${ID}`, {
-                headers: {
-                    "Access-Control-Allow-Origin": "*",
-                    // "Content-type": "Application/json",
-                    "Authorization": `Bearer ${token}`
-                }
+        async deleteKH(ID) {
+            let text = "BẠN CÓ MUỐN XÓA KHÁCH HÀNG NÀY";
+
+            if (confirm(text) == true) {
+                const token = localStorage.token;
+                const result = await axios.delete(`http://localhost:3000/user/remove-usr/${ID}`, {
+                    headers: {
+                        "Access-Control-Allow-Origin": "*",
+                        // "Content-type": "Application/json",
+                        "Authorization": `Bearer ${token}`
+                    }
+                });
+                alert(result.data.message);
+                window.location.reload();
             }
-            ).then((result) => {
-                console.warn(result);
-            });
         },
-        // clickCallback (pageNum) => {
-        //  console.log(pageNum)
-        // },
+
+        async activeKH(ID) {
+            let text = "BẠN CÓ MUỐN KÍCH HOẠT KHÁCH HÀNG NÀY";
+            if (confirm(text) == true) {
+                const token = localStorage.token;
+                const result = await axios.get(`http://localhost:3000/user/active-usr/${ID}`, {
+                    headers: {
+                        "Access-Control-Allow-Origin": "*",
+                        // "Content-type": "Application/json",
+                        "Authorization": `Bearer ${token}`
+                    }
+                });
+                alert(result.data.message);
+                window.location.reload();
+            }
+        },
     }
 }
 </script>

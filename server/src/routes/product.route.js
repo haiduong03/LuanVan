@@ -5,74 +5,50 @@ const router = express.Router();
 const product = require("../controllers/product.controller");
 const token = require("../middlewares/token.middleware");
 
-router.get("/get-all-pro", token.verifyToken, product.getAllPro);
+router.get("/get-all-product", token.verifyToken, product.getAllPro);
 
-router.get("/get-all-pro-active", product.getAllProActive);
+router.get("/get-all-product-active", product.getAllProActive);
 
-router.get(
-	"/get-all-pro-not-active",
-	token.verifyToken,
-	product.getAllProNotActive,
-);
+router.get("/find-product-by-id/:id", product.findProById);
 
-router.get("/find-pro-by-name", product.findProByName);
+router.get("/find-product-by-name", product.findProByName);
 
-router.get("/find-pro-by-brand", product.findProByBrand);
+router.get("/find-product-by-brand", product.findProByBrand);
 
-router.get("/find-pro-by-category", product.findProByCategory);
+router.get("/find-product-by-cpu", product.findProByCpu);
 
-router.post("/create-product", token.verifyToken, product.addProduct);
+router.get("/find-product-by-ram", product.findProByRam);
 
-router.put("/update-product", token.verifyToken, product.updateProduct);
+router.get("/find-product-by-os", product.findProByOS);
 
-router.delete("/remove-product", token.verifyToken, product.removeProduct);
+router.get("/find-product-by-drive", product.findProByDrive);
 
-router.get("/get-all-brand", token.verifyToken, product.getAllBrand);
+router.get("/get-all-brand", product.getAllBrand);
 
-router.get("/get-all-brand-active", product.getAllBrandActive);
+router.post("/add-brand/:name", token.verifyToken, product.addBrand);
 
-router.get(
-	"/get-all-brand-not-active",
-	token.verifyToken,
-	product.getAllBrandNotTActive,
-);
+router.get("/get-all-cpu", product.getAllCpu);
 
-router.post("/add-brand", token.verifyToken, product.addBrand);
+router.post("/add-cpu/:name", token.verifyToken, product.addCpu);
 
-router.put("/update-brand", token.verifyToken, product.updatedBrand);
+router.get("/get-all-ram", product.getAllRam);
 
-router.delete("/remove-brand", token.verifyToken, product.removeBrand);
+router.post("/add-ram/:name", token.verifyToken, product.addRam);
 
-router.post(
-	"/add-product-details",
-	token.verifyToken,
-	product.addProductDetails,
-);
+router.get("/get-all-drive", product.getAllDrive);
 
-router.put(
-	"/update-product-details",
-	token.verifyToken,
-	product.updateProductDetails,
-);
+router.post("/add-drive/:name", token.verifyToken, product.addDrive);
 
-router.post("/add-category", token.verifyToken, product.addCategory);
+router.get("/get-all-os", product.getAllOS);
 
-router.put("/update-category", token.verifyToken, product.updateCategory);
+router.post("/add-os/:name", token.verifyToken, product.addOS);
 
-router.delete("/remove-category", token.verifyToken, product.removeCategory);
+router.post("/add-product", token.verifyToken, product.addProduct);
 
-router.get("/get-all-category", token.verifyToken, product.getAllCategory);
+router.put("/update-product/:id", token.verifyToken, product.updateProduct);
 
-router.get(
-	"/get-all-category-active",
-	token.verifyToken,
-	product.getAllCategoryActive,
-);
+router.delete("/remove-product/:id", token.verifyToken, product.removeProduct);
 
-router.get(
-	"/get-all-category-not-active",
-	token.verifyToken,
-	product.getAllCategoryNotTActive,
-);
+router.get("/active-product/:id", token.verifyToken, product.activeProduct);
 
 module.exports = router;

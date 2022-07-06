@@ -23,6 +23,10 @@
           <i class="nc-icon nc-app"></i>
           <p>Sản phẩm</p>
         </sidebar-link>
+        <sidebar-link to="/quanlysanpham/linhkien">
+          <i class="nc-icon nc-settings-gear-64"></i>
+          <p>Linh kiện</p>
+        </sidebar-link>
         <sidebar-link to="/quanlydonhang">
           <i class="nc-icon nc-cart-simple"></i>
           <p>Đơn hàng</p>

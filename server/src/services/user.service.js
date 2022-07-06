@@ -44,7 +44,9 @@ async function getAllUsrActive() {
 	// 	data,
 	// 	meta,
 	// };
-	return await db.query(`SELECT * FROM NGUOIDUNG WHERE LOAI = 0 AND TRANGTHAI = 0`);
+	return await db.query(
+		`SELECT * FROM NGUOIDUNG WHERE LOAI = 0 AND TRANGTHAI = 0`,
+	);
 }
 
 async function getAllUsrNotActive() {
@@ -62,19 +64,26 @@ async function getAllUsrNotActive() {
 	// 	data,
 	// 	meta,
 	// };
-	return await db.query(`SELECT * FROM NGUOIDUNG WHERE LOAI = 0 AND TRANGTHAI = 1`);
+	return await db.query(
+		`SELECT * FROM NGUOIDUNG WHERE LOAI = 0 AND TRANGTHAI = 1`,
+	);
 }
 
 async function findUsrId(id) {
-	return await db.query(`SELECT * FROM NGUOIDUNG WHERE LOAI = 0 AND ID = ?`, [id]);
+	return await db.query(`SELECT * FROM NGUOIDUNG WHERE LOAI = 0 AND ID = ?`, [
+		id,
+	]);
 }
 
 async function findUsrMail(email) {
-	if (await checkEmailValid(email) == false) {
+	if ((await checkEmailValid(email)) == false) {
 		message = "EMAIL PHẢI CÓ DẠNG ABC@EMAIL.COM";
 		return message;
 	}
-	return await db.query(`SELECT * FROM NGUOIDUNG WHERE LOAI = 0 AND EMAIL = ?`, [email]);
+	return await db.query(
+		`SELECT * FROM NGUOIDUNG WHERE LOAI = 0 AND EMAIL = ?`,
+		[email],
+	);
 }
 
 async function findUsrName(name) {
@@ -85,7 +94,10 @@ async function findUsrName(name) {
 }
 
 async function findUsrPhone(phone) {
-	return await db.query(`SELECT * FROM NGUOIDUNG WHERE LOAI = 0 AND  SODIENTHOAI = ?`, [phone]);
+	return await db.query(
+		`SELECT * FROM NGUOIDUNG WHERE LOAI = 0 AND  SODIENTHOAI = ?`,
+		[phone],
+	);
 }
 
 async function checkEmailValid(email) {
@@ -122,7 +134,7 @@ async function checkPhoneValid(phone) {
 		.is()
 		.min(10) // Minimum length 10
 		.is()
-		.max(13) // Maximum length 1
+		.max(13); // Maximum length 1
 
 	return constructor.validate(phone); // true or false
 }
@@ -131,15 +143,21 @@ async function createUsr(user) {
 	const oldUsr = await findUsrMail(user.EMAIL);
 	const email = await checkEmailValid(user.EMAIL);
 	const pass = await checkPassValid(user.PASS);
-	const phone = await checkPhoneValid((user.SODIENTHOAI).toString());
+	const phone = await checkPhoneValid(user.SODIENTHOAI.toString());
 
 	message = "TẠO THẤT BẠI";
 
-	if (!user.TEN || !user.EMAIL || !user.PASS || !user.SODIENTHOAI || !user.DIACHI) {
+	if (
+		!user.TEN ||
+		!user.EMAIL ||
+		!user.PASS ||
+		!user.SODIENTHOAI ||
+		!user.DIACHI
+	) {
 		message = "KHÔNG ĐƯỢC ĐỂ TRỐNG";
 		return {
 			message,
-			user
+			user,
 		};
 	}
 
@@ -147,7 +165,7 @@ async function createUsr(user) {
 		message = "ĐÃ CÓ NGƯỜI DÙNG";
 		return {
 			message,
-			user
+			user,
 		};
 	}
 
@@ -155,7 +173,7 @@ async function createUsr(user) {
 		message = "SỐ ĐIỆN THOẠI PHẢI CÓ ĐỘ DÀI TỪ 10 ĐẾN 13";
 		return {
 			message,
-			user
+			user,
 		};
 	}
 
@@ -163,7 +181,7 @@ async function createUsr(user) {
 		message = "EMAIL PHẢI CÓ DẠNG 'ABC@EMAIL.COM'";
 		return {
 			message,
-			user
+			user,
 		};
 	}
 
@@ -172,7 +190,7 @@ async function createUsr(user) {
 			"MẬT KHẨU PHẢI CÓ ĐỘ DÀI TỪ 8 ĐẾN 100, CHỮ CÁI THƯỜNG, CHỮ CÁI IN HOA, 2 KÍ TỰ ĐẶC BIỆT VÀ KHÔNG CÓ KHOẢNG TRỐNG";
 		return {
 			message,
-			user
+			user,
 		};
 	}
 
@@ -212,13 +230,7 @@ async function updateUsr(id, user) {
 		`UPDATE NGUOIDUNG 
 			SET TEN = ?, SODIENTHOAI = ?, DIACHI = ?, GIOITINH = ?
 		WHERE LOAI = 0 AND ID = ?`,
-		[
-			user.TEN,
-			user.SODIENTHOAI,
-			user.DIACHI,
-			user.GIOITINH,
-			id,
-		],
+		[user.TEN, user.SODIENTHOAI, user.DIACHI, user.GIOITINH, id],
 	);
 
 	if (result.affectedRows) {
@@ -236,7 +248,10 @@ async function updateUsr(id, user) {
 // }
 
 async function removeUsr(id) {
-	const result = await db.query(`UPDATE NGUOIDUNG SET TRANGTHAI = 1 WHERE LOAI = 0 AND ID = ?`, [id]);
+	const result = await db.query(
+		`UPDATE NGUOIDUNG SET TRANGTHAI = 1 WHERE LOAI = 0 AND ID = ?`,
+		[id],
+	);
 
 	message = "XÓA THẤT BẠI";
 
@@ -249,6 +264,22 @@ async function removeUsr(id) {
 	};
 }
 
+async function activeUsr(id) {
+	const result = await db.query(
+		`UPDATE NGUOIDUNG SET TRANGTHAI = 0 WHERE LOAI = 0 AND ID = ?`,
+		[id],
+	);
+
+	message = "KÍCH HOẠT THẤT BẠI";
+
+	if (result.affectedRows) {
+		message = "KÍCH HOẠT THÀNH CÔNG";
+	}
+
+	return {
+		message,
+	};
+}
 module.exports = {
 	getAllUsr,
 	getAllUsrActive,
@@ -260,4 +291,5 @@ module.exports = {
 	createUsr,
 	updateUsr,
 	removeUsr,
+	activeUsr,
 };

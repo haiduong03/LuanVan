@@ -66,7 +66,6 @@ app.post("/upload", (req, res) => {
 	}
 	// accessing the file
 	const myFile = req.files.file;
-
 	//  mv() method places the file inside public directory
 	myFile.mv(`${__dirname}/uploads/${myFile.name}`, function (err) {
 		if (err) {
@@ -76,7 +75,7 @@ app.post("/upload", (req, res) => {
 		// returing the response with file path and name
 		return res.send({
 			name: myFile.name,
-			path: `/${myFile.name}`,
+			// path: `/${myFile.name}`,
 			msg: "CHỌN THÀNH CÔNG",
 		});
 	});
