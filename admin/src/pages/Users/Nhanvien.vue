@@ -26,7 +26,7 @@
                   <th>Email</th>
                   <th>Họ tên</th>
                   <th>SĐT</th>
-                  <th>Địa chỉ</th>
+                  <!-- <th>Địa chỉ</th> -->
                   <th>Giới tính</th>
                   <th>Trạng thái</th>
                   <th></th>
@@ -34,6 +34,7 @@
                 </tr>
               </thead>
               <tbody>
+<<<<<<< HEAD
                 <tr v-for="(use, index) in users" :key="index">
                   <template v-if="use.LOAI == 1">
                     <td>{{ index + 1 }}</td>
@@ -47,6 +48,33 @@
                     <template v-else>
                       <td>Nữ</td>
                     </template>
+=======
+                <tr v-for="(use, index) in pageOfitems" :key="index">
+                  <td>{{ index + 1 }}</td>
+                  <td>{{ use.EMAIL }}</td>
+                  <td>{{ use.TEN }}</td>
+                  <td>{{ use.SODIENTHOAI }}</td>
+                  <!-- <td>{{ use.DIACHI }}</td> -->
+                  <template v-if="use.GIOITINH == 0">
+                    <td>Nam</td>
+                  </template>
+                  <template v-else>
+                    <td>Nữ</td>
+                  </template>
+                  <template v-if="use.TRANGTHAI == 0">
+                    <td>Hoạt động</td>
+                  </template>
+                  <template v-else>
+                    <td>Không hoạt động</td>
+                  </template>
+                  <td>
+                    <router-link :to="`/quanlyuser/${use.ID}/chinhsuaNV`">
+                      <button type="button" class="btn btn-primary btn-fill float-righ">
+                        Sửa
+                      </button>
+                    </router-link>
+                    &nbsp;
+>>>>>>> ec144a17e2507032e38485aea96b37e404076f88
                     <template v-if="use.TRANGTHAI == 0">
                       <td>Hoạt động</td>
                     </template>
