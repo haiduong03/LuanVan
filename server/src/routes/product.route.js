@@ -5,9 +5,11 @@ const router = express.Router();
 const product = require("../controllers/product.controller");
 const token = require("../middlewares/token.middleware");
 
-router.get("/get-all-product", product.getAllPro);
+router.get("/get-all-product", token.verifyToken, product.getAllPro);
 
 router.get("/get-all-product-active", product.getAllProActive);
+
+router.get("/find-product-by-id/:id", token.verifyToken, product.findProById);
 
 router.get("/find-product-by-name", product.findProByName);
 

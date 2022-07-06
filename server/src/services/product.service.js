@@ -63,6 +63,37 @@ async function getAllProActive(page) {
 	);
 }
 
+async function findProById(id) {
+	return await db.query(
+		`SELECT
+			SP.ID,
+			H.TEN AS THUONGHIEU,
+			SP.TEN,
+			HDH.TEN AS HEDIEUHANH,
+			C.TEN AS CPU,
+			SP.THONGTINCPU,
+			SP.GIA,
+			O.TEN AS OCUNG,
+			SP.DUNGLUONGOCUNG,
+			R.TEN AS RAM,
+			SP.DUNGLUONGRAM,
+			SP.MOTA,
+			SP.ANH,
+			SP.TRANGTHAI
+		FROM
+			SANPHAM SP
+			JOIN HEDIEUHANH HDH ON HDH.ID = SP.HEDIEUHANH_ID
+			JOIN HANG H ON H.ID = SP.THUONGHIEU_ID
+			JOIN CPU C ON C.ID = SP.CPU_ID
+			JOIN OCUNG O ON O.ID = SP.OCUNG_ID
+			JOIN RAM R ON R.ID = SP.RAM_ID
+		WHERE
+			SP.ID = ? AND
+			SP.TRANGTHAI = 0`,
+		[id],
+	);
+}
+
 async function findProByName(name) {
 	const value = name.replace(/ /g, "%");
 	return await db.query(
@@ -525,6 +556,7 @@ async function addOS(os) {
 module.exports = {
 	getAllPro,
 	getAllProActive,
+	findProById,
 	findProByName,
 	findProByBrand,
 	findProByCpu,
