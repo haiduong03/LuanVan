@@ -41,7 +41,11 @@
                             </tbody>
                         </table>
                         <div style="text-align: center">
+<<<<<<< HEAD
                             <jw-pagination :pageSize="5" :items="listCPU" @changePage="onChangePageCpu"
+=======
+                            <jw-pagination :pageSize="10" :items="listCPU" @changePage="onChangePage"
+>>>>>>> 3b31f4ed3fca05c17be641425e962367d754b7bd
                                 :labels="customLabels">
                             </jw-pagination>
                         </div>
@@ -86,7 +90,7 @@
                             </tbody>
                         </table>
                         <div style="text-align: center">
-                            <jw-pagination :pageSize="10" :items="listRAM" @changePage="onChangePageRam"
+                            <jw-pagination :pageSize="10" :items="listRAM" @changePage="onChangePage"
                                 :labels="customLabels">
                             </jw-pagination>
                         </div>
@@ -205,6 +209,7 @@
     </div>
 </template>
 <script>
+// import Paginate from 'vuejs-paginate'
 import axios from "axios";
 import LTable from "src/components/Table.vue";
 import Card from "src/components/Cards/Card.vue";
@@ -221,6 +226,7 @@ export default {
     components: {
         LTable,
         Card,
+        // Paginate,
     },
     data() {
         return {
@@ -229,8 +235,11 @@ export default {
             TENRAM: null,
             listRAM: [],
             users: [],
+<<<<<<< HEAD
             pageOfcpu: [],
             pageOfram: [],
+=======
+>>>>>>> 3b31f4ed3fca05c17be641425e962367d754b7bd
             pageOfitems: [],
             customLabels
         };
@@ -242,18 +251,15 @@ export default {
 
     methods: {
         onChangePage(pageOfitems) {
+<<<<<<< HEAD
       this.pageOfitems = pageOfitems;
     },
         onChangePageCpu(page) {
             this.pageOfcpu = page;
+=======
+            this.pageOfitems = pageOfitems;
+>>>>>>> 3b31f4ed3fca05c17be641425e962367d754b7bd
         },
-
-        onChangePageRam(pageOfitems) {
-            this.pageOfram = pageOfitems;
-        },
-        // onChangePageCpu(pageOfitems) {
-        //     this.pageOfcpu = pageOfitems;
-        // },
 
         async listCpu() {
             const result = await axios.get(`http://localhost:3000/product/get-all-cpu`);

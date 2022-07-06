@@ -110,7 +110,6 @@ Tăng tốc độ tải ứng dụng với ổ SSD 512GB NVMe PCIe® và dễ d�
     </div>
 </template>
 <script>
-import axios from "axios";
 export default {
     components: {},
     data() {
@@ -146,17 +145,18 @@ export default {
         }
       });
       console.log(result)
-        // this.TEN = result.data[0].TEN;
-        // this.HEDIEUHANH = result.data[0].HEDIEUHANH;
-        // this.THUONGHIEU = result.data[0].THUONGHIEU;
-        // this.CPU = result.data[0].CPU;
-        // this.THONGTINCPU = result.data[0].THONGTINCPU;
-        // this.GIA = result.data[0].GIA;
-        // this.OCUNG = result.data[0].OCUNG;
-        // this.DUNGLUONGOCUNG = result.data[0].DUNGLUONGOCUNG;
-        // this.RAM = result.data[0].RAM;
-        // this.DUNGLUONGRAM = result.data[0].DUNGLUONGRAM;
-        // this.MOTA = result.data[0].MOTA;
+      this.TEN = result.data[0].TEN;
+      this.HEDIEUHANH = result.data[0].HEDIEUHANH;
+      this.THUONGHIEU = result.data[0].THUONGHIEU;
+      this.CPU = result.data[0].CPU;
+        this.THONGTINCPU = result.data[0].THONGTINCPU;
+      this.GIA = result.data[0].GIA;
+      this.OCUNG = result.data[0].OCUNG;
+      this.DUNGLUONGOCUNG = result.data[0].DUNGLUONGOCUNG;
+       this.RAM = result.data[0].RAM;
+      this.DUNGLUONGRAM = result.data[0].DUNGLUONGRAM;
+      this.MOTA = result.data[0].MOTA;
+
     },
     }
 };

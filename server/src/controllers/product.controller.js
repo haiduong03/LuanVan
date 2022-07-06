@@ -20,6 +20,15 @@ async function getAllProActive(req, res, next) {
 	}
 }
 
+async function findProById(req, res, next) {
+	try {
+		res.json(await product.findProById(req.params.id));
+	} catch (err) {
+		console.error(`Error`, err.message);
+		next(err);
+	}
+}
+
 async function findProByName(req, res, next) {
 	try {
 		res.json(await product.findProByName(req.params.name));
@@ -205,6 +214,7 @@ async function activeProduct(req, res, next) {
 module.exports = {
 	getAllPro,
 	getAllProActive,
+	findProById,
 	findProByName,
 	findProByBrand,
 	findProByCpu,
