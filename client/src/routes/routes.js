@@ -29,7 +29,7 @@ import DangNhapUser from "src/pages/Users/DangNhap.vue";
 import DangKyUser from "src/pages/Users/DangKy.vue";
 // import EditUser from "src/pages/Users/_id/chinhsuaKH.vue";
 
-import TrangChu from "src/pages/TrangChu/Index.vue";
+import TrangChu from "src/pages/Trangchu/Index.vue";
 import ChiTietSP from "src/pages/Products/_id/chitietsp.vue";
 
 import GioHang from "src/pages/Cart/GioHang.vue";
