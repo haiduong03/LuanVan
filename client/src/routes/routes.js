@@ -1,140 +1,111 @@
-import DashboardLayout from '../layout/DashboardLayout.vue'
-import IndexLayout from '../layout/IndexLayout.vue'
+// import DashboardLayout from "../layout/DashboardLayout.vue";
+import IndexLayout from "../layout/IndexLayout.vue";
 // GeneralViews
-import NotFound from '../pages/NotFoundPage.vue'
+import NotFound from "../pages/NotFoundPage.vue";
 
 // Admin pages
-import Overview from 'src/pages/Overview.vue'
-import UserProfile from 'src/pages/UserProfile.vue'
-import TableList from 'src/pages/TableList.vue'
-import Typography from 'src/pages/Typography.vue'
-import Icons from 'src/pages/Icons.vue'
-import Maps from 'src/pages/Maps.vue'
-import Notifications from 'src/pages/Notifications.vue'
-import Upgrade from 'src/pages/Upgrade.vue'
+// import Overview from "src/pages/Overview.vue";
+// import UserProfile from "src/pages/UserProfile.vue";
+// import TableList from "src/pages/TableList.vue";
+// import Typography from "src/pages/Typography.vue";
+// import Icons from "src/pages/Icons.vue";
+// import Maps from "src/pages/Maps.vue";
+// import Notifications from "src/pages/Notifications.vue";
+// import Upgrade from "src/pages/Upgrade.vue";
+// import UserIndex from "src/pages/Users/Index.vue";
+// import Nhanvien from "src/pages/Users/Nhanvien.vue";
+// import EditNV from "src/pages/Users/_id/chinhsuaNV.vue";
+// import AddNV from "src/pages/Users/ThemNV.vue";
+// import Khachhang from "src/pages/Users/Khachhang.vue";
+// import EditKH from "src/pages/Users/_id/chinhsuaKH.vue";
+// import AddKH from "src/pages/Users/ThemKH.vue";
 
-import UserIndex from 'src/pages/Users/Index.vue'
-import UserEdit from 'src/pages/Users/_id/manage.vue'
-import UserAdd from 'src/pages/Users/addUser.vue'
-import ProductIndex from 'src/pages/Products/Index.vue'
-import ProductAdd from 'src/pages/Products/addProduct.vue'
+// import SanPhamDanhSach from "src/pages/Products/SanPham.vue";
+// import SanPhamThem from "src/pages/Products/ThemSanPham.vue";
 
-import HomeIndex from 'src/pages/Trangchu/Index.vue'
-import Login from 'src/pages/Login.vue'
+// import LinhKien from "src/pages/Products/LinhKien.vue";
+
+import DangNhapUser from "src/pages/Users/DangNhap.vue";
+import DangKyUser from "src/pages/Users/DangKy.vue";
+// import EditUser from "src/pages/Users/_id/chinhsuaKH.vue";
+
+import TrangChu from "src/pages/TrangChu/Index.vue";
+import ChiTietSP from "src/pages/Products/_id/chitietsp.vue";
+
+import GioHang from "src/pages/Cart/GioHang.vue";
+import ThanhToan from "src/pages/Cart/ThanhToan.vue";
 
 const routes = [
   {
-    path: '/',
+    path: "/",
     component: IndexLayout,
-    redirect: '/home',
+    redirect: "/home",
     children: [
       {
-        path: 'home',
-        name: 'Home',
-        component: HomeIndex
-      },  
-    ]
+        path: "home",
+        name: "Home",
+        component: TrangChu,
+      },
+    ],
   },
   {
-    path: '/admin',
-    component: DashboardLayout,
-    redirect: '/admin/overview'
-  },
-  {
-    path: '/admin',
-    component: DashboardLayout,
-    redirect: '/admin/overview',
+    path: "/quanlysanpham",
+    component: IndexLayout,
     children: [
       {
-        path: 'overview',
-        name: 'Overview',
-        component: Overview
+        path: ":id/chitietsp",
+        name: "chitietSP",
+        component: ChiTietSP,
       },
-      {
-        path: 'user',
-        name: 'User',
-        component: UserProfile
-      },      
-      {
-        path: 'table-list',
-        name: 'Table List',
-        component: TableList
-      },
-      {
-        path: 'typography',
-        name: 'Typography',
-        component: Typography
-      },
-      {
-        path: 'icons',
-        name: 'Icons',
-        component: Icons
-      },
-      {
-        path: 'maps',
-        name: 'Maps',
-        component: Maps
-      },
-      {
-        path: 'notifications',
-        name: 'Notifications',
-        component: Notifications
-      },
-      {
-        path: 'upgrade',
-        name: 'Upgrade to PRO',
-        component: Upgrade
-      }
-    ]
+    ],
   },
   {
-    path: '/quanlyuser',
-    component: DashboardLayout,
+    path: "/giohang",
+    component: IndexLayout,
     children: [
       {
-        path: 'userslist',
-        name: 'UsersList',
-        component: UserIndex
+        path: "/",
+        name: "GioHang",
+        component: GioHang,
       },
       {
-        path: ':id/manage',
-        name: 'UsersEdit',
-        component: UserEdit
-      },        
-      {
-        path: 'adduser',
-        name: 'UsersAdd',
-        component: UserAdd
-      },  
-    ]
+        path: "thanhtoan",
+        name: "ThanhToan",
+        component: ThanhToan,
+      },
+    ],
   },
+
   {
-    path: '/quanlysanpham',
-    component: DashboardLayout,
+    path: "/user",
+    component: IndexLayout,
     children: [
       {
-        path: 'productslist',
-        name: 'ProductsList',
-        component: ProductIndex
+        path: "dangnhap",
+        name: "DangNhap",
+        component: DangNhapUser,
       },
       {
-        path: ':id/manage',
-        name: 'UsersEdit',
-        component: UserEdit
-      },        
-      {
-        path: 'addproduct',
-        name: 'ProductAdd',
-        component: ProductAdd
-      },  
-    ]
+        path: "dangky",
+        name: "DangKy",
+        component: DangKyUser,
+      },
+      // {
+      //     path: ":id/chinhsuaKH",
+      //     name: "chinhsuaKH",
+      //     component: EditUser,
+      // },
+    ],
   },
+  // {
+  //     path: "/dangnhap",
+  //     component: DangNhapUser,
+  // },
   {
-    path: '/login',
-    component: Login,
+    path: "*",
+    component: NotFound,
   },
-  { path: '*', component: NotFound }
-]
+];
 
 /**
  * Asynchronously load view (Webpack Lazy loading compatible)
@@ -145,4 +116,4 @@ function view(name) {
    return res;
 };**/
 
-export default routes
+export default routes;

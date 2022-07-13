@@ -9,6 +9,18 @@
               Danh sách sản phẩm
             </h5>
           </template>
+
+          <div style="background-color:#fff">
+            <form class="form-inline my-2 my-lg-0 ml-5" style="width:100%;">
+              <input v-model="name" class="form-control mr-sm-2" style="width:80%;" type="search" placeholder="Tìm kiếm"
+                aria-label="Search" @keyup.enter="findByName(name)">
+              <button @click="findByName(name)" type="button" class="btn btn-light"
+                style="color:black;background-color:#fff;border-color:cyan">
+                <i class="nc-icon nc-zoom-split" style="color:black;font-size: 16px;"></i>
+              </button>
+            </form>
+          </div>
+
           <div style="text-align: left">
             <router-link to="/quanlysanpham/themsanpham">
               <button data-bs-toggle="modal" data-bs-target="#exampleModal"
@@ -20,31 +32,33 @@
           <table class="table table-striped">
             <thead>
               <tr>
+                <th>STT</th>
                 <th style="text-align: center">Hình ảnh</th>
                 <th style="text-align: center">Thương hiệu</th>
                 <th style="text-align: center">Tên sản phẩm</th>
-                <th style="text-align: center">Hệ điều hành</th>
+                <!-- <th style="text-align: center">Hệ điều hành</th>
                 <th style="text-align: center">Cpu</th>
                 <th style="text-align: center">Ram</th>
                 <th style="text-align: center">Ổ cứng</th>
-                <!-- <th style="text-align: center">Mô tả</th> -->
+                <th style="text-align: center">Mô tả</th> -->
                 <th style="text-align: center">Giá</th>
                 <th style="text-align: center">Tình trạng</th>
-                <th style="text-align: center">Thao tác</th>
+                <th style="text-align: center"></th>
               </tr>
             </thead>
             <tbody>
               <tr v-for="(product, index) in pageOfitems" :key="index">
-                <td><img class="img-thumbnail" width="150px" v-bind:src="'http://localhost:3000/' + product.ANH + ''"
-                    alt="..." />
+                <td>{{ index + 1 }}</td>
+                <td width="15%" height="15%"><img class="img-thumbnail" v-bind:src="'http://localhost:3000/' +
+                product.ANH + ''" alt=" ..." />
                 </td>
                 <td>{{ product.THUONGHIEU }}</td>
                 <td>{{ product.TEN }}</td>
-                <td>{{ product.HEDIEUHANH }}</td>
+                <!-- <td>{{ product.HEDIEUHANH }}</td>
                 <td>{{ product.CPU + " " + product.THONGTINCPU }}</td>
                 <td>{{ product.OCUNG + " " + product.DUNGLUONGOCUNG }}GB</td>
                 <td>{{ product.RAM + " " + product.DUNGLUONGRAM }}GB</td>
-                <!-- <td>{{ product.MOTA }}</td> -->
+                <td>{{ product.MOTA }}</td> -->
                 <td>{{ product.GIA | numeral("0,0") }} VND</td>
                 <template v-if="product.TRANGTHAI == 0">
                   <td style="text-align: left">Đang bán</td>
@@ -53,7 +67,7 @@
                   <td style="text-align: left">Tạm ngưng</td>
                 </template>
                 <td>
-                  <router-link :to="`/quanlyuser/${product.ID}/chinhsuaNV`">
+                  <router-link :to="`/quanlysanpham/${product.ID}/suasanpham`">
                     <button type="button" class="btn btn-primary btn-fill float-righ">
                       Sửa
                     </button>
@@ -88,19 +102,14 @@
 </template>
 <script>
 import axios from "axios";
-import LTable from "src/components/Table.vue";
-import Card from "src/components/Cards/Card.vue";
-
 
 export default {
-  components: {
-    LTable,
-    Card,
-  },
+
   data() {
     return {
       products: [],
       pageOfitems: [],
+      name: null
     };
   },
   mounted() {
@@ -153,9 +162,14 @@ export default {
         alert(result.data.message);
         window.location.reload();
       }
-    }
+    },
+    async findByName(name) {
+      const result = await axios.get(
+        `http://localhost:3000/product/find-product-by-name/${name}`
+      );
+      this.products = result.data;
+    },
   }
 }
 </script>
-<style>
-</style>
+

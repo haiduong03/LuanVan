@@ -9,7 +9,16 @@
                 Danh sách nhân viên
               </h5>
             </template>
-
+            <div style="background-color:#fff">
+              <form class="form-inline my-2 my-lg-0 ml-5" style="width:100%;">
+                <input v-model="name" class="form-control mr-sm-2" style="width:80%;" type="search"
+                  placeholder="Tìm kiếm" aria-label="Search" @keyup.enter="findByName(name)">
+                <button @click="findByName(name)" type="button" class="btn btn-light"
+                  style="color:black;background-color:#fff;border-color:cyan">
+                  <i class="nc-icon nc-zoom-split" style="color:black;font-size: 16px;"></i>
+                </button>
+              </form>
+            </div>
             <div style="text-align: left">
               <router-link to="/quanlyuser/themnv">
                 <button data-bs-toggle="modal" data-bs-target="#exampleModal"
@@ -108,6 +117,7 @@ export default {
   data() {
     return {
       users: [],
+      name: null,
       pageOfitems: [],
       customLabels
     };
@@ -180,6 +190,20 @@ export default {
         alert(result.data.message);
         window.location.reload();
       }
+    },
+
+    async findByName(name) {
+      const token = localStorage.token;
+      const result = await axios.get(
+        `http://localhost:3000/admin/find-adm-name/${name}`, {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          // "Content-type": "Application/json",
+          "Authorization": `Bearer ${token}`
+        }
+      }
+      );
+      this.users = result.data;
     },
   }
 }

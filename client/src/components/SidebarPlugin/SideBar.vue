@@ -5,11 +5,11 @@
        :data-image="backgroundImage">
     <div class="sidebar-wrapper">
       <div class="logo">
-        <a href="/home" class="simple-text logo__container">
+        <a href="#" class="simple-text logo__container">
             <div class="logo-img">
-                <img src="https://img.favpng.com/6/5/12/ecommerce-logo-png-favpng-c9XwFQHwsmZeVNHU6BRWQgabB.jpg">
+                <img src="img/vue-logo.png" alt="">
             </div>
-          <span style="color:yellow; font-weight:bold;">{{title}}</span>
+          {{title}}
         </a>
       </div>
 
@@ -43,7 +43,7 @@
     props: {
       title: {
         type: String,
-        default: 'K.I.W.I Shop'
+        default: 'Vue LBD'
       },
       backgroundColor: {
         type: String,
@@ -55,7 +55,7 @@
       },
       backgroundImage: {
         type: String,
-        default: 'https://uploads.onsize.com.br/cndl/varejosa/2021/06/25110921/shutterstock_1276617907_marketplace_1500x1000px-1140x694.jpg'
+        default: 'img/sidebar-5.jpg'
       },
       activeColor: {
         type: String,

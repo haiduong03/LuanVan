@@ -66,7 +66,6 @@
 
 <script>
 import axios from "axios";
-import { update } from "../../../../../server/src/services/programmingLanguages.service";
 // import BaseInput from '../../components/Inputs/BaseInput.vue';
 export default {
   components: {
@@ -95,7 +94,6 @@ export default {
           "Authorization": `Bearer ${token} `
         }
       });
-      console.log(result)
       this.TEN = result.data[0].TEN;
       this.SODIENTHOAI = result.data[0].SODIENTHOAI;
       this.DIACHI = result.data[0].DIACHI;

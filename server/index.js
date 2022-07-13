@@ -11,6 +11,7 @@ const userRouter = require("./src/routes/user.route");
 const adminRouter = require("./src/routes/admin.route");
 const productRouter = require("./src/routes/product.route");
 const busboyBodyParser = require("busboy-body-parser");
+const orderRouter = require("./src/routes/order.route");
 
 const fileUpload = require("express-fileupload");
 
@@ -48,6 +49,8 @@ app.use("/user", userRouter);
 app.use("/admin", adminRouter);
 
 app.use("/product", productRouter);
+
+app.use("/order", orderRouter);
 
 /* Error handler middleware */
 app.use((err, req, res, next) => {

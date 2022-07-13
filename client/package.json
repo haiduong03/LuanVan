@@ -1,11 +1,11 @@
 {
-  "name": "vue-light-bootstrap-dashboard",
+  "name": "client",
   "version": "2.0.0",
   "private": true,
   "description": "Vue light bootstrap dashboard",
   "author": "cristijora <joracristi@gmail.com>",
   "scripts": {
-    "serve": "vue-cli-service serve --open",
+    "serve": "vue-cli-service serve --port 8082",
     "build": "vue-cli-service build",
     "e2e": "node test/e2e/runner.js",
     "lint": "vue-cli-service lint",
@@ -17,11 +17,20 @@
     "bootstrap": "^4.3.1",
     "chartist": "^0.11.0",
     "google-maps": "^3.2.1",
+    "jw-paginate": "^1.0.4",
+    "jw-vue-pagination": "^1.0.3",
+    "numeral": "^2.0.6",
     "register-service-worker": "^1.5.2",
     "v-tooltip": "^2.0.0-rc.33",
     "vue": "^2.6.6",
+    "vue-append": "^2.2.0",
+    "vue-numeral-filter": "^2.2.0",
+    "vue-responsive-components": "^0.2.3",
     "vue-router": "^3.0.2",
-    "vue2-google-maps": "^0.8.4"
+    "vue2-google-maps": "^0.8.4",
+    "vuejs-paginate": "^2.1.0",
+    "vuelidate": "^0.7.7",
+    "vuex": "^4.0.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.4.0",

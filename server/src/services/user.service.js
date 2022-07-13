@@ -214,7 +214,7 @@ async function createUsr(user) {
 		);
 
 		if (result.affectedRows) {
-			message = "TẠO THÀNH CÔNG";
+			message = "ĐĂNG KÍ THÀNH CÔNG";
 		}
 	}
 

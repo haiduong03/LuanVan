@@ -29,6 +29,15 @@ async function findProById(req, res, next) {
 	}
 }
 
+async function findSpecProById(req, res, next) {
+	try {
+		res.json(await product.findSpecProById(req.params.id));
+	} catch (err) {
+		console.error(`Error`, err.message);
+		next(err);
+	}
+}
+
 async function findProByName(req, res, next) {
 	try {
 		res.json(await product.findProByName(req.params.name));
@@ -41,6 +50,7 @@ async function findProByName(req, res, next) {
 async function findProByBrand(req, res, next) {
 	try {
 		res.json(await product.findProByBrand(req.params.brand));
+		// console.log(req.params.brand);
 	} catch (err) {
 		console.error(`Error`, err.message);
 		next(err);
@@ -214,6 +224,7 @@ async function activeProduct(req, res, next) {
 module.exports = {
 	getAllPro,
 	getAllProActive,
+	findSpecProById,
 	findProById,
 	findProByName,
 	findProByBrand,

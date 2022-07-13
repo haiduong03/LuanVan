@@ -5,11 +5,10 @@
       <div class="collapse navbar-collapse justify-content-end">
         <ul class="nav navbar-nav mr-auto">
           <li class="nav-item">
-            <a href="#" class="nav-link">
-              <!-- <input type="text"> -->
+            <!-- <a href="#" class="nav-link">
               <i class="nc-icon nc-zoom-split"></i>
               <span class="d-lg-block">&nbsp;Tìm kiếm</span>
-            </a>
+            </a> -->
           </li>
         </ul>
         <ul class="navbar-nav ml-auto">

@@ -121,7 +121,6 @@
                 </card>
             </div>
         </div>
-        <!-- </div> -->
     </div>
 </template>
 <script>
@@ -174,7 +173,7 @@ export default {
                 .post("http://localhost:3000/upload", formData)
                 .then(res => {
                     alert(res.data.msg);
-                    this.ANH = res.data.name;
+                    this.ANH.name = res.data.name;
                 }).catch(err => {
                     console.log(err);
                 });
@@ -244,7 +243,7 @@ export default {
                         }
                     });
                 alert(result.data);
-                this.$router.push("/quanlysanpham");
+                this.$router.push('/quanlysanpham/sanpham');
             }
         }
     }

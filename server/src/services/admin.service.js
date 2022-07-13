@@ -11,8 +11,6 @@ const jwt = require("jsonwebtoken");
 
 let message = null;
 
-let listToken = [];
-
 async function getAllAdm() {
 	// const offset = helper.getOffset(page, config.listPerPage);
 	// const rows = await db.query(`SELECT * FROM user WHERE user_type = 1 LIMIT ?,?`, [
@@ -158,7 +156,6 @@ async function createAdm(user) {
 		message = "KHÔNG ĐƯỢC ĐỂ TRỐNG";
 		return {
 			message,
-			user,
 		};
 	}
 
@@ -166,7 +163,6 @@ async function createAdm(user) {
 		message = "ĐÃ CÓ NGƯỜI DÙNG";
 		return {
 			message,
-			user,
 		};
 	}
 
@@ -174,7 +170,6 @@ async function createAdm(user) {
 		message = "SỐ ĐIỆN THOẠI PHẢI CÓ ĐỘ DÀI TỪ 10 ĐẾN 13";
 		return {
 			message,
-			user,
 		};
 	}
 
@@ -182,7 +177,6 @@ async function createAdm(user) {
 		message = "EMAIL PHẢI CÓ DẠNG 'ABC@EMAIL.COM'";
 		return {
 			message,
-			user,
 		};
 	}
 
@@ -191,7 +185,6 @@ async function createAdm(user) {
 			"MẬT KHẨU PHẢI CÓ ĐỘ DÀI TỪ 8 ĐẾN 100, CHỮ CÁI THƯỜNG, CHỮ CÁI IN HOA, 2 KÍ TỰ ĐẶC BIỆT VÀ KHÔNG CÓ KHOẢNG TRỐNG";
 		return {
 			message,
-			user,
 		};
 	}
 

@@ -30,7 +30,8 @@ async function getAllPro() {
 			JOIN HANG H ON H.ID = SP.THUONGHIEU_ID
 			JOIN CPU C ON C.ID = SP.CPU_ID
 			JOIN OCUNG O ON O.ID = SP.OCUNG_ID
-			JOIN RAM R ON R.ID = SP.RAM_ID`,
+			JOIN RAM R ON R.ID = SP.RAM_ID
+		ORDER BY SP.ID ASC`,
 	);
 }
 
@@ -60,6 +61,18 @@ async function getAllProActive(page) {
 			JOIN RAM R ON R.ID = SP.RAM_ID
 		WHERE
 			SP.TRANGTHAI = 0`,
+	);
+}
+
+async function findSpecProById(id) {
+	return await db.query(
+		`SELECT
+			*
+		FROM
+			SANPHAM SP
+		WHERE
+			SP.ID = ?`,
+		[id],
 	);
 }
 
@@ -129,7 +142,6 @@ async function findProByName(name) {
 async function findProByBrand(id) {
 	return await db.query(
 		`SELECT
-			SELECT
 			SP.ID,
 			H.TEN AS THUONGHIEU,
 			SP.TEN,
@@ -161,7 +173,6 @@ async function findProByBrand(id) {
 async function findProByCpu(id) {
 	return await db.query(
 		`SELECT
-			SELECT
 			SP.ID,
 			H.TEN AS THUONGHIEU,
 			SP.TEN,
@@ -193,7 +204,6 @@ async function findProByCpu(id) {
 async function findProByRam(id) {
 	return await db.query(
 		`SELECT
-			SELECT
 			SP.ID,
 			H.TEN AS THUONGHIEU,
 			SP.TEN,
@@ -225,7 +235,6 @@ async function findProByRam(id) {
 async function findProByDrive(id) {
 	return await db.query(
 		`SELECT
-			SELECT
 			SP.ID,
 			H.TEN AS THUONGHIEU,
 			SP.TEN,
@@ -257,7 +266,6 @@ async function findProByDrive(id) {
 async function findProByOS(id) {
 	return await db.query(
 		`SELECT
-			SELECT
 			SP.ID,
 			H.TEN AS THUONGHIEU,
 			SP.TEN,
@@ -326,7 +334,7 @@ async function addProduct(product) {
 			product.RAM_ID,
 			product.DUNGLUONGRAM,
 			product.MOTA.toUpperCase(),
-			product.ANH,
+			product.ANH.replace("C:\\fakepath\\", " ").trimStart(),
 		],
 	);
 	if (result.affectedRows) {
@@ -351,8 +359,8 @@ async function updateProduct(id, product) {
 				DUNGLUONGOCUNG=?,
 				RAM_ID=?,
 				DUNGLUONGRAM=?,
-				SOLUONGSP=?,
-				ANH=?,
+				MOTA=?,
+				ANH=?
 		WHERE 
 			ID = ?`,
 		[
@@ -366,8 +374,8 @@ async function updateProduct(id, product) {
 			product.DUNGLUONGOCUNG,
 			product.RAM_ID,
 			product.DUNGLUONGRAM,
-			product.SOLUONGSP,
-			product.ANH,
+			product.MOTA.toUpperCase(),
+			product.ANH.replace("C:\\fakepath\\", " ").trimStart(),
 			id,
 		],
 	);
@@ -424,15 +432,15 @@ async function findBrandNameExist(brand) {
 async function addBrand(brand) {
 	message = "THÊM KHÔNG THÀNH CÔNG";
 
-	const oldBrand = await findBrandNameExist(brand.toString());
+	const oldBrand = await findBrandNameExist(brand.toUpperCase());
 
 	if (oldBrand.length != 0) {
 		message = "ĐÃ CÓ HÃNG";
 		return message;
 	}
 
-	const result = await db.query(`INSERT INTO HANG TEN VALUES ?`, [
-		brand.toString(),
+	const result = await db.query(`INSERT INTO HANG (TEN) VALUES (?)`, [
+		brand.toUpperCase(),
 	]);
 
 	if (result.affectedRows) {
@@ -487,7 +495,7 @@ async function addRam(ram) {
 		return message;
 	}
 
-	const result = await db.query(`INSERT INTO RAM TEN VALUES ?`, [
+	const result = await db.query(`INSERT INTO RAM (TEN) VALUES (?)`, [
 		ram.toUpperCase(),
 	]);
 
@@ -515,7 +523,7 @@ async function addDrive(drive) {
 		return message;
 	}
 
-	const result = await db.query(`INSERT INTO OCUNG TEN VALUES ?`, [
+	const result = await db.query(`INSERT INTO OCUNG (TEN) VALUES (?)`, [
 		drive.toUpperCase(),
 	]);
 
@@ -543,7 +551,7 @@ async function addOS(os) {
 		return message;
 	}
 
-	const result = await db.query(`INSERT INTO HEDIEUHANH TEN VALUES ?`, [
+	const result = await db.query(`INSERT INTO HEDIEUHANH (TEN) VALUES (?)`, [
 		os.toUpperCase(),
 	]);
 
@@ -556,6 +564,7 @@ async function addOS(os) {
 module.exports = {
 	getAllPro,
 	getAllProActive,
+	findSpecProById,
 	findProById,
 	findProByName,
 	findProByBrand,

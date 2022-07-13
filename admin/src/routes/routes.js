@@ -12,15 +12,17 @@ import Maps from "src/pages/Maps.vue";
 import Notifications from "src/pages/Notifications.vue";
 import Upgrade from "src/pages/Upgrade.vue";
 import UserIndex from "src/pages/Users/Index.vue";
+
 import Nhanvien from "src/pages/Users/Nhanvien.vue";
-import EditNV from "src/pages/Users/_id/chinhsuaNV.vue";
-import AddNV from "src/pages/Users/ThemNV.vue";
+import ChinhSuaNhanVien from "src/pages/Users/_id/chinhsuaNV.vue";
+import ThemNhanVien from "src/pages/Users/ThemNV.vue";
 import Khachhang from "src/pages/Users/Khachhang.vue";
-import EditKH from "src/pages/Users/_id/chinhsuaKH.vue";
-import AddKH from "src/pages/Users/ThemKH.vue";
-import DangNhapUser from "src/pages/DangNhap.vue";
-import SanPhamDanhSach from "src/pages/Products/SanPham.vue";
-import SanPhamThem from "src/pages/Products/ThemSanPham.vue";
+import ChinhSuaKhachHang from "src/pages/Users/_id/chinhsuaKH.vue";
+import ThemKhachHang from "src/pages/Users/ThemKH.vue";
+import DangNhap from "src/pages/DangNhap.vue";
+import DanhSachSanPham from "src/pages/Products/SanPham.vue";
+import ThemSanPham from "src/pages/Products/ThemSanPham.vue";
+import ChinhSuaSanPham from "src/pages/Products/_id/chinhsuaSP.vue";
 import LinhKien from "src/pages/Products/LinhKien.vue";
 
 const routes = [
@@ -92,13 +94,13 @@ const routes = [
       },
       {
         path: ":id/chinhsuaNV",
-        name: "chinhsuaNV",
-        component: EditNV,
+        name: "ChinhSuaNhanVien",
+        component: ChinhSuaNhanVien,
       },
       {
         path: "themnv",
-        name: "ThemNV",
-        component: AddNV,
+        name: "ThemNhanVien",
+        component: ThemNhanVien,
       },
       {
         path: "khachhang",
@@ -107,13 +109,13 @@ const routes = [
       },
       {
         path: ":id/chinhsuakh",
-        name: "chinhsuaKH",
-        component: EditKH,
+        name: "ChinhSuaKhachHang",
+        component: ChinhSuaKhachHang,
       },
       {
         path: "themkh",
-        name: "ThemKH",
-        component: AddKH,
+        name: "ThemKhachHang",
+        component: ThemKhachHang,
       },
     ],
   },
@@ -124,7 +126,7 @@ const routes = [
       {
         path: "sanpham",
         name: "SanPham",
-        component: SanPhamDanhSach,
+        component: DanhSachSanPham,
       },
       {
         path: "linhkien",
@@ -134,13 +136,18 @@ const routes = [
       {
         path: "themsanpham",
         name: "ThemSanPham",
-        component: SanPhamThem,
+        component: ThemSanPham,
+      },
+      {
+        path: ":id/suasanpham",
+        name: "SuaSanPham",
+        component: ChinhSuaSanPham,
       },
     ],
   },
   {
     path: "/dangnhap",
-    component: DangNhapUser,
+    component: DangNhap,
   },
   {
     path: "*",

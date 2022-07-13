@@ -119,19 +119,17 @@ export default {
 
             const token = localStorage.token;
             console.log(token)
-            const url = `http://localhost:3000/admin/update-adm/${this.$route.params.id}`
-
-            await axios.put(url,
-                this.form,
-                {
-                    headers: {
-                        "Access-Control-Allow-Origin": "*",
-                        // "Content-type": "Application/json",
-                        "Authorization": `Bearer ${token}`
-                    }
-                },
-                // this.form,
-            );
+            const result =
+                await axios.put(`http://localhost:3000/admin/update-adm/${this.$route.params.id}`,
+                    this.form,
+                    {
+                        headers: {
+                            "Access-Control-Allow-Origin": "*",
+                            // "Content-type": "Application/json",
+                            "Authorization": `Bearer ${token}`
+                        }
+                    },
+                );
             alert("Chỉnh sửa thành công");
             this.$router.push('/quanlyuser/nhanvien')
         },

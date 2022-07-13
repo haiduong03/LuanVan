@@ -11,17 +11,23 @@ router.get("/get-all-product-active", product.getAllProActive);
 
 router.get("/find-product-by-id/:id", product.findProById);
 
-router.get("/find-product-by-name", product.findProByName);
+router.get(
+	"/find-spec-product-by-id/:id",
+	token.verifyToken,
+	product.findSpecProById,
+);
 
-router.get("/find-product-by-brand", product.findProByBrand);
+router.get("/find-product-by-name/:name", product.findProByName);
 
-router.get("/find-product-by-cpu", product.findProByCpu);
+router.get("/find-product-by-brand/:brand", product.findProByBrand);
 
-router.get("/find-product-by-ram", product.findProByRam);
+router.get("/find-product-by-cpu/:cpu", product.findProByCpu);
 
-router.get("/find-product-by-os", product.findProByOS);
+router.get("/find-product-by-ram/:ram", product.findProByRam);
 
-router.get("/find-product-by-drive", product.findProByDrive);
+router.get("/find-product-by-os/:os", product.findProByOS);
+
+router.get("/find-product-by-drive/:drive", product.findProByDrive);
 
 router.get("/get-all-brand", product.getAllBrand);
 

@@ -2,7 +2,7 @@
   <div class="wrapper">
     <template v-if="admin">
       <side-bar>
-        <mobile-menu slot="content"></mobile-menu>
+        <!-- <mobile-menu slot="content"></mobile-menu> -->
         <sidebar-link to="/">
           <i class="nc-icon nc-chart-pie-35"></i>
           <p>Trang chủ</p>
