@@ -30,6 +30,7 @@ import "./registerServiceWorker";
 import JwPagination from "jw-vue-pagination";
 import vueNumeralFilterInstaller from "vue-numeral-filter";
 // import { VueResponsiveComponents } from "vue-responsive-components";
+import moment from "moment";
 
 Vue.use(vueNumeralFilterInstaller, { locale: "en-gb" });
 Vue.component("jw-pagination", JwPagination);
@@ -48,7 +49,11 @@ const router = new VueRouter({
     }
   },
 });
-
+Vue.filter("formatDate", function (value) {
+  if (value) {
+    return moment(String(value)).format("hh:mm:ss MM/DD/YYYY");
+  }
+});
 /* eslint-disable no-new */
 new Vue({
   el: "#app",

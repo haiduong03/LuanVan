@@ -218,6 +218,17 @@ async function createAdm(user) {
 async function updateAdm(id, user) {
 	message = "CẬP NHẬT THẤT BẠI";
 
+	const email = await checkEmailValid(user.EMAIL);
+
+	const phone = await checkPhoneValid(user.SODIENTHOAI.toString());
+
+	if (phone == false) {
+		message = "SỐ ĐIỆN THOẠI PHẢI CÓ ĐỘ DÀI TỪ 10 ĐẾN 13";
+		return {
+			message,
+		};
+	}
+
 	const result = await db.query(
 		`UPDATE NGUOIDUNG 
 			SET TEN = ?, SODIENTHOAI = ?, DIACHI = ?, GIOITINH = ?
@@ -232,6 +243,44 @@ async function updateAdm(id, user) {
 	return {
 		message,
 	};
+}
+
+async function updatePass(id, pass) {
+	message = "SAI MẬT KHẨU";
+	const passchk = await checkPassValid(pass.PASS_NEW);
+
+	const oldUsr = await findAdmId(id);
+	const passUsr = bcryptjs.compareSync(pass.PASS_OLD, oldUsr[0].PASS);
+
+	if (passchk == false) {
+		message =
+			"MẬT KHẨU PHẢI CÓ ĐỘ DÀI TỪ 8 ĐẾN 100, CHỮ CÁI THƯỜNG, CHỮ CÁI IN HOA, 2 KÍ TỰ ĐẶC BIỆT VÀ KHÔNG CÓ KHOẢNG TRỐNG";
+		return {
+			message,
+		};
+	}
+
+	if (passUsr == true) {
+		const salt = bcryptjs.genSaltSync(parseInt(process.env.SALT));
+		const hash = bcryptjs.hashSync(pass.PASS_NEW, salt);
+
+		const result = await db.query(
+			`UPDATE NGUOIDUNG
+				SET PASS=?
+			WHERE LOAI = 1 AND ID = ?`,
+			[hash, id],
+		);
+		if (result.affectedRows) {
+			message = "CẬP NHẬT THÀNH CÔNG";
+		}
+		return {
+			message,
+		};
+	} else {
+		return {
+			message,
+		};
+	}
 }
 
 async function removeAdm(id) {
@@ -279,5 +328,6 @@ module.exports = {
 	createAdm,
 	updateAdm,
 	removeAdm,
+	updatePass,
 	activeAdm,
 };

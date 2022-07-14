@@ -68,14 +68,8 @@
     </div>
 </template>
 <script>
-import EditProfileForm from "../../UserProfile/EditProfileForm.vue";
-import UserCard from "../../UserProfile/UserCard.vue";
 import axios from "axios";
 export default {
-    components: {
-        EditProfileForm,
-        UserCard,
-    },
     data() {
         return {
             data: [],
@@ -86,9 +80,6 @@ export default {
                 DIACHI: null,
             },
         };
-    },
-    created() {
-        //console.log(this.$route.params.id);
     },
     mounted() {
         this.solieu();

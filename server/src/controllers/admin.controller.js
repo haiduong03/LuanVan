@@ -84,6 +84,15 @@ async function updateAdm(req, res, next) {
 	}
 }
 
+async function updatePass(req, res, next) {
+	try {
+		res.json(await admin.updatePass(req.params.ID, req.body));
+	} catch (err) {
+		console.error(`Error`, err.message);
+		next(err);
+	}
+}
+
 async function removeAdm(req, res, next) {
 	try {
 		res.json(await admin.removeAdm(req.params.ID));
@@ -113,5 +122,6 @@ module.exports = {
 	createAdm,
 	updateAdm,
 	removeAdm,
+	updatePass,
 	activeAdm,
 };

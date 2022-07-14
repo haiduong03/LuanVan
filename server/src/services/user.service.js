@@ -225,7 +225,9 @@ async function createUsr(user) {
 
 async function updateUsr(id, user) {
 	message = "CẬP NHẬT THẤT BẠI";
+	const email = await checkEmailValid(user.EMAIL);
 
+	const phone = await checkPhoneValid(user.SODIENTHOAI.toString());
 	const result = await db.query(
 		`UPDATE NGUOIDUNG 
 			SET TEN = ?, SODIENTHOAI = ?, DIACHI = ?, GIOITINH = ?
@@ -242,10 +244,44 @@ async function updateUsr(id, user) {
 	};
 }
 
-// async function changePassUsr(email, oldPass, newPass) {
-// 	const use = await findUsrMail(email);
+async function updatePass(id, pass) {
+	message = "SAI MẬT KHẨU";
+	const passchk = await checkPassValid(pass.PASS_NEW);
 
-// }
+	const oldUsr = await findUsrId(id);
+	const passUsr = bcryptjs.compareSync(pass.PASS_OLD, oldUsr[0].PASS);
+
+	if (passchk == false) {
+		message =
+			"MẬT KHẨU PHẢI CÓ ĐỘ DÀI TỪ 8 ĐẾN 100, CHỮ CÁI THƯỜNG, CHỮ CÁI IN HOA, 2 KÍ TỰ ĐẶC BIỆT VÀ KHÔNG CÓ KHOẢNG TRỐNG";
+		return {
+			message,
+			user,
+		};
+	}
+
+	if (passUsr == true) {
+		const salt = bcryptjs.genSaltSync(parseInt(process.env.SALT));
+		const hash = bcryptjs.hashSync(pass.PASS_NEW, salt);
+
+		const result = await db.query(
+			`UPDATE NGUOIDUNG
+				SET PASS=?
+			WHERE LOAI = 0 AND ID = ?`,
+			[hash, id],
+		);
+		if (result.affectedRows) {
+			message = "CẬP NHẬT THÀNH CÔNG";
+		}
+		return {
+			message,
+		};
+	} else {
+		return {
+			message,
+		};
+	}
+}
 
 async function removeUsr(id) {
 	const result = await db.query(
@@ -290,6 +326,7 @@ module.exports = {
 	findUsrPhone,
 	createUsr,
 	updateUsr,
+	updatePass,
 	removeUsr,
 	activeUsr,
 };

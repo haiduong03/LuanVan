@@ -66,11 +66,8 @@
 
 <script>
 import axios from "axios";
-// import BaseInput from '../../components/Inputs/BaseInput.vue';
 export default {
-  components: {
-    // BaseInput
-  },
+
   data() {
     return {
       TEN: null,

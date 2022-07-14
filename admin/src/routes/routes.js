@@ -24,6 +24,8 @@ import DanhSachSanPham from "src/pages/Products/SanPham.vue";
 import ThemSanPham from "src/pages/Products/ThemSanPham.vue";
 import ChinhSuaSanPham from "src/pages/Products/_id/chinhsuaSP.vue";
 import LinhKien from "src/pages/Products/LinhKien.vue";
+import DonHang from "src/pages/Order/Order.vue";
+import ChiTietDonHang from "src/pages/Order/DetailOrder.vue";
 
 const routes = [
   {
@@ -142,6 +144,22 @@ const routes = [
         path: ":id/suasanpham",
         name: "SuaSanPham",
         component: ChinhSuaSanPham,
+      },
+    ],
+  },
+  {
+    path: "/quanlydonhang",
+    component: DashboardLayout,
+    children: [
+      {
+        path: "donhang",
+        name: "DonHang",
+        component: DonHang,
+      },
+      {
+        path: "chitietdonhang/:id",
+        name: "ChiTietDonHang",
+        component: ChiTietDonHang,
       },
     ],
   },

@@ -49,7 +49,7 @@
             <tbody>
               <tr v-for="(product, index) in pageOfitems" :key="index">
                 <td>{{ index + 1 }}</td>
-                <td width="15%" height="15%"><img class="img-thumbnail" v-bind:src="'http://localhost:3000/' +
+                <td width="15%" height="15%"><img class="img-thumbnail" :src="'http://localhost:3000/' +
                 product.ANH + ''" alt=" ..." />
                 </td>
                 <td>{{ product.THUONGHIEU }}</td>

@@ -83,6 +83,15 @@ async function updateUsr(req, res, next) {
 	}
 }
 
+async function updatePass(req, res, next) {
+	try {
+		res.json(await user.updatePass(req.params.ID, req.body));
+	} catch (err) {
+		console.error(`Error`, err.message);
+		next(err);
+	}
+}
+
 async function removeUsr(req, res, next) {
 	try {
 		res.json(await user.removeUsr(req.params.ID));
@@ -111,6 +120,7 @@ module.exports = {
 	findUsrPhone,
 	createUsr,
 	updateUsr,
+	updatePass,
 	removeUsr,
 	activeUsr,
 };

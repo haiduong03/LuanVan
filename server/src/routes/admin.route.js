@@ -19,6 +19,8 @@ router.post("/create-adm", token.verifyToken, admin.createAdm);
 
 router.put("/update-adm/:ID", token.verifyToken, admin.updateAdm);
 
+router.put("/update-pass-admin/:ID", token.verifyToken, admin.updatePass);
+
 router.delete("/remove-adm/:ID", token.verifyToken, admin.removeAdm);
 
 router.get("/active-adm/:ID", token.verifyToken, admin.activeAdm);

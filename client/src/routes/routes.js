@@ -3,34 +3,13 @@ import IndexLayout from "../layout/IndexLayout.vue";
 // GeneralViews
 import NotFound from "../pages/NotFoundPage.vue";
 
-// Admin pages
-// import Overview from "src/pages/Overview.vue";
-// import UserProfile from "src/pages/UserProfile.vue";
-// import TableList from "src/pages/TableList.vue";
-// import Typography from "src/pages/Typography.vue";
-// import Icons from "src/pages/Icons.vue";
-// import Maps from "src/pages/Maps.vue";
-// import Notifications from "src/pages/Notifications.vue";
-// import Upgrade from "src/pages/Upgrade.vue";
-// import UserIndex from "src/pages/Users/Index.vue";
-// import Nhanvien from "src/pages/Users/Nhanvien.vue";
-// import EditNV from "src/pages/Users/_id/chinhsuaNV.vue";
-// import AddNV from "src/pages/Users/ThemNV.vue";
-// import Khachhang from "src/pages/Users/Khachhang.vue";
-// import EditKH from "src/pages/Users/_id/chinhsuaKH.vue";
-// import AddKH from "src/pages/Users/ThemKH.vue";
-
-// import SanPhamDanhSach from "src/pages/Products/SanPham.vue";
-// import SanPhamThem from "src/pages/Products/ThemSanPham.vue";
-
-// import LinhKien from "src/pages/Products/LinhKien.vue";
-
 import DangNhapUser from "src/pages/Users/DangNhap.vue";
 import DangKyUser from "src/pages/Users/DangKy.vue";
-// import EditUser from "src/pages/Users/_id/chinhsuaKH.vue";
-
 import TrangChu from "src/pages/Trangchu/Index.vue";
 import ChiTietSP from "src/pages/Products/_id/chitietsp.vue";
+
+import ThongTinCaNhan from "src/pages/Users/_id/thongtincanhan.vue";
+// import ChiTietSP from "src/pages/Products/_id/chitietsp.vue";
 
 import GioHang from "src/pages/Cart/GioHang.vue";
 import ThanhToan from "src/pages/Cart/ThanhToan.vue";
@@ -90,11 +69,11 @@ const routes = [
         name: "DangKy",
         component: DangKyUser,
       },
-      // {
-      //     path: ":id/chinhsuaKH",
-      //     name: "chinhsuaKH",
-      //     component: EditUser,
-      // },
+      {
+        path: "thongtin",
+        name: "thongtin",
+        component: ThongTinCaNhan,
+      },
     ],
   },
   // {

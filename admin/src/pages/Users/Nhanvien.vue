@@ -98,8 +98,6 @@
 <script>
 import Paginate from "vuejs-paginate"
 import axios from "axios";
-import LTable from "src/components/Table.vue";
-import Card from "src/components/Cards/Card.vue";
 
 const customLabels = {
   first: '<<',
@@ -110,8 +108,6 @@ const customLabels = {
 
 export default {
   components: {
-    LTable,
-    Card,
     Paginate,
   },
   data() {

@@ -19,6 +19,8 @@ router.post("/create-usr", user.createUsr);
 
 router.put("/update-usr/:ID", token.verifyToken, user.updateUsr);
 
+router.put("/update-pass-usr/:ID", token.verifyToken, user.updatePass);
+
 router.delete("/remove-usr/:ID", token.verifyToken, user.removeUsr);
 
 router.get("/active-usr/:ID", token.verifyToken, user.activeUsr);

@@ -40,7 +40,7 @@
                                 <input type="text" class="form-control" id="inputAddress" :value="user.DIACHI">
                             </div>
                             <button type="submit" class="row-sm-2 btn-primary btn-fill btn btn-lg btn-block"
-                                @click="paid()">Thanh toán</button>
+                                @click="order()">Thanh toán</button>
                         </form>
                     </div>
                 </div>
@@ -77,7 +77,7 @@
                                         </th>
                                         <td>{{ cart.TEN }}</td>
                                         <td style="text-align: center !important">{{ cart.SL }}</td>
-                                        <td style="text-align: center !important">{{ price = cart.SL * cart.GIA |
+                                        <td style="text-align: center !important">{{ cart.SL * cart.GIA |
                                                 numeral("0,0")
                                         }}
                                             VND</td>
@@ -104,7 +104,7 @@
                                         Phí vận chuyển:
                                     </td>
                                     <td style="text-align: center !important">
-                                        {{ price | numeral("0,0") }} VND
+                                        {{ sum | numeral("0,0") }} VND
                                         <br>
                                         {{ cod = 100000 | numeral("0,0") }} VND
                                     </td>
@@ -113,9 +113,7 @@
                                     <td colspan="3" style=" font-weight: bold; color:black">
                                         Tổng cộng</td>
                                     <td style="text-align: center !important ; font-weight: bold; color:black">
-                                        {{ sum = price + cod | numeral("0,0") }} VND</td>
-                                </tr>
-                                <tr>
+                                        {{ total = sum + cod | numeral("0,0") }} VND</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -127,6 +125,7 @@
 </template>
 <script>
 import axios from "axios";
+
 export default {
     components: {
 
@@ -139,13 +138,22 @@ export default {
             },
             user: [],
             carts: JSON.parse(localStorage.cart),
+            sum: null,
+            // price: 0
         }
     },
     mounted() {
         this.getInfo();
+        this.data();
     },
     methods: {
-        async paid() {
+        data() {
+            this.carts.forEach(e => {
+                this.sum += e.SL * e.GIA
+            });
+        },
+
+        async order() {
             const token = localStorage.token;
 
             const today = new Date();
@@ -183,7 +191,7 @@ export default {
                 localStorage.removeItem("cart");
                 setTimeout(function () {
                     window.location.reload();
-                }, 300);
+                }, 1500);
                 this.$router.push("/")
             }
         },
