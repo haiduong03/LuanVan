@@ -9,8 +9,9 @@ import TrangChu from "src/pages/Trangchu/Index.vue";
 import ChiTietSP from "src/pages/Products/_id/chitietsp.vue";
 
 import ThongTinCaNhan from "src/pages/Users/_id/thongtincanhan.vue";
-// import ChiTietSP from "src/pages/Products/_id/chitietsp.vue";
 
+import DonHang from "src/pages/Cart/DonHang.vue";
+import ChiTietDonHang from "src/pages/Cart/ChiTietDonHang.vue";
 import GioHang from "src/pages/Cart/GioHang.vue";
 import ThanhToan from "src/pages/Cart/ThanhToan.vue";
 
@@ -51,6 +52,16 @@ const routes = [
         path: "thanhtoan",
         name: "ThanhToan",
         component: ThanhToan,
+      },
+      {
+        path: "donhang",
+        name: "DonHang",
+        component: DonHang,
+      },
+      {
+        path: "chitietdonhang/:id",
+        name: "ChiTietDonHang",
+        component: ChiTietDonHang,
       },
     ],
   },

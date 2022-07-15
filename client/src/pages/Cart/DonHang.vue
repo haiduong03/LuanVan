@@ -1,5 +1,5 @@
 <template>
-    <div class="content">
+    <div class="container col-md-7" style="align:center;">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
@@ -9,16 +9,6 @@
                                 Danh sách đơn hàng
                             </h5>
                         </template>
-                        <div style="background-color:#fff">
-                            <form class="form-inline my-2 my-lg-0 ml-5" style="width:100%;">
-                                <input v-model="id" class="form-control mr-sm-2" style="width:80%;" type="search"
-                                    placeholder="Tìm kiếm" aria-label="Search">
-                                <button @click="findByID(id)" @keypress.enter="findByID(id)" type="button"
-                                    class="btn btn-light" style="color:black;background-color:#fff;border-color:cyan">
-                                    <i class="nc-icon nc-zoom-split" style="color:black;font-size: 16px;"></i>
-                                </button>
-                            </form>
-                        </div>
                         <table class="table table-striped">
                             <thead>
                                 <tr>
@@ -34,7 +24,7 @@
                             <tbody>
                                 <tr v-for="(order, index) in pageOfitems" :key="index">
                                     <td @click="detail(order.ID)">{{ index + 1 }}</td>
-                                    <td>{{ order.ID }}</td>
+                                    <td @click="detail(order.ID)">{{ order.ID }}</td>
                                     <td @click="detail(order.ID)">{{ order.TEN }}</td>
                                     <td @click="detail(order.ID)" style="text-align: center;">{{ order.SOLUONG }}</td>
                                     <td @click="detail(order.ID)">{{ order.TONG | numeral("0,0") }} VND</td>
@@ -45,8 +35,7 @@
                                         </button>
                                     </template>
                                     <template v-else-if="order.TRANGTHAI == 0">
-                                        <button @click="confirm(order.ID)" type="button"
-                                            class="btn btn-primary btn-fill float-righ">
+                                        <button type="button" class="btn btn-primary btn-fill float-righ">
                                             Chờ xác nhận
                                         </button>
                                         &nbsp;
@@ -56,14 +45,12 @@
                                         </button>
                                     </template>
                                     <template v-else-if="order.TRANGTHAI == 1">
-                                        <button @click="moving(order.ID)" type="button"
-                                            class="btn btn-info btn-fill float-righ">
+                                        <button type="button" class="btn btn-info btn-fill float-righ">
                                             Đã xác nhận
                                         </button>
                                     </template>
                                     <template v-else-if="order.TRANGTHAI == 2">
-                                        <button @click="completed(order.ID)" type="button"
-                                            class="btn btn-warning btn-fill float-righ">
+                                        <button type="button" class="btn btn-warning btn-fill float-righ">
                                             Đang vận chuyển
                                         </button>
                                     </template>
@@ -112,7 +99,6 @@ export default {
             orders: [],
             pageOfitems: [],
             customLabels,
-            id: null
         };
     },
     mounted() {
@@ -124,47 +110,27 @@ export default {
         onChangePage(pageOfitems) {
             this.pageOfitems = pageOfitems;
         },
-
         detail(id) {
-            this.$router.push(`/quanlydonhang/chitietdonhang/${id}`)
+            this.$router.push(`/giohang/chitietdonhang/${id}`)
         },
-
-        async findByID(id) {
-            const result = await axios.get(
-                `http://localhost:3000/order/find-order-by-id/${id}`, {
+        async listOrder() {
+            const user = localStorage.user;
+            const result = await axios.get(`http://localhost:3000/user/find-usr-mail/${user}`, {
                 headers: {
                     "Access-Control-Allow-Origin": "*",
                     // "Content-type": "Application/json",
-                    "Authorization": `Bearer ${token}`
+                    "Authorization": `Bearer ${token} `
                 }
-            }
-            );
-            this.orders = result.data;
-        },
-
-        async listOrder() {
-            const result = await axios.get(`http://localhost:3000/order/get-all-order`, {
+            });
+            const id = result.data[0].ID;
+            const result1 = await axios.get(`http://localhost:3000/order/get-order-user/${id}`, {
                 headers: {
                     "Access-Control-Allow-Origin": "*",
                     // "Content-type": "Application/json",
                     "Authorization": `Bearer ${token}`
                 }
             });
-            this.orders = result.data;
-        },
-        async confirm(id) {
-            const text = "XÁC NHẬN ĐƠN HÀNG ??"
-            if (confirm(text) == true) {
-                const result = await axios.get(`http://localhost:3000/order/confirm-oder/${id}`, {
-                    headers: {
-                        "Access-Control-Allow-Origin": "*",
-                        // "Content-type": "Application/json",
-                        "Authorization": `Bearer ${token}`
-                    }
-                });
-                alert("XÁC NHẬN THÀNH CÔNG")
-                window.location.reload();
-            }
+            this.orders = result1.data;
         },
         async cancel(id) {
             const text = "HUỶ ĐƠN HÀNG ??"
@@ -177,34 +143,8 @@ export default {
                     }
                 });
                 alert(result.data)
-                location.reload();
-            }
-        },
-        async moving(id) {
-            const text = "ĐƠN HÀNG ĐANG ĐƯỢC VẬN CHUYỂN ??"
-            if (confirm(text) == true) {
-                const result = await axios.get(`http://localhost:3000/order/moving-oder/${id}`, {
-                    headers: {
-                        "Access-Control-Allow-Origin": "*",
-                        // "Content-type": "Application/json",
-                        "Authorization": `Bearer ${token}`
-                    }
-                });
-                alert("ĐƠN HÀNG ĐANG VẬN CHUYỂN")
-                location.reload();
-            }
-        },
-        async completed(id) {
-            const text = "HOÀN THÀNH ĐƠN HÀNG ??"
-            if (confirm(text) == true) {
-                const result = await axios.get(`http://localhost:3000/order/completed-oder/${id}`, {
-                    headers: {
-                        "Access-Control-Allow-Origin": "*",
-                        // "Content-type": "Application/json",
-                        "Authorization": `Bearer ${token}`
-                    }
-                }); alert("ĐƠN HÀNG ĐÃ HOÀN THÀNH")
-                location.reload();
+                if (result.data === "HỦY THÀNH CÔNG")
+                    location.reload();
             }
         },
     }

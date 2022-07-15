@@ -1,6 +1,5 @@
 <template>
     <div class="content">
-
         <!-- <div class="container-fluid"> -->
         <div class="container">
             <nav aria-label="breadcrumb">

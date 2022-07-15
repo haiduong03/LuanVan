@@ -11,7 +11,6 @@ async function createOrder(order) {
 			(?, ?, ?, ?, ?, 0)`,
 		[orderCode, order.ID, order.QTY, order.SUM, order.DATE],
 	);
-
 	order.CART.forEach(async (e) => {
 		const result2 = await db.query(
 			`INSERT INTO CHITIETDONHANG
@@ -21,7 +20,6 @@ async function createOrder(order) {
 			[orderCode, e.ID, e.SL, e.GIA],
 		);
 	});
-
 	return "ĐẶT HÀNG THÀNH CÔNG";
 }
 
@@ -87,9 +85,95 @@ async function getOrderUser(id) {
 	);
 }
 
+async function getOrderByID(id) {
+	return await db.query(
+		`SELECT
+			DH.ID,
+			ND.TEN,
+			ND.SODIENTHOAI,
+			DH.SOLUONG,
+			DH.TONG,
+			DH.NGAYDAT,
+			DH.TRANGTHAI
+		FROM
+			DONHANG DH
+			JOIN NGUOIDUNG ND ON DH.ID_NGUOIDUNG = ND.ID
+		WHERE
+			DH.ID=?`,
+		[id],
+	);
+}
+
+async function confirmOder(id) {
+	return await db.query(
+		`UPDATE
+			DONHANG
+		SET
+			TRANGTHAI = 1
+		WHERE
+			ID = ?`,
+		[id],
+	);
+}
+
+async function cencelOder(id) {
+	message = "ĐÃ XÁC NHẬN ĐƠN HÀNG KHÔNG THỂ HỦY";
+	const result = await db.query(
+		`SELECT
+			TRANGTHAI
+		FROM
+			DONHANG
+		WHERE
+			ID = ?;`,
+		[id],
+	);
+	if (result[0].TRANGTHAI != 1) {
+		const result1 = await db.query(
+			`UPDATE
+				DONHANG
+			SET
+				TRANGTHAI = 4
+			WHERE
+				ID = ?`,
+			[id],
+		);
+		message = "HỦY THÀNH CÔNG";
+	}
+	return message;
+}
+
+async function movingOder(id) {
+	return await db.query(
+		`UPDATE
+			DONHANG
+		SET
+			TRANGTHAI = 2
+		WHERE
+			ID = ?`,
+		[id],
+	);
+}
+
+async function completedOder(id) {
+	return await db.query(
+		`UPDATE
+			DONHANG
+		SET
+			TRANGTHAI = 3
+		WHERE
+			ID = ?`,
+		[id],
+	);
+}
+
 module.exports = {
 	createOrder,
 	getAllOrder,
 	getOrderDetail,
+	getOrderByID,
 	getOrderUser,
+	confirmOder,
+	cencelOder,
+	movingOder,
+	completedOder,
 };

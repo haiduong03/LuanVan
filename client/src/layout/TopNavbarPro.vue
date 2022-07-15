@@ -15,7 +15,7 @@
                     <li class="nav-item dropdown ml-auto mr-1">
                         <base-dropdown :title="user">
                             <a class="dropdown-item" href="#/user/thongtin">Chỉnh sửa thông tin</a>
-                            <a class="dropdown-item" href="#">Thông tin đơn hàng</a>
+                            <a class="dropdown-item" href="#/giohang/donhang">Thông tin đơn hàng</a>
                             <a class="dropdown-item" @click="logout()">Đăng xuất</a>
                         </base-dropdown>
                     </li>
