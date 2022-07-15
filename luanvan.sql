@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 13, 2022 at 04:44 AM
+-- Generation Time: Jul 16, 2022 at 12:00 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -39,24 +39,16 @@ CREATE TABLE `chitietdonhang` (
 --
 
 INSERT INTO `chitietdonhang` (`ID_DONHANG`, `ID_SANPHAM`, `SOLUONG`, `GIA`) VALUES
-('202271391510', 5, 11, '20000000'),
-('202271391612', 5, 1, '20000000'),
-('202271391612', 13, 1, '15000000'),
-('202271391612', 1, 1, '5000000'),
-('20227139175', 13, 1, '15000000'),
-('20227139175', 5, 1, '20000000'),
-('20227139175', 1, 1, '5000000'),
-('202271391719', 13, 1, '15000000'),
-('202271391719', 5, 1, '20000000'),
-('202271391719', 1, 1, '5000000'),
-('202271391927', 5, 1, '20000000'),
-('202271391927', 13, 1, '15000000'),
-('202271391927', 1, 1, '5000000'),
-('202271392029', 1, 1, '5000000'),
-('202271392029', 5, 1, '20000000'),
-('202271392029', 13, 1, '15000000'),
-('20227139229', 6, 1, '20000000'),
-('202271392444', 20, 3, '12000000');
+('202271533957', 1, 2, '5000000'),
+('202271534040', 5, 1, '20000000'),
+('202271534110', 20, 1, '12000000'),
+('20227156178', 1, 1, '5000000'),
+('20227156178', 9, 1, '25000000'),
+('20227156178', 14, 1, '15000000'),
+('202271561716', 1, 1, '5000000'),
+('202271561716', 14, 1, '15000000'),
+('202271561716', 9, 1, '25000000'),
+('202271643552', 19, 4, '1523000');
 
 -- --------------------------------------------------------
 
@@ -98,7 +90,7 @@ CREATE TABLE `donhang` (
   `SOLUONG` int(11) NOT NULL,
   `TONG` int(11) NOT NULL,
   `NGAYDAT` datetime NOT NULL,
-  `TRANGTHAI` tinyint(4) NOT NULL
+  `TRANGTHAI` smallint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -106,14 +98,12 @@ CREATE TABLE `donhang` (
 --
 
 INSERT INTO `donhang` (`ID`, `ID_NGUOIDUNG`, `SOLUONG`, `TONG`, `NGAYDAT`, `TRANGTHAI`) VALUES
-('202271391510', 4, 11, 220100000, '2022-07-13 09:15:10', 0),
-('202271391612', 4, 3, 5100000, '2022-07-13 09:16:12', 0),
-('202271391719', 4, 3, 5100000, '2022-07-13 09:17:19', 0),
-('20227139175', 4, 3, 5100000, '2022-07-13 09:17:05', 0),
-('202271391927', 4, 3, 5100000, '2022-07-13 09:19:27', 0),
-('202271392029', 4, 3, 5100000, '2022-07-13 09:20:29', 0),
-('20227139229', 4, 1, 20100000, '2022-07-13 09:22:09', 0),
-('202271392444', 4, 3, 36100000, '2022-07-13 09:24:44', 0);
+('202271533957', 6, 2, 10000000, '2022-07-15 03:39:57', 1),
+('202271534040', 12, 1, 20000000, '2022-07-15 03:40:40', 4),
+('202271534110', 5, 1, 12000000, '2022-07-15 03:41:10', 2),
+('202271561716', 3, 3, 45000000, '2022-07-15 06:17:16', 3),
+('20227156178', 4, 3, 45000000, '2022-07-15 06:17:08', 0),
+('202271643552', 4, 4, 6092000, '2022-07-16 04:35:52', 0);
 
 -- --------------------------------------------------------
 
@@ -137,8 +127,7 @@ INSERT INTO `hang` (`ID`, `TEN`) VALUES
 (4, 'ACER'),
 (5, 'MACBOOK'),
 (6, 'HP'),
-(7, 'DELL'),
-(8, 'APPLE');
+(7, 'DELL');
 
 -- --------------------------------------------------------
 
@@ -185,7 +174,7 @@ CREATE TABLE `nguoidung` (
 
 INSERT INTO `nguoidung` (`ID`, `TEN`, `EMAIL`, `PASS`, `SODIENTHOAI`, `DIACHI`, `GIOITINH`, `LOAI`, `TRANGTHAI`) VALUES
 (3, 'khanhduy', 'khanhduy@gmail.com', '$2a$05$M/PeqYdZgcCPN0Hftx7.xuhQodQ.j0HSP9d/UTrn0eDtgWdpQB6aS', 1234567890, '180 cao lo phuong 4 quan 8 tphcm', 0, 0, 1),
-(4, 'haiduong', 'haiduong@gmail.com', '$2a$05$Tbf4W9aDScuNdinFZZzmbeFOkX92c4uoJNF.WgKinWwH55Kv3Ea/2', 1234567890, '180 cao lo phuong 4 quan 8 tphcm', 1, 0, 0),
+(4, 'hải dương', 'haiduong@gmail.com', '$2a$05$Tbf4W9aDScuNdinFZZzmbeFOkX92c4uoJNF.WgKinWwH55Kv3Ea/2', 1234567890, '180 cao lo phuong 4 quan 8 tphcm', 0, 0, 0),
 (5, 'phạm  đăng hải dương', 'haiduong1@gmail.com', '$2a$05$A7nGlP1LTkposLzc1I566.AgP5YN2LmCE7TePBNhd55ycS2EnSEM.', 1234567890, '180 cao lo phuong 4 quan 8 tphcm', 0, 1, 0),
 (6, 'haiduong', 'kahnhduy1@gmail.com', '$2a$05$KMm4J3UCwiN//RoDKYm3/uBeqdb1RrQlYnAUzPqL9E33H4GXG0hvq', 1234567890, '180 cao lo phuong 4 quan 8 tphcm', 0, 1, 1),
 (7, 'khanhduy01', 'khanhduy11147@gmail.com', '$2a$05$BP0pCz7uxs6Enb/O6Whz/ub0Hm6KXFqdNKAk2opImpAz3jQLOb806', 1234567890, '180 cao lo phuong 4 quan 8 tphcm', 0, 1, 0),
@@ -207,7 +196,9 @@ INSERT INTO `nguoidung` (`ID`, `TEN`, `EMAIL`, `PASS`, `SODIENTHOAI`, `DIACHI`, 
 (23, 'trần khánh duy', 'khanh1@gamil.com', '$2a$05$qDZwIhQMidHO2wXuP4phjOMrcS1AMAiSgM8ZaweSrcMJLbC8UGbYq', 1234567890, 'thành phố hồ chí minh', 0, 0, 0),
 (24, 'khán', 'khanh@gamil.com', '$2a$05$KOiS44rcSbPRQ90WAK39Ve.ZQy1u8eNgWdl6j3DSZRmHxqbhgXJyO', 1234589710, 'aifghuikqwgifukqh', 0, 0, 0),
 (25, 'phạm dương', 'pmdung@gmail.com', '$2a$05$/t/cFhQBOXJraA8fc5yvxOrdyT2fURS2/ehKwZQEUE4g2qE28XHFG', 1234567890, 'thành phố hồ chí minh', 1, 0, 0),
-(26, 'dung', 'DY@GMAIL.COM', '$2a$05$Eu8RNf2vK4uOQNwcET8biu3ngZ0Ai9vKalHJg/qU.lQ0QlaRpEjC6', 1234567891, 'thành phố hồ chí minh', 0, 0, 0);
+(26, 'dung', 'DY@GMAIL.COM', '$2a$05$Eu8RNf2vK4uOQNwcET8biu3ngZ0Ai9vKalHJg/qU.lQ0QlaRpEjC6', 1234567891, 'thành phố hồ chí minh', 0, 0, 0),
+(27, 'hải', 'pham@gmail.com', '$2a$05$ld3jYLlXYe1gD096w.od.eEraCczFL9D33v52HPwxUuCGI4x9P6X6', 1234567890, 'thành phố hồ chí minh', 0, 0, 0),
+(28, 'trần', 'tran@gmail.com', '$2a$05$NomQWWj7q3O/1rCdi4YGvuPViFzcus9T3BAHoOSPr0qqli2K9wrDm', 1234567890, 'thành phố hồ chí minh', 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -303,7 +294,8 @@ INSERT INTO `sanpham` (`ID`, `TEN`, `HEDIEUHANH_ID`, `THUONGHIEU_ID`, `CPU_ID`, 
 -- Indexes for table `chitietdonhang`
 --
 ALTER TABLE `chitietdonhang`
-  ADD KEY `ID_DONHANG` (`ID_DONHANG`);
+  ADD KEY `ID_DONHANG` (`ID_DONHANG`),
+  ADD KEY `ID_sanpham` (`ID_SANPHAM`);
 
 --
 -- Indexes for table `cpu`
@@ -385,7 +377,7 @@ ALTER TABLE `hedieuhanh`
 -- AUTO_INCREMENT for table `nguoidung`
 --
 ALTER TABLE `nguoidung`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `ocung`
@@ -413,7 +405,8 @@ ALTER TABLE `sanpham`
 -- Constraints for table `chitietdonhang`
 --
 ALTER TABLE `chitietdonhang`
-  ADD CONSTRAINT `ID_DONHANG` FOREIGN KEY (`ID_DONHANG`) REFERENCES `donhang` (`ID`);
+  ADD CONSTRAINT `ID_DONHANG` FOREIGN KEY (`ID_DONHANG`) REFERENCES `donhang` (`ID`),
+  ADD CONSTRAINT `ID_sanpham` FOREIGN KEY (`ID_SANPHAM`) REFERENCES `sanpham` (`ID`);
 
 --
 -- Constraints for table `donhang`
