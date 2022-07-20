@@ -14,7 +14,7 @@
                                 <div>
                                     <label style="text-align:left"> cpu</label>
                                 </div>
-                                <input type="text" v-model="TENCPU">
+                                <input @keypress.enter="addCpu()" type="text" v-model="TENCPU">
                             </div>
                             <br>
                             <div>
@@ -59,7 +59,7 @@
                                 <div>
                                     <label style="text-align:left"> HÃNG</label>
                                 </div>
-                                <input type="text" v-model="TENHANG">
+                                <input @keypress.enter="addBrand()" type="text" v-model="TENHANG">
                             </div>
                             <br>
                             <div>
@@ -104,12 +104,12 @@
                                 <div>
                                     <label style="text-align:left"> HỆ ĐIỀU HÀNH</label>
                                 </div>
-                                <input type="text" v-model="TENHDH">
+                                <input @keypress.enter="addOS()" type="text" v-model="TENHDH">
                             </div>
                             <br>
                             <div>
-                                <button @click.prevent="addDrive()" data-bs-toggle="modal"
-                                    data-bs-target="#exampleModal" class="btn btn-primary btn-fill float-righ">
+                                <button @click.prevent="addOS()" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                    class="btn btn-primary btn-fill float-righ">
                                     Thêm
                                 </button>
                             </div>
@@ -149,7 +149,7 @@
                                 <div>
                                     <label style="text-align:left"> ram</label>
                                 </div>
-                                <input type="text" v-model="TENRAM">
+                                <input @keypress.enter="addRam()" type="text" v-model="TENRAM">
                             </div>
                             <br>
                             <div>
@@ -196,7 +196,7 @@
                                 <div>
                                     <label style="text-align:left"> ổ cứng</label>
                                 </div>
-                                <input type="text" v-model="TENOCUNG">
+                                <input @keypress.enter="addDrive()" type="text" v-model="TENOCUNG">
                             </div>
                             <br>
                             <div>

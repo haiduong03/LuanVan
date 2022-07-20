@@ -347,8 +347,8 @@ async function updateProduct(id, product) {
 	message = "SỬA KHÔNG THÀNH CÔNG";
 
 	const result = await db.query(
-		`UPDATE SANPHAM 
-			SET 
+		`UPDATE SANPHAM
+			SET
 				TEN=?,
 				HEDIEUHANH_ID=?,
 				THUONGHIEU_ID=?,
@@ -361,7 +361,7 @@ async function updateProduct(id, product) {
 				DUNGLUONGRAM=?,
 				MOTA=?,
 				ANH=?
-		WHERE 
+		WHERE
 			ID = ?`,
 		[
 			product.TEN.toUpperCase(),

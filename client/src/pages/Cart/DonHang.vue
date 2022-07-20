@@ -22,7 +22,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="(order, index) in pageOfitems" :key="index">
+                                <tr class="mouse-hover" v-for="(order, index) in pageOfitems" :key="index">
                                     <td @click="detail(order.ID)">{{ index + 1 }}</td>
                                     <td @click="detail(order.ID)">{{ order.ID }}</td>
                                     <td @click="detail(order.ID)">{{ order.TEN }}</td>
@@ -151,4 +151,7 @@ export default {
 }
 </script>
 <style>
+.mouse-hover {
+    cursor: pointer;
+}
 </style>

@@ -37,11 +37,11 @@
                                                     Đăng kí
                                                 </button>
                                             </div>
-                                            <div class="col-4">
+                                            <!-- <div class="col-4">
                                                 <button type="reset" class="btn btn-danger btn-fill float-right">
                                                     Huỷ bỏ
                                                 </button>
-                                            </div>
+                                            </div> -->
                                         </div>
                                         <div class="clearfix"></div>
                                     </form>

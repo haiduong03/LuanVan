@@ -99,10 +99,7 @@ export default {
       );
       if (result.data.message === "ĐĂNG KÍ THÀNH CÔNG") {
         alert("ĐĂNG KÍ THÀNH CÔNG!!! XIN VUI LÒNG ĐĂNG NHẬP");
-        setTimeout(function () {
-          this.$router.push("/")
-        }, 300);
-
+        this.$router.push("/user/dangnhap")
       }
       else {
         alert(result.data.message);

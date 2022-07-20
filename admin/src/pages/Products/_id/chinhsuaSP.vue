@@ -23,8 +23,8 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <label for="inputState" required>Hệ điều hành</label>
-                                <select class="form-control">
-                                    <option v-for=" (os, index) in LIST_HEDIEUHANH" :key="index"
+                                <select v-model="HEDIEUHANH" class="form-control">
+                                    <option v-for=" (os, index) in LIST_HEDIEUHANH" :key="index" :value="os.ID"
                                         :selected="os.ID == HEDIEUHANH">
                                         {{ os.TEN }}
                                     </option>
@@ -34,8 +34,8 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <label for="inputState">Thương hiệu</label>
-                                <select class="form-control">
-                                    <option v-for="(brand, index) in LIST_THUONGHIEU" :key="index"
+                                <select v-model="THUONGHIEU" class="form-control">
+                                    <option v-for="(brand, index) in LIST_THUONGHIEU" :key="index" :value="brand.ID"
                                         :selected="brand.ID == THUONGHIEU">
                                         {{ brand.TEN }}
                                     </option>
@@ -45,11 +45,13 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <label for="inputState">CPU</label>
-                                <select class="form-control">
-                                    <option v-for=" (cpu, index) in LIST_CPU" :key="index" :selected="cpu.ID == CPU">
+                                <select v-model="CPU" class="form-control">
+                                    <option v-for=" (cpu, index) in LIST_CPU" :key="index" :value="cpu.ID"
+                                        :selected="cpu.ID == CPU">
                                         {{ cpu.TEN }}
                                     </option>
                                 </select>
+
                             </div>
                         </div>
                         <div class="row">
@@ -67,8 +69,8 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <label for="inputState">LOẠI Ổ CỨNG</label>
-                                <select class="form-control">
-                                    <option v-for=" (drive, index) in LIST_OCUNG" :key="index"
+                                <select v-model="OCUNG" class="form-control">
+                                    <option v-for=" (drive, index) in LIST_OCUNG" :key="index" :value="drive.ID"
                                         :selected="drive.ID == OCUNG">
                                         {{ drive.TEN }}
                                     </option>
@@ -83,8 +85,9 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <label for="inputState">LOẠI RAM</label>
-                                <select class="form-control">
-                                    <option v-for=" (ram, index) in LIST_RAM" :key="index" :selected="ram.ID == RAM">
+                                <select v-model="RAM" class="form-control">
+                                    <option v-for=" (ram, index) in LIST_RAM" :key="index" :value="ram.ID"
+                                        :selected="ram.ID == RAM">
                                         {{ ram.TEN }}
                                     </option>
                                 </select>
@@ -222,7 +225,6 @@ export default {
             this.DUNGLUONGRAM = result.data[0].DUNGLUONGRAM;
             this.MOTA = result.data[0].MOTA;
             this.ANHCU = result.data[0].ANH;
-            // console.log(result.data[0])
         },
         async updateSP() {
             if (this.ANH == null) {
@@ -253,6 +255,7 @@ export default {
             if (result.data === "SỬA THÀNH CÔNG") {
                 alert(result.data);
                 this.$router.push('/quanlysanpham/sanpham');
+                window.location.reload();
             }
             else {
                 alert(result.data);

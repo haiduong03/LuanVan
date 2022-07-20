@@ -7,7 +7,7 @@
         <div class="row" style="background-color:#fff">
           <form class="form-inline my-2 my-lg-0 ml-5" style="width:100%;">
             <input v-model="name" class="form-control mr-sm-2" style="width:75%;" type="search" placeholder="Tìm kiếm"
-              aria-label="Search" @keyup.enter="findByName(name)">
+              aria-label="Search" @keypress.enter="findByName(name)">
             <button @click="findByName(name)" type="button" class="btn btn-light"
               style="color:black;background-color:#fff;border-color:greenyellow">
               <i class="nc-icon nc-zoom-split" style="color:black;font-size: 16px;"></i>

@@ -242,8 +242,12 @@ export default {
                             "Authorization": `Bearer ${token}`
                         }
                     });
-                alert(result.data);
-                this.$router.push('/quanlysanpham/sanpham');
+                if (result.data === "THÊM THÀNH CÔNG") {
+                    alert(result.data);
+                    this.$router.push('/quanlysanpham/sanpham');
+                    window.location.reload();
+                }
+                else alert(result.data);
             }
         }
     }

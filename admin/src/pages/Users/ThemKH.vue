@@ -87,8 +87,8 @@ export default {
                     GIOITINH: this.GIOITINH,
                 },
             );
-            if (result.data.message === "TẠO THÀNH CÔNG") {
-                alert(result.data.message);
+            if (result.data.message === "ĐĂNG KÍ THÀNH CÔNG") {
+                alert("THÊM MỚI THÀNH CÔNG");
                 this.$router.push('/quanlyuser/khachhang')
             }
             else {

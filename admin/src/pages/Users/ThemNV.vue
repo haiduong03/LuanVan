@@ -93,7 +93,7 @@ export default {
           }
         });
       if (result.data.message === "TẠO THÀNH CÔNG") {
-        alert(result.data.message);
+        alert("THÊM MỚI THÀNH CÔNG");
         this.$router.push('/quanlyuser/nhanvien')
       }
       else {

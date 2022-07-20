@@ -11,8 +11,8 @@
                         </template>
                         <div style="background-color:#fff">
                             <form class="form-inline my-2 my-lg-0 ml-5" style="width:100%;">
-                                <input v-model="id" class="form-control mr-sm-2" style="width:80%;" type="search"
-                                    placeholder="Tìm kiếm" aria-label="Search">
+                                <input @keypress.enter="findByID(id)" v-model="id" class="form-control mr-sm-2"
+                                    style="width:80%;" type="search" placeholder="Tìm kiếm" aria-label="Search">
                                 <button @click="findByID(id)" @keypress.enter="findByID(id)" type="button"
                                     class="btn btn-light" style="color:black;background-color:#fff;border-color:cyan">
                                     <i class="nc-icon nc-zoom-split" style="color:black;font-size: 16px;"></i>
