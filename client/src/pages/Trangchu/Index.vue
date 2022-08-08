@@ -11,19 +11,16 @@
         </div>
       </div>
       <div class="container">
-        <khuyenmai />
+        <SanPham />
       </div>
     </div>
   </div>
 </template>
 <script>
-import Khuyenmai from "../../components/Khuyenmai.vue";
-import axios from "axios";
+import SanPham from "../Products/SanPham.vue"
 export default {
   components: {
-    Khuyenmai
+    SanPham
   },
 };
 </script>
-<style>
-</style>

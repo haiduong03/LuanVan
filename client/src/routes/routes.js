@@ -1,14 +1,14 @@
 // import DashboardLayout from "../layout/DashboardLayout.vue";
 import IndexLayout from "../layout/IndexLayout.vue";
 // GeneralViews
-import NotFound from "../pages/NotFoundPage.vue";
+// import NotFound from "../pages/NotFoundPage.vue";
 
 import DangNhapUser from "src/pages/Users/DangNhap.vue";
 import DangKyUser from "src/pages/Users/DangKy.vue";
 import TrangChu from "src/pages/Trangchu/Index.vue";
-import ChiTietSP from "src/pages/Products/_id/chitietsp.vue";
+import ChiTietSP from "src/pages/Products/ChiTietSanPham.vue";
 
-import ThongTinCaNhan from "src/pages/Users/_id/thongtincanhan.vue";
+import ThongTinCaNhan from "src/pages/Users/ThongTin.vue";
 
 import DonHang from "src/pages/Cart/DonHang.vue";
 import ChiTietDonHang from "src/pages/Cart/ChiTietDonHang.vue";
@@ -91,10 +91,10 @@ const routes = [
   //     path: "/dangnhap",
   //     component: DangNhapUser,
   // },
-  {
-    path: "*",
-    component: NotFound,
-  },
+  // {
+  //   path: "*",
+  //   component: NotFound,
+  // },
 ];
 
 /**

@@ -64,7 +64,8 @@ export default {
                 alert("Vui lòng nhập đầy đủ thông tin")
             }
             else {
-                const result = await axios.post("http://localhost:3000/user/login", {
+                // console.log(this.EMAIL, this.PASS)
+                const result = await axios.post("http://localhost:3000/admin/login", {
                     EMAIL: this.EMAIL,
                     PASS: this.PASS,
                 });

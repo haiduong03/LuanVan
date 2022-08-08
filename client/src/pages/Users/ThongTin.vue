@@ -8,27 +8,26 @@
             <div class="form-row">
               <div class="form-group col-md-12">
                 <label>Email</label>
-                <input style="background-color:black;" type="email" class="form-control" id="inputEmail4" :value="EMAIL"
-                  disabled>
+                <input style="background-color:black;" type="email" class="form-control" :value="EMAIL" disabled>
               </div>
             </div>
             <div class="form-row">
               <div class="form-group col-md-12">
                 <label>Họ và tên</label>
-                <input v-model="TEN" type="text" class="form-control" id="inputEmail4">
+                <input v-model="TEN" type="text" class="form-control">
               </div>
             </div>
 
             <div class="form-row">
               <div class="form-group col-md-12">
                 <label>Số điện thoại</label>
-                <input v-model="SODIENTHOAI" type="number" class="form-control" id="inputPassword4">
+                <input v-model="SODIENTHOAI" type="number" class="form-control">
               </div>
             </div>
             <div class="form-row">
               <div class="form-group col-md-12">
                 <label>Địa chỉ</label>
-                <input v-model="DIACHI" type="text" class="form-control" id="inputCity">
+                <input v-model="DIACHI" type="text" class="form-control">
               </div>
             </div>
             <div class="form-row">
@@ -55,13 +54,13 @@
             <div class="form-row">
               <div class="form-group col-md-12">
                 <label>mật khẩu cũ</label>
-                <input v-model="PASS_OLD" type="password" class="form-control" id="inputinputPassword4">
+                <input v-model="PASS_OLD" type="password" class="form-control">
               </div>
             </div>
             <div class="form-row">
               <div class="form-group col-md-12">
                 <label>mật khẩu mới</label>
-                <input v-model="PASS_NEW" type="password" class="form-control" id="inputPassword4">
+                <input v-model="PASS_NEW" type="password" class="form-control">
               </div>
             </div>
             <div class="form-row">
@@ -112,7 +111,6 @@ export default {
       this.SODIENTHOAI = result.data[0].SODIENTHOAI;
       this.DIACHI = result.data[0].DIACHI;
       this.GIOITINH = result.data[0].GIOITINH;
-
     },
     async updateKH() {
       let message = "BẠN CÓ MUỐN CẬP NHẬT THÔNG TIN ???"

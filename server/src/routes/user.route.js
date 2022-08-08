@@ -33,6 +33,6 @@ router.get("/find-usr-mail/:EMAIL", token.verifyToken, user.findUsrMail);
 
 router.get("/find-usr-phone/:PHONE", token.verifyToken, user.findUsrPhone);
 
-router.post("/login", token.login);
+router.post("/login", token.loginUser);
 
 module.exports = router;

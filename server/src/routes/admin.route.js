@@ -33,6 +33,6 @@ router.get("/find-adm-mail/:EMAIL", token.verifyToken, admin.findAdmMail);
 
 router.get("/find-adm-phone/:PHONE", token.verifyToken, admin.findAdmPhone);
 
-router.post("/login", token.login);
+router.post("/login", token.loginAdmin);
 
 module.exports = router;

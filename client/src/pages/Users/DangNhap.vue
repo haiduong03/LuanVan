@@ -32,7 +32,7 @@
                                                 </button>
                                             </div>
                                             <div class="col-5">
-                                                <button @click.prevent="login()" type="submit"
+                                                <button @click.prevent="registerd()" type="submit"
                                                     class="btn btn-primary btn-fill float-right">
                                                     Đăng kí
                                                 </button>
@@ -86,6 +86,9 @@ export default {
                 }
             }
         },
+        registerd() {
+            this.$router.push("/user/dangky")
+        }
     }
 }
 </script>

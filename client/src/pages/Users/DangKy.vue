@@ -98,7 +98,7 @@ export default {
         },
       );
       if (result.data.message === "ĐĂNG KÍ THÀNH CÔNG") {
-        alert("ĐĂNG KÍ THÀNH CÔNG!!! XIN VUI LÒNG ĐĂNG NHẬP");
+        alert(`${result.data.message}` + `!!! XIN VUI LÒNG ĐĂNG NHẬP`);
         this.$router.push("/user/dangnhap")
       }
       else {

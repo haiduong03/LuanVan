@@ -165,7 +165,7 @@ export default {
             const result = await axios.post(`http://localhost:3000/order/add-order`,
                 {
                     ID: this.user.ID,
-                    SUM: this.sum,
+                    SUM: this.total,
                     QTY: qty,
                     DATE: datetime,
                     CART: this.carts
@@ -190,7 +190,7 @@ export default {
                 localStorage.removeItem("cart");
                 setTimeout(function () {
                     window.location.reload();
-                }, 1500);
+                }, 1000);
                 this.$router.push("/")
             }
         },

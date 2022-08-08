@@ -3,76 +3,85 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <card class="strpied-tabled-with-hover" body-classes="table-full-width table-responsive">
-                        <template slot="header">
-                            <h5 class="card-title" style="font-weight: bold">
-                                Danh sách đơn hàng
-                            </h5>
-                        </template>
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>STT</th>
-                                    <th>Mã đơn hàng</th>
-                                    <th>Tên Khách Hàng</th>
-                                    <th>Số lượng</th>
-                                    <th>Tổng </th>
-                                    <th>Ngày đặt hàng</th>
-                                    <th>Trạng thái</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="mouse-hover" v-for="(order, index) in pageOfitems" :key="index">
-                                    <td @click="detail(order.ID)">{{ index + 1 }}</td>
-                                    <td @click="detail(order.ID)">{{ order.ID }}</td>
-                                    <td @click="detail(order.ID)">{{ order.TEN }}</td>
-                                    <td @click="detail(order.ID)" style="text-align: center;">{{ order.SOLUONG }}</td>
-                                    <td @click="detail(order.ID)">{{ order.TONG | numeral("0,0") }} VND</td>
-                                    <td @click="detail(order.ID)">{{ order.NGAYDAT | formatDate }}</td>
-                                    <template v-if="order.TRANGTHAI == 4">
-                                        <button ype="button" class="btn btn-danger btn-fill float-righ">
-                                            Đã hủy
-                                        </button>
-                                    </template>
-                                    <template v-else-if="order.TRANGTHAI == 0">
-                                        <button type="button" class="btn btn-primary btn-fill float-righ">
-                                            Chờ xác nhận
-                                        </button>
-                                        &nbsp;
-                                        <button @click="cancel(order.ID)" type="button"
-                                            class="btn btn-danger btn-fill float-righ">
-                                            Hủy
-                                        </button>
-                                    </template>
-                                    <template v-else-if="order.TRANGTHAI == 1">
-                                        <button type="button" class="btn btn-info btn-fill float-righ">
-                                            Đã xác nhận
-                                        </button>
-                                    </template>
-                                    <template v-else-if="order.TRANGTHAI == 2">
-                                        <button type="button" class="btn btn-warning btn-fill float-righ">
-                                            Đang vận chuyển
-                                        </button>
-                                    </template>
-                                    <template v-else-if="order.TRANGTHAI == 3">
-                                        <button type="button" class="btn btn-success btn-fill float-righ">
-                                            Đã hoàn thành
-                                        </button>
-                                    </template>
-                                    <template v-else>
-                                        <button type="button" class="btn btn-warning btn-fill float-righ">
-                                            Đã hủy
-                                        </button>
-                                    </template>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <div style="text-align: center">
-                            <jw-pagination :pageSize="10" :items="orders" @changePage="onChangePage"
-                                :labels="customLabels">
-                            </jw-pagination>
-                        </div>
-                    </card>
+                    <template v-if="orders.length > 0">
+                        <card class=" strpied-tabled-with-hover" body-classes="table-full-width table-responsive">
+
+                            <template slot="header">
+                                <h5 class="card-title" style="font-weight: bold">
+                                    Danh sách đơn hàng
+                                </h5>
+                            </template>
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>STT</th>
+                                        <th>Mã đơn hàng</th>
+                                        <th>Tên Khách Hàng</th>
+                                        <th>Số lượng</th>
+                                        <th>Tổng </th>
+                                        <th>Ngày đặt hàng</th>
+                                        <th>Trạng thái</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="mouse-hover" v-for="(order, index) in pageOfitems" :key="index">
+                                        <td @click="detail(order.ID)">{{ index + 1 }}</td>
+                                        <td @click="detail(order.ID)">{{ order.ID }}</td>
+                                        <td @click="detail(order.ID)">{{ order.TEN }}</td>
+                                        <td @click="detail(order.ID)" style="text-align: center;">{{ order.SOLUONG }}
+                                        </td>
+                                        <td @click="detail(order.ID)">{{ order.TONG | numeral("0,0") }} VND</td>
+                                        <td @click="detail(order.ID)">{{ order.NGAYDAT | formatDate }}</td>
+                                        <template v-if="order.TRANGTHAI == 4">
+                                            <button ype="button" class="btn btn-danger btn-fill float-righ">
+                                                Đã hủy
+                                            </button>
+                                        </template>
+                                        <template v-else-if="order.TRANGTHAI == 0">
+                                            <button type="button" class="btn btn-primary btn-fill float-righ">
+                                                Chờ xác nhận
+                                            </button>
+                                            &nbsp;
+                                            <button @click="cancel(order.ID)" type="button"
+                                                class="btn btn-danger btn-fill float-righ">
+                                                Hủy
+                                            </button>
+                                        </template>
+                                        <template v-else-if="order.TRANGTHAI == 1">
+                                            <button type="button" class="btn btn-info btn-fill float-righ">
+                                                Đã xác nhận
+                                            </button>
+                                        </template>
+                                        <template v-else-if="order.TRANGTHAI == 2">
+                                            <button type="button" class="btn btn-warning btn-fill float-righ">
+                                                Đang vận chuyển
+                                            </button>
+                                        </template>
+                                        <template v-else-if="order.TRANGTHAI == 3">
+                                            <button type="button" class="btn btn-success btn-fill float-righ">
+                                                Đã hoàn thành
+                                            </button>
+                                        </template>
+                                        <template v-else>
+                                            <button type="button" class="btn btn-warning btn-fill float-righ">
+                                                Đã hủy
+                                            </button>
+                                        </template>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div style="text-align: center">
+                                <jw-pagination :pageSize="10" :items="orders" @changePage="onChangePage"
+                                    :labels="customLabels">
+                                </jw-pagination>
+                            </div>
+
+
+                        </card>
+                    </template>
+                    <template v-else>
+                        <h1 style=" text-align: center;"> ĐƠN HÀNG TRỐNG </h1>
+                    </template>
                 </div>
             </div>
         </div>

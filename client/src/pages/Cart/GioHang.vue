@@ -176,7 +176,7 @@ export default {
       //     type: 'success'
       //   })
       if (!localStorage.user)
-        this.$router.push(`/dangnhap`)
+        this.$router.push(`/user/dangnhap`)
       else {
         this.$router.push(`/giohang/thanhtoan`)
       }
