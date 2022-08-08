@@ -16,14 +16,12 @@
 import TopNavbarPro from './TopNavbarPro.vue'
 import ContentFooter from './ContentFooter.vue'
 import DashboardContent from './Content.vue'
-import MobileMenu from './MobileMenu.vue'
 import MenuBar from './MenuBar.vue'
 export default {
   components: {
     TopNavbarPro,
     ContentFooter,
     DashboardContent,
-    MobileMenu,
     MenuBar
   },
   methods: {
