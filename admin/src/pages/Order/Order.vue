@@ -211,4 +211,7 @@ export default {
 }
 </script>
 <style>
+td {
+    cursor: pointer;
+}
 </style>
