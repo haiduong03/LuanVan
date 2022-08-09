@@ -1,7 +1,7 @@
 <template>
     <nav class="navbar navbar-expand-lg navbar-light bg-primary container">
         <a class="navbar-brand" href="#/home" style="color:white;">LaptopDD</a>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class=" navbar-collapse" id="navbarSupportedContent">
             <!-- <form class="form-inline my-2 my-lg-0 ml-5" style="width:100%;">
                 <input class="form-control mr-sm-2" style="width:75%;" type="search" placeholder="Tìm kiếm"
                     aria-label="Search">
@@ -19,6 +19,10 @@
                             <a class="dropdown-item" @click="logout()">Đăng xuất</a>
                         </base-dropdown>
                     </li>
+                    <router-link style="text-decoration: none; color: inherit;" to="/giohang">
+                        <p style="font-weight: bold; margin-top:8px; font-size:25px; color:orange"
+                            class="nc-icon nc-cart-simple">{{ this.cart }} </p>
+                    </router-link>
                 </template>
                 <template v-else>
                     <li class="nav-item dropdown ml-auto mr-1">
@@ -27,19 +31,23 @@
                             <a class="dropdown-item" href="#/user/dangnhap">Đăng nhập</a>
                         </base-dropdown>
                     </li>
+                    <router-link style="text-decoration: none; color: inherit;" to="/giohang">
+                        <p style="font-weight: bold; margin-top:8px; font-size:25px; color:orange"
+                            class="nc-icon nc-cart-simple">{{ this.cart }} </p>
+                    </router-link>
                 </template>
                 <li class="nav-item mr-5" style="list-style-type: none;width: max-content !important;">
                     <!-- <a class="nc-icon nc-cart-simple" style="color: white" href="#">&nbsp;Giỏ hàng
                     <span>(0)</span>
                     </a> -->
-                    <div style="
+                    <!-- <div style="
                     padding-top: 16px;
 
                     display: inline;
                     padding: 7px;
                   ">
-                        &nbsp;
-                        <!-- <span style="
+                        &nbsp; -->
+                    <!-- <span style="
                       position: absolute;
                       right: 397px;
                       top: 10px;
@@ -53,11 +61,11 @@
                       color: rgb(255, 255, 255) !important;
                       padding-top:2px;
                     "></span> -->
-                        <router-link style="text-decoration: none; color: inherit;" to="/giohang">
+                    <!-- <router-link style="text-decoration: none; color: inherit;" to="/giohang">
                             <p style="font-weight: bold; margin-top:8px; font-size:25px; color:orange"
                                 class="nc-icon nc-cart-simple">{{ this.cart }} </p>
                         </router-link>
-                    </div>
+                    </div> -->
                 </li>
             </ul>
         </div>

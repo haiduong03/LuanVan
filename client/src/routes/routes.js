@@ -14,7 +14,7 @@ import DonHang from "src/pages/Cart/DonHang.vue";
 import ChiTietDonHang from "src/pages/Cart/ChiTietDonHang.vue";
 import GioHang from "src/pages/Cart/GioHang.vue";
 import ThanhToan from "src/pages/Cart/ThanhToan.vue";
-
+import ChinhSach from "src/pages/Trangchu/ChinhSach.vue";
 const routes = [
   {
     path: "/",
@@ -25,6 +25,11 @@ const routes = [
         path: "home",
         name: "Home",
         component: TrangChu,
+      },
+      {
+        path: "chinhsach",
+        name: "ChinhSach",
+        component: ChinhSach,
       },
     ],
   },
