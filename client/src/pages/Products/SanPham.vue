@@ -101,7 +101,7 @@
             </div>
             <!-- </div> -->
             <template v-if="this.products.length > 0">
-              <div class="row" style="margin-top: 20px;align-items: center ;">
+              <div class="row" style="margin-top: 20px; align: center;">
                 <div v-for="(product, index) in pageOfitems" :key="index" class="col-sm-3">
                   <div class="card" style="heigth: 250px">
                     <router-link :to="`/quanlysanpham/${product.ID}/chitietsp`">

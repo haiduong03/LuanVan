@@ -99,14 +99,27 @@
                             </div>
                         </div>
 
-                        <div class="row">
+                        <!-- <div class="row">
                             <div class="col-md-12">
                                 <label for="formFile" class="form-label">Ảnh sản phẩm </label>
-
                                 <base-input v-model="ANH" @change="onFileChange" type="file">
                                 </base-input>
                             </div>
+                        </div> -->
+                        <div class="row">
+                            <div class="col-md-4">
+                                <base-input v-model="BAOHANH" type="number" label="Thời gian bảo hành (Tháng)" required>
+                                </base-input>
+                            </div>
+                            <!-- <div class="row"> -->
+                            <div class="col-md-8">
+                                <label for="formFile" class="form-label">Ảnh sản phẩm</label>
+                                <base-input v-model="ANH" @change="onFileChange" type="file">
+                                </base-input>
+                            </div>
+                            <!-- </div> -->
                         </div>
+
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
@@ -150,6 +163,7 @@ export default {
             MOTA: null,
             ANH: null,
             ANHCU: null,
+            BAOHANH: null,
             LIST_HEDIEUHANH: [],
             LIST_THUONGHIEU: [],
             LIST_CPU: [],
@@ -225,6 +239,7 @@ export default {
             this.DUNGLUONGRAM = result.data[0].DUNGLUONGRAM;
             this.MOTA = result.data[0].MOTA;
             this.ANHCU = result.data[0].ANH;
+            this.BAOHANH = result.data[0].BAOHANH;
         },
         async updateSP() {
             if (this.ANH == null) {

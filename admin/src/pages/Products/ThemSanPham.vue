@@ -60,7 +60,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-4">
-                                <base-input v-model="BAOHANH" type="number" label="Thời gian bảo hành" required>
+                                <base-input v-model="BAOHANH" type="number" label="Thời gian bảo hành (Tháng)" required>
                                 </base-input>
                             </div>
                             <!-- <div class="row"> -->

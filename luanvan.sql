@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 16, 2022 at 12:00 AM
+-- Generation Time: Aug 09, 2022 at 01:36 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -33,22 +33,6 @@ CREATE TABLE `chitietdonhang` (
   `SOLUONG` int(11) NOT NULL,
   `GIA` decimal(11,0) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `chitietdonhang`
---
-
-INSERT INTO `chitietdonhang` (`ID_DONHANG`, `ID_SANPHAM`, `SOLUONG`, `GIA`) VALUES
-('202271533957', 1, 2, '5000000'),
-('202271534040', 5, 1, '20000000'),
-('202271534110', 20, 1, '12000000'),
-('20227156178', 1, 1, '5000000'),
-('20227156178', 9, 1, '25000000'),
-('20227156178', 14, 1, '15000000'),
-('202271561716', 1, 1, '5000000'),
-('202271561716', 14, 1, '15000000'),
-('202271561716', 9, 1, '25000000'),
-('202271643552', 19, 4, '1523000');
 
 -- --------------------------------------------------------
 
@@ -92,18 +76,6 @@ CREATE TABLE `donhang` (
   `NGAYDAT` datetime NOT NULL,
   `TRANGTHAI` smallint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `donhang`
---
-
-INSERT INTO `donhang` (`ID`, `ID_NGUOIDUNG`, `SOLUONG`, `TONG`, `NGAYDAT`, `TRANGTHAI`) VALUES
-('202271533957', 6, 2, 10000000, '2022-07-15 03:39:57', 1),
-('202271534040', 12, 1, 20000000, '2022-07-15 03:40:40', 4),
-('202271534110', 5, 1, 12000000, '2022-07-15 03:41:10', 2),
-('202271561716', 3, 3, 45000000, '2022-07-15 06:17:16', 3),
-('20227156178', 4, 3, 45000000, '2022-07-15 06:17:08', 0),
-('202271643552', 4, 4, 6092000, '2022-07-16 04:35:52', 0);
 
 -- --------------------------------------------------------
 
@@ -173,7 +145,7 @@ CREATE TABLE `nguoidung` (
 --
 
 INSERT INTO `nguoidung` (`ID`, `TEN`, `EMAIL`, `PASS`, `SODIENTHOAI`, `DIACHI`, `GIOITINH`, `LOAI`, `TRANGTHAI`) VALUES
-(3, 'khanhduy', 'khanhduy@gmail.com', '$2a$05$M/PeqYdZgcCPN0Hftx7.xuhQodQ.j0HSP9d/UTrn0eDtgWdpQB6aS', 1234567890, '180 cao lo phuong 4 quan 8 tphcm', 0, 0, 1),
+(3, 'khanhduy', 'khanhduy@gmail.com', '$2a$05$M/PeqYdZgcCPN0Hftx7.xuhQodQ.j0HSP9d/UTrn0eDtgWdpQB6aS', 1234567890, '180 cao lo phuong 4 quan 8 tphcm', 0, 0, 0),
 (4, 'hải dương', 'haiduong@gmail.com', '$2a$05$Tbf4W9aDScuNdinFZZzmbeFOkX92c4uoJNF.WgKinWwH55Kv3Ea/2', 1234567890, '180 cao lo phuong 4 quan 8 tphcm', 0, 0, 0),
 (5, 'phạm  đăng hải dương', 'haiduong1@gmail.com', '$2a$05$A7nGlP1LTkposLzc1I566.AgP5YN2LmCE7TePBNhd55ycS2EnSEM.', 1234567890, '180 cao lo phuong 4 quan 8 tphcm', 0, 1, 0),
 (6, 'haiduong', 'kahnhduy1@gmail.com', '$2a$05$KMm4J3UCwiN//RoDKYm3/uBeqdb1RrQlYnAUzPqL9E33H4GXG0hvq', 1234567890, '180 cao lo phuong 4 quan 8 tphcm', 0, 1, 1),
@@ -181,24 +153,8 @@ INSERT INTO `nguoidung` (`ID`, `TEN`, `EMAIL`, `PASS`, `SODIENTHOAI`, `DIACHI`, 
 (8, 'khanhduy', 'khanhduy111@gmail.com', '$2a$05$uGSdcfF0DPtPTjKQPgC3mOAmY/v5oCzzO4Aron5FmKTOugWt/7l8q', 1234567890, '180 cao lo phuong 4 quan 8 tphcm', 0, 1, 0),
 (9, 'haiduong', 'haiduong12@gmail.com', '$2a$05$q6R2A9OYsHU2POYUji62X.ydZdU19e2YkdglibCjRt3o/inQak.1m', 1234567890, '180 cao lo phuong 4 quan 8 tphcm', 0, 0, 0),
 (10, 'haiduong', 'haiduong12123@gmail.com', '$2a$05$SskjDTe6Q/AGXxy8AEsPRur6c2fNVHKbci4rEF9v/2UHnl0h7Ry5i', 1234567890, '180 cao lo phuong 4 quan 8 tphcm', 0, 0, 0),
-(11, 'hai', 'hai@gmail.com', '$2a$05$JwaIf.UtLH2/XiheAGNgMuv41/iwmKs6eoPH0d1YgZckweXZl1Ph2', 1234567890, '180 cao lỗ', 1, 1, 0),
-(12, 'khanh', 'khanh@gmail.com', '$2a$05$KW67IEEtcNm/M1r39eaaqewVxjTi4TmaOblFOmok6Av9G4RCXOs8y', 1234567890, '180 cao lỗ', 1, 1, 0),
-(13, 'duong', 'duong@gmail.com', '$2a$05$sSeBkERiIZl77C4bsdbk6O5J3qOwUHX2jogI.3n7eJNXDpByahr0S', 1234567890, '123456', 1, 1, 0),
-(14, 'duong', 'd@gmail.com', '$2a$05$V4yAh3U9WUVIYxovUNrXSu1hOV2yILVNdxnQSK6uWUTXM0N.c0z..', 1234567890, '180 cao lỗ', 1, 1, 0),
-(15, 'dương', 'u@gmail.com', '$2a$05$pDCUGByYfxEtfR39gjWodeJkZFGNfvXQ3nFalwLH39Q5p/ufcZyP6', 1234567890, '152615646', 1, 0, 0),
-(16, 'haiduong', 'hai1245@gmail.com', '$2a$05$98Bpy38Bey/RbqGGfWC4IOz6RcNi0skSiyFpuucoIAFJjXR1538EG', 1234567890, '180 long an', 1, 1, 0),
-(17, 'DUY', 'duy@gmail.com', '$2a$05$xQeJQHJaJdWKulXwc7Q9eO1AVnXG988BMWq4CncOkgBKxibVUU.EG', 1234567890, '123456789', 0, 0, 0),
-(18, 'duy ', 'duy11@gmail.com', '$2a$05$aNq0VOV047QRVVL5BSfgl.g7F.fgkLo4gK2YpWGqXMweSYJm0pcdW', 1234567890, 'thành phố hồ chí minh', 1, 1, 0),
-(19, 'huy', 'huy@gmail.com', '$2a$05$MghWkyy/jxGYDPbpBF8EAezxZ0nAnzIiIuZcc5hZ1iw.SYIBt7psO', 2147483647, '1231456789', 0, 1, 0),
-(20, 'khanh', 'khanh@gamil.com', '$2a$05$J.MkLOqBtzBYdxKxY5IUn.Hbm/g7kYPH9dSTz9rSBjSoP7gnBltpO', 1234567890, '87qư86r4qắ', 1, 1, 0),
-(21, 'trần khánh duy', 'khahdy@gamil.com', '$2a$05$MtPNzA1IET08eKqKTpD3MOSImcrO0bAyXJ5OiBJtRqay8lgvOpCIG', 1234567890, 'thành phố hồ chí minh', 0, 1, 0),
-(22, 'hải dương', 'hidg@gmail.com', '$2a$05$m53m7LBs36kK/6kbmBJQBuQKDXxogqh07VVQUqqLhtglT/m49AK1a', 1234567891, 'thành phố hồ chí minh', 1, 1, 0),
-(23, 'trần khánh duy', 'khanh1@gamil.com', '$2a$05$qDZwIhQMidHO2wXuP4phjOMrcS1AMAiSgM8ZaweSrcMJLbC8UGbYq', 1234567890, 'thành phố hồ chí minh', 0, 0, 0),
-(24, 'khán', 'khanh@gamil.com', '$2a$05$KOiS44rcSbPRQ90WAK39Ve.ZQy1u8eNgWdl6j3DSZRmHxqbhgXJyO', 1234589710, 'aifghuikqwgifukqh', 0, 0, 0),
-(25, 'phạm dương', 'pmdung@gmail.com', '$2a$05$/t/cFhQBOXJraA8fc5yvxOrdyT2fURS2/ehKwZQEUE4g2qE28XHFG', 1234567890, 'thành phố hồ chí minh', 1, 0, 0),
-(26, 'dung', 'DY@GMAIL.COM', '$2a$05$Eu8RNf2vK4uOQNwcET8biu3ngZ0Ai9vKalHJg/qU.lQ0QlaRpEjC6', 1234567891, 'thành phố hồ chí minh', 0, 0, 0),
-(27, 'hải', 'pham@gmail.com', '$2a$05$ld3jYLlXYe1gD096w.od.eEraCczFL9D33v52HPwxUuCGI4x9P6X6', 1234567890, 'thành phố hồ chí minh', 0, 0, 0),
-(28, 'trần', 'tran@gmail.com', '$2a$05$NomQWWj7q3O/1rCdi4YGvuPViFzcus9T3BAHoOSPr0qqli2K9wrDm', 1234567890, 'thành phố hồ chí minh', 0, 0, 0);
+(28, 'trần', 'tran@gmail.com', '$2a$05$NomQWWj7q3O/1rCdi4YGvuPViFzcus9T3BAHoOSPr0qqli2K9wrDm', 1234567890, 'thành phố hồ chí minh', 0, 0, 0),
+(29, 'Phạm Đăng Hải Dương', 'haidg@gmail.com', '$2a$05$ctS0G6w7kUYgvALXz6ynfO24sAm7WO8.tiZDKXFWMIUCpiDQL5snW', 942008730, 'thành phố hồ chí minh', 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -260,6 +216,7 @@ CREATE TABLE `sanpham` (
   `DUNGLUONGRAM` int(11) NOT NULL,
   `MOTA` longtext NOT NULL,
   `ANH` varchar(500) NOT NULL,
+  `BAOHANH` int(11) NOT NULL,
   `TRANGTHAI` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -267,24 +224,15 @@ CREATE TABLE `sanpham` (
 -- Dumping data for table `sanpham`
 --
 
-INSERT INTO `sanpham` (`ID`, `TEN`, `HEDIEUHANH_ID`, `THUONGHIEU_ID`, `CPU_ID`, `THONGTINCPU`, `GIA`, `OCUNG_ID`, `DUNGLUONGOCUNG`, `RAM_ID`, `DUNGLUONGRAM`, `MOTA`, `ANH`, `TRANGTHAI`) VALUES
-(1, 'THINKPAD T490', 2, 1, 2, '8250U', '5000000', 2, 500, 3, 16, 'ĐẾN TỪ LENOVO ', 'lenovo-thinkpad-e495-laptoppro-1.jpg', 0),
-(3, 'THINKPAD T490', 2, 1, 2, '8250U', '500000', 2, 500, 3, 16, 'ĐẾN TỪ LENOVO', 'macbook-m1-6301-1608832446-901-6791-7036-1644919107.jpg', 1),
-(4, 'NITRO5', 2, 4, 4, '9900K', '100000000', 2, 500, 3, 16, 'ĐẾN TỪ ACER', '38186_laptop_dell_latitude_3420_42lt342001_111.png', 0),
-(5, 'KATANA', 2, 3, 2, '11400H', '20000000', 2, 512, 3, 8, 'SỬ DỤNG VI XỬ LÍ INTEL® CORE™ I5 THẾ HỆ 11 MỚI NHẤT, HIỆU NĂNG CAO HƠN TỐI ĐA TỚI 40% SO VỚI THẾ HỆ TRƯỚC. MẠNH MẼ HƠN BAO GIỜ HẾT VỚI VI XỬ LÍ 6 NHÂN, XUNG TURBO HAI NHÂN TỐI ĐA TỚI 4.5GHZ GIÚP PHÁT HUY HIỆU SUẤT TỐI ĐA TRONG VIỆC XỬ LÍ GAME, PHẦN MỀM CÔNG VIỆC VÀ TÁC VỤ ĐA NHIỆM.\n\nGEFORCE RTX™ 30 SERIES GPU MANG ĐẾN SỨC MẠNH TỐI THƯỢNG CHO GAME THỦ VÀ NGƯỜI SÁNG TẠO NỘI DUNG. SỬ DỤNG KIẾN TRÚC AMPERE DANH GIÁ ĐÃ ĐẠT NHIỀU GIẢI THƯỞNG UY TÍN —CŨNG LÀ KIẾN TRÚC RTX THẾ HỆ THỨ 2 CỦA NVIDIA —VỚI NHÂN RT VÀ NHÂN TENSOR MỚI, CÙNG VỚI ĐA NHÂN XỬ LÍ STREAMING GIÚP ĐEM LẠI ĐỒ HỌA RAY-TRACING SIÊU CHÂN THỰC VÀ CÁC TÍNH NĂNG AI TÂN TIẾN NHẤT.', 'product_1619086146fdfbc8b34331ebecbf18cb444480b7d1_ac2062f64fe84910a66f33a40a7f03b2.webp', 0),
-(6, 'KATANA', 2, 3, 2, '11400H', '20000000', 2, 512, 3, 8, 'SỬ DỤNG VI XỬ LÍ INTEL® CORE™ I5 THẾ HỆ 11 MỚI NHẤT, HIỆU NĂNG CAO HƠN TỐI ĐA TỚI 40% SO VỚI THẾ HỆ TRƯỚC. MẠNH MẼ HƠN BAO GIỜ HẾT VỚI VI XỬ LÍ 6 NHÂN, XUNG TURBO HAI NHÂN TỐI ĐA TỚI 4.5GHZ GIÚP PHÁT HUY HIỆU SUẤT TỐI ĐA TRONG VIỆC XỬ LÍ GAME, PHẦN MỀM CÔNG VIỆC VÀ TÁC VỤ ĐA NHIỆM.\n\nGEFORCE RTX™ 30 SERIES GPU MANG ĐẾN SỨC MẠNH TỐI THƯỢNG CHO GAME THỦ VÀ NGƯỜI SÁNG TẠO NỘI DUNG. SỬ DỤNG KIẾN TRÚC AMPERE DANH GIÁ ĐÃ ĐẠT NHIỀU GIẢI THƯỞNG UY TÍN —CŨNG LÀ KIẾN TRÚC RTX THẾ HỆ THỨ 2 CỦA NVIDIA —VỚI NHÂN RT VÀ NHÂN TENSOR MỚI, CÙNG VỚI ĐA NHÂN XỬ LÍ STREAMING GIÚP ĐEM LẠI ĐỒ HỌA RAY-TRACING SIÊU CHÂN THỰC VÀ CÁC TÍNH NĂNG AI TÂN TIẾN NHẤT.', 'product_1619086146fdfbc8b34331ebecbf18cb444480b7d1_ac2062f64fe84910a66f33a40a7f03b2.webp', 0),
-(7, 'KATANA', 2, 3, 2, '11400H', '20000000', 2, 512, 3, 8, 'SỬ DỤNG VI XỬ LÍ INTEL® CORE™ I5 THẾ HỆ 11 MỚI NHẤT, HIỆU NĂNG CAO HƠN TỐI ĐA TỚI 40% SO VỚI THẾ HỆ TRƯỚC. MẠNH MẼ HƠN BAO GIỜ HẾT VỚI VI XỬ LÍ 6 NHÂN, XUNG TURBO HAI NHÂN TỐI ĐA TỚI 4.5GHZ GIÚP PHÁT HUY HIỆU SUẤT TỐI ĐA TRONG VIỆC XỬ LÍ GAME, PHẦN MỀM CÔNG VIỆC VÀ TÁC VỤ ĐA NHIỆM.\n\nGEFORCE RTX™ 30 SERIES GPU MANG ĐẾN SỨC MẠNH TỐI THƯỢNG CHO GAME THỦ VÀ NGƯỜI SÁNG TẠO NỘI DUNG. SỬ DỤNG KIẾN TRÚC AMPERE DANH GIÁ ĐÃ ĐẠT NHIỀU GIẢI THƯỞNG UY TÍN —CŨNG LÀ KIẾN TRÚC RTX THẾ HỆ THỨ 2 CỦA NVIDIA —VỚI NHÂN RT VÀ NHÂN TENSOR MỚI, CÙNG VỚI ĐA NHÂN XỬ LÍ STREAMING GIÚP ĐEM LẠI ĐỒ HỌA RAY-TRACING SIÊU CHÂN THỰC VÀ CÁC TÍNH NĂNG AI TÂN TIẾN NHẤT.', 'product_1619086146fdfbc8b34331ebecbf18cb444480b7d1_ac2062f64fe84910a66f33a40a7f03b2.webp', 0),
-(8, 'NITRO 5 EAGLE AN515 57 54MV', 2, 4, 2, '11400H', '21000000', 2, 512, 3, 16, 'VỚI SỰ KẾT HỢP TỪ CPU CORE I5 -11400H VÀ GPU NVIDIA GEFORCE RTX 3050, LAPTOP ACER NITRO 5 EAGLE AN515-57 SẼ CHO CHÚNG TA HIỆU NĂNG TỐT ĐỂ XỬ LÝ CÁC CÔNG VIỆC ĐỒ HỌA ĐƠN GIẢN TRÊN CÁC PHẦN MỀM CHUYÊN DỤNG, TỐC ĐỘ XỬ LÝ THÔNG TIN CŨNG TƯƠNG ĐỐI NHANH VÀ MƯỢT. \n\nCÙNG VỚI ĐÓ RAM 8 GB CÓ KHẢ NĂNG NÂNG CẤP TỐI ĐA LÊN ĐẾN 32 GB GIÚP ĐA NHIỆM TỐT, THOẢI MÁI SỬ DỤNG NHIỀU ỨNG DỤNG CÙNG LÚC HAY MỞ NHIỀU TAB CHROME.\n\nNGOÀI RA, ACER GAMING NITRO 5 EAGLE AN515-57-54MV CÒN ĐƯỢC TRANG BỊ SSD M.2 VỚI 512GB VẬN HÀNH NHANH, PHẢN HỒI MỌI TÁC VỤ CHỈ TRONG VÀI GIÂY. CÙNG VỚI ĐÓ, ACER CŨNG TRANG BỊ KHE CẮM HDD CHO NGƯỜI DÙNG CÓ NHU CẦU NÂNG CẤP KHÔNG GIAN LƯU TRỮ.', 'nitro_5_eagle__3__a52ef47b567b48ceb1d7b6f8078e2c07.webp', 0),
-(9, 'TUF A15 FA507RC HN051W', 2, 2, 8, '6800H', '25000000', 2, 512, 3, 16, 'ĐẾN TỪ ASUS', 'gearvn-laptop-gaming-asus-tuf-a15-fa507rc-hn051w-1_c5df613e590d466696cd74ed2f30ce2d.webp', 0),
-(10, 'BRAVO 15 B5DD 276VN', 2, 3, 7, '5600H', '15000000', 2, 512, 3, 16, 'ĐẾN TỪ MSI', 'gearvn-laptop-gaming-msi-bravo-15-b5dd-276vn-5_bc5418ca2d9f499895ddd4f20a563fa6.webp', 0),
-(11, 'BRAVO 15 B5DD 276VN', 2, 3, 7, '5600H', '15000000', 2, 512, 3, 16, 'ĐẾN TỪ MSI', 'gearvn-laptop-gaming-msi-bravo-15-b5dd-276vn-5_bc5418ca2d9f499895ddd4f20a563fa6.webp', 0),
-(12, 'BRAVO 15 B5DD 276VN', 2, 3, 7, '5600H', '15000000', 2, 512, 3, 16, 'ĐẾN TỪ MSI', 'gearvn-laptop-gaming-msi-bravo-15-b5dd-276vn-5_bc5418ca2d9f499895ddd4f20a563fa6.webp', 0),
-(13, 'BRAVO 15 B5DD 276VN', 2, 3, 7, '5600H', '15000000', 2, 512, 3, 16, 'ĐẾN TỪ MSI', 'gearvn-laptop-gaming-msi-bravo-15-b5dd-276vn-5_bc5418ca2d9f499895ddd4f20a563fa6.webp', 0),
-(14, 'BRAVO 15 B5DD 276VN', 2, 3, 7, '5600H', '15000000', 2, 512, 3, 16, 'ĐẾN TỪ MSI', 'gearvn-laptop-gaming-msi-bravo-15-b5dd-276vn-5_bc5418ca2d9f499895ddd4f20a563fa6.webp', 0),
-(15, 'BRAVO 15 B5DD 276VN', 2, 3, 7, '5600H', '15000000', 2, 512, 3, 16, 'ĐẾN TỪ MSI', 'gearvn-laptop-gaming-msi-bravo-15-b5dd-276vn-5_bc5418ca2d9f499895ddd4f20a563fa6.webp', 0),
-(18, 'QFW', 4, 2, 3, 'QỪQỪ', '1234124', 2, 214214, 1, 21421, '12421412', 'gearvn-laptop-gaming-asus-tuf-a15-fa507rc-hn051w-1_c5df613e590d466696cd74ed2f30ce2d.webp', 0),
-(19, 'THINKPAD E14', 2, 1, 8, '6500U', '1523000', 2, 512, 3, 16, 'OKE', '36154_thinkpad_e14_ct1_03.png', 0),
-(20, 'MACBOOK PRO', 3, 5, 2, '8250U', '12000000', 2, 512, 3, 17, 'SẢN PHẨM ĐẾN TỪ APPLE', 'macbook-m1-6301-1608832446-901-6791-7036-1644919107.jpg', 0);
+INSERT INTO `sanpham` (`ID`, `TEN`, `HEDIEUHANH_ID`, `THUONGHIEU_ID`, `CPU_ID`, `THONGTINCPU`, `GIA`, `OCUNG_ID`, `DUNGLUONGOCUNG`, `RAM_ID`, `DUNGLUONGRAM`, `MOTA`, `ANH`, `BAOHANH`, `TRANGTHAI`) VALUES
+(1, 'THINKPAD T490', 2, 1, 2, '8250U', '5000000', 2, 500, 3, 16, 'ĐẾN TỪ LENOVO ', 'lenovo-thinkpad-e495-laptoppro-1.jpg', 36, 1),
+(4, 'NITRO 5', 2, 4, 4, '9900K', '100000000', 2, 500, 3, 16, 'ĐẾN TỪ ACER', '38186_laptop_dell_latitude_3420_42lt342001_111.png', 36, 0),
+(5, 'KATANA', 2, 3, 2, '11400H', '20000000', 2, 512, 3, 8, 'SỬ DỤNG VI XỬ LÍ INTEL® CORE™ I5 THẾ HỆ 11 MỚI NHẤT, HIỆU NĂNG CAO HƠN TỐI ĐA TỚI 40% SO VỚI THẾ HỆ TRƯỚC. MẠNH MẼ HƠN BAO GIỜ HẾT VỚI VI XỬ LÍ 6 NHÂN, XUNG TURBO HAI NHÂN TỐI ĐA TỚI 4.5GHZ GIÚP PHÁT HUY HIỆU SUẤT TỐI ĐA TRONG VIỆC XỬ LÍ GAME, PHẦN MỀM CÔNG VIỆC VÀ TÁC VỤ ĐA NHIỆM.\n\nGEFORCE RTX™ 30 SERIES GPU MANG ĐẾN SỨC MẠNH TỐI THƯỢNG CHO GAME THỦ VÀ NGƯỜI SÁNG TẠO NỘI DUNG. SỬ DỤNG KIẾN TRÚC AMPERE DANH GIÁ ĐÃ ĐẠT NHIỀU GIẢI THƯỞNG UY TÍN —CŨNG LÀ KIẾN TRÚC RTX THẾ HỆ THỨ 2 CỦA NVIDIA —VỚI NHÂN RT VÀ NHÂN TENSOR MỚI, CÙNG VỚI ĐA NHÂN XỬ LÍ STREAMING GIÚP ĐEM LẠI ĐỒ HỌA RAY-TRACING SIÊU CHÂN THỰC VÀ CÁC TÍNH NĂNG AI TÂN TIẾN NHẤT.', 'product_1619086146fdfbc8b34331ebecbf18cb444480b7d1_ac2062f64fe84910a66f33a40a7f03b2.webp', 36, 0),
+(8, 'NITRO 5 EAGLE AN515 57 54MV', 2, 4, 2, '11400H', '21000000', 2, 512, 3, 16, 'VỚI SỰ KẾT HỢP TỪ CPU CORE I5 -11400H VÀ GPU NVIDIA GEFORCE RTX 3050, LAPTOP ACER NITRO 5 EAGLE AN515-57 SẼ CHO CHÚNG TA HIỆU NĂNG TỐT ĐỂ XỬ LÝ CÁC CÔNG VIỆC ĐỒ HỌA ĐƠN GIẢN TRÊN CÁC PHẦN MỀM CHUYÊN DỤNG, TỐC ĐỘ XỬ LÝ THÔNG TIN CŨNG TƯƠNG ĐỐI NHANH VÀ MƯỢT. \n\nCÙNG VỚI ĐÓ RAM 8 GB CÓ KHẢ NĂNG NÂNG CẤP TỐI ĐA LÊN ĐẾN 32 GB GIÚP ĐA NHIỆM TỐT, THOẢI MÁI SỬ DỤNG NHIỀU ỨNG DỤNG CÙNG LÚC HAY MỞ NHIỀU TAB CHROME.\n\nNGOÀI RA, ACER GAMING NITRO 5 EAGLE AN515-57-54MV CÒN ĐƯỢC TRANG BỊ SSD M.2 VỚI 512GB VẬN HÀNH NHANH, PHẢN HỒI MỌI TÁC VỤ CHỈ TRONG VÀI GIÂY. CÙNG VỚI ĐÓ, ACER CŨNG TRANG BỊ KHE CẮM HDD CHO NGƯỜI DÙNG CÓ NHU CẦU NÂNG CẤP KHÔNG GIAN LƯU TRỮ.', 'nitro_5_eagle__3__a52ef47b567b48ceb1d7b6f8078e2c07.webp', 36, 0),
+(9, 'TUF A15 FA507RC HN051W', 2, 2, 8, '6800H', '25000000', 2, 512, 3, 16, 'ĐẾN TỪ ASUS', 'gearvn-laptop-gaming-asus-tuf-a15-fa507rc-hn051w-1_c5df613e590d466696cd74ed2f30ce2d.webp', 36, 0),
+(14, 'BRAVO 15 B5DD 276VN', 2, 3, 7, '5600H', '15000000', 2, 512, 3, 16, 'ĐẾN TỪ MSI', 'gearvn-laptop-gaming-msi-bravo-15-b5dd-276vn-5_bc5418ca2d9f499895ddd4f20a563fa6.webp', 36, 0),
+(19, 'THINKPAD E14', 2, 1, 8, '6500U', '1523000', 2, 512, 3, 16, 'OKE', '36154_thinkpad_e14_ct1_03.png', 36, 0),
+(20, 'MACBOOK PRO', 3, 5, 2, '8250U', '12000000', 2, 512, 3, 17, 'SẢN PHẨM ĐẾN TỪ APPLE', 'macbook-m1-6301-1608832446-901-6791-7036-1644919107.jpg', 36, 0);
 
 --
 -- Indexes for dumped tables
@@ -377,7 +325,7 @@ ALTER TABLE `hedieuhanh`
 -- AUTO_INCREMENT for table `nguoidung`
 --
 ALTER TABLE `nguoidung`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `ocung`
@@ -395,7 +343,7 @@ ALTER TABLE `ram`
 -- AUTO_INCREMENT for table `sanpham`
 --
 ALTER TABLE `sanpham`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- Constraints for dumped tables

@@ -179,4 +179,9 @@ export default {
   }
 }
 </script>
-
+<style>
+td {
+  vertical-align: middle;
+  text-align: center;
+}
+</style>

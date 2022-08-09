@@ -146,8 +146,8 @@ export default {
     },
 
     update(id, qty) {
-      if (parseInt(qty) <= 0 && parseInt(id) > 10) {
-        alert("Số lượng sản phẩm chỉ được từ 1 đến 10 ")
+      if (parseInt(qty) <= 0 || parseInt(qty) > 10) {
+        alert("Số lượng sản phẩm chỉ được từ 1 đến 10 ");
       } else {
         const cart = JSON.parse(localStorage.cart);
         for (let index = 0; index < cart.length; index++) {
