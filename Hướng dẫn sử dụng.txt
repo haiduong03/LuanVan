@@ -1,0 +1,29 @@
+- Cài các phần mềm: nvm (Nodejs management), npm (Nodejs) v12.22
+	+ Link nvm (.exe cho window): "https://github.com/coreybutler/nvm-windows/releases"
+
+- Truy cập cmd (terminal/power shell) dưới quyền administrator
+
+- Kiểm tra phiên bản nvm và npm bằng command: nvm version, npm -v, node -v 
+
+- Tải node v12.22 bằng command: 
+	+ nvm install 12 -> nvm list (kiểm tra danh sách node version) -> nvm use 12.22.12
+
+- Khởi động server (backend) bằng command:
+	+ cd luanvan (truy cập thư mục luanvan)
+	+ cd server (truy cập thư mục server)
+	+ npm i (tải node module)
+	+ npm run dev (khởi động server)
+
+- Khởi động client và admin (frontend) bằng command:
+	+ cd luanvan (truy cập thư mục luanvan)
+	+ cd client/admin (truy cập thư mục client/admin)
+	+ npm i (tải node module)
+	+ npm run dev (khởi động client/admin)
+
+- Giải pháp khi tải node module lỗi:
+	+ Cách 1:
+		- Sử dụng command: npm i -force
+	+ Cách 2:
+		- Xóa thư mục node_modules và package-lock.json
+		- Tải lại thư mục node_module bằng command: npm i
+		
