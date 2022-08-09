@@ -56,7 +56,7 @@
             <div style="text-align: left">
               <button data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-danger btn-fill float-right"
                 @click="paid()">
-                Thanh toán
+                Đặt hàng
               </button>
             </div>
           </template>

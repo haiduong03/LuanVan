@@ -38,8 +38,8 @@
                                 <label for="inputEmail4">Địa chỉ:</label>
                                 <input type="text" class="form-control" id="inputAddress" :value="user.DIACHI">
                             </div>
-                            <button type="submit" class="row-sm-2 btn-primary btn-fill btn btn-lg btn-block"
-                                @click="order()">Thanh toán</button>
+                            <div><button type="submit" class="row-sm-2 btn-primary btn-fill btn btn-lg btn-block"
+                                    @click="order()">Đặt hàng</button></div>
                         </form>
                     </div>
                 </div>

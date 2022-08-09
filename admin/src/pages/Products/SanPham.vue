@@ -116,7 +116,8 @@ export default {
     return {
       products: [],
       pageOfitems: [],
-      name: null
+      name: null,
+      customLabels,
     };
   },
   mounted() {
