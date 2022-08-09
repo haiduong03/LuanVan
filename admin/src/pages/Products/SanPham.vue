@@ -92,7 +92,8 @@
             </tbody>
           </table>
           <div style="text-align: center">
-            <jw-pagination :pageSize="10" :items="products" @changePage="onChangePage"></jw-pagination>
+            <jw-pagination :pageSize="10" :items="products" @changePage="onChangePage" :labels="customLabels">
+            </jw-pagination>
           </div>
         </card>
       </div>
@@ -103,8 +104,14 @@
 <script>
 import axios from "axios";
 
-export default {
+const customLabels = {
+  first: '<<',
+  last: '>>',
+  previous: '<',
+  next: '>'
+};
 
+export default {
   data() {
     return {
       products: [],

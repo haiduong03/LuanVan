@@ -24,96 +24,84 @@
               margin-top: 20px;
               margin-left: 0px;
             "></div>
-          <div class="col-2"><br><br>
-
-            <div class="row ">
-              <br><br>
-
-              <div class="container" style=" font-weight: bold; color: blue; text-align: center;">LỌC SẢN PHẨM</div>
-              <br><br>
-              <ul>
-                <div class="dropdown">
-                  <li class=" container " style=" font-weight: bold; color: blue; text-align: center;">
-                    THƯƠNG HIỆU
-                  </li>
-                  <div class="dropdown-content">
-                    <template v-for="brand in LIST_THUONGHIEU">
-                      <a @click="findByBrand(brand.ID)" class="badge badge-pill badge-primary"
-                        style="color: #fff margin: 20px; margin-top: 5px; margin-bottom: 5px; width: 100px; font-size: 15px; border-color: #fff">
-                        {{ brand.TEN }}
-                      </a>
-                    </template>
-                  </div>
-                </div>
-                <br><br>
-                <div class="dropdown">
-                  <li class="container " style="font-weight: bold; color: blue; text-align: center;">
-                    CPU
-                  </li>
-                  <div class="dropdown-content">
-                    <template v-for="cpu in LIST_CPU">
-                      <a @click="findByCpu(cpu.ID)" class="badge badge-pill badge-info"
-                        style="color: #fff margin: 20px; margin-top: 5px; margin-bottom: 5px; width: 100px; font-size: 15px; border-color: #fff">
-                        {{ cpu.TEN }}
-                      </a>
-                    </template>
-                  </div>
-                </div>
-                <br><br>
-                <div class="dropdown">
-                  <li class="container " style="font-weight: bold; color: blue; text-align: center;">
-                    RAM
-                  </li>
-                  <div class="dropdown-content">
-                    <template v-for="ram in LIST_RAM">
-                      <a @click="findByRam(ram.ID)" class="badge badge-pill badge-success"
-                        style="color: #fff margin: 20px; margin-top: 5px; margin-bottom: 5px; width: 100px; font-size: 15px; border-color: #fff">
-                        {{ ram.TEN }}</a>
-                    </template>
-                  </div>
-                </div>
-                <br><br>
-                <div class="dropdown">
-                  <li class="container " style="font-weight: bold; color: blue; text-align: center;">
-                    Ổ CỨNG
-                  </li>
-                  <div class="dropdown-content">
-                    <template v-for="drive in LIST_OCUNG">
-                      <a @click="findByDrive(drive.ID)" class="badge badge-pill badge-danger"
-                        style="color: #fff margin: 20px; margin-top: 5px; margin-bottom: 5px; width: 100px; font-size: 15px; border-color: #fff">
-                        {{
-                            drive.TEN
-                        }}</a>
-                    </template>
-                  </div>
-                </div>
-                <br><br>
-                <div class="dropdown">
-                  <li class="container " style="font-weight: bold; color: blue; text-align: center;">
-                    HỆ ĐIỀU HÀNH
-                  </li>
-                  <div class="dropdown-content">
-                    <template v-for="os in LIST_HEDIEUHANH">
-                      <a @click="findByOs(os.ID)" class="badge badge-pill badge-warning"
-                        style="color: #fff margin: 20px; margin-top: 5px; margin-bottom: 5px; width: 100px; font-size: 15px; border-color: #fff">
-                        {{
-                            os.TEN
-                        }}</a>
-                    </template>
-                  </div>
-                </div>
-              </ul>
-
-
-            </div>
-            <br />
-            <!-- <div class="row">
-            </div> -->
-          </div>
           <!-- products -->
-          <div class=" col-10">
+          <div class=" col-12">
+            <!-- <div class="row "> -->
+            <br>
+            <div class="container" style=" font-weight: bold; color: blue; text-align: center; ">LỌC SẢN PHẨM:
+              <!-- <ul> -->&emsp;&emsp;&emsp;
+              <div class="dropdown">
+                <div class=" container " style=" font-weight: bold; color: blue; text-align: center;">
+                  THƯƠNG HIỆU
+                </div>
+                <div class="dropdown-content">
+                  <template v-for="brand in LIST_THUONGHIEU">
+                    <a @click="findByBrand(brand.ID)" class="badge badge-pill badge-primary"
+                      style="color: #fff; margin: 20px; margin-top: 5px; margin-bottom: 5px; width: 100px; font-size: 15px; border-color: #fff">
+                      {{ brand.TEN }}
+                    </a>
+                  </template>
+                </div>
+              </div>
+              <div class="dropdown">
+                <div class="container " style="font-weight: bold; color: blue; text-align: center;">
+                  CPU
+                </div>
+                <div class="dropdown-content">
+                  <template v-for="cpu in LIST_CPU">
+                    <a @click="findByCpu(cpu.ID)" class="badge badge-pill badge-info"
+                      style="color: #fff; margin: 20px; margin-top: 5px; margin-bottom: 5px; width: 100px; font-size: 15px; border-color: #fff">
+                      {{ cpu.TEN }}
+                    </a>
+                  </template>
+                </div>
+              </div>
+              <div class="dropdown">
+                <div class="container " style="font-weight: bold; color: blue; text-align: center;">
+                  RAM
+                </div>
+                <div class="dropdown-content">
+                  <template v-for="ram in LIST_RAM">
+                    <a @click="findByRam(ram.ID)" class="badge badge-pill badge-success"
+                      style="color: #fff; margin: 20px; margin-top: 5px; margin-bottom: 5px; width: 100px; font-size: 15px; border-color: #fff">
+                      {{ ram.TEN }}</a>
+                  </template>
+                </div>
+              </div>
+              <div class="dropdown">
+                <div class="container " style="font-weight: bold; color: blue; text-align: center;">
+                  Ổ CỨNG
+                </div>
+                <div class="dropdown-content">
+                  <template v-for="drive in LIST_OCUNG">
+                    <a @click="findByDrive(drive.ID)" class="badge badge-pill badge-danger"
+                      style="color: #fff; margin: 20px; margin-top: 5px; margin-bottom: 5px; width: 100px; font-size: 15px; border-color: #fff">
+                      {{
+                          drive.TEN
+                      }}</a>
+                  </template>
+                </div>
+              </div>
+              <div class="dropdown">
+                <div class="container " style="font-weight: bold; color: blue; text-align: center;">
+                  HỆ ĐIỀU HÀNH
+                </div>
+                <div class="dropdown-content">
+                  <template v-for="os in LIST_HEDIEUHANH">
+                    <a @click="findByOs(os.ID)" class="badge badge-pill badge-warning"
+                      style="color: #fff; margin: 20px; margin-top: 5px; margin-bottom: 5px; width: 100px; font-size: 15px; border-color: #fff">
+                      {{
+                          os.TEN
+                      }}</a>
+                  </template>
+                </div>
+              </div>
+              <!-- </ul> -->
+              <!-- <br><br> -->
+            </div>
+            <!-- </div> -->
             <template v-if="this.products.length > 0">
-              <div class="row" style="margin-top: 20px;align-items: right ;">
+              <div class="row" style="margin-top: 20px;align-items: center ;">
                 <div v-for="(product, index) in pageOfitems" :key="index" class="col-sm-3">
                   <div class="card" style="heigth: 250px">
                     <router-link :to="`/quanlysanpham/${product.ID}/chitietsp`">
@@ -147,6 +135,7 @@
               </div>
             </template>
           </div>
+
           <div class="col-md-12" style="
               border-top: 2px solid #6c757d;
               margin-top: 13px;
@@ -262,8 +251,9 @@ export default {
   }
   
   .dropdown-content {
+    cursor: pointer;
     display: none;
-    position: sticky;
+    position: absolute;
     background-color: #f9f9f9;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);

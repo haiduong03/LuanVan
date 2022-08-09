@@ -51,17 +51,25 @@
                                 </base-input>
                             </div>
                         </div>
-                        <!-- <div class="row">
-                            <div class="col-md-12">
-                                <base-input v-model="TOCDOCPU" type="text" label="Tốc độ cpu " required>
-                                </base-input>
-                            </div>
-                        </div> -->
+
                         <div class="row">
                             <div class="col-md-12">
                                 <base-input v-model="GIA" type="number" label="Giá sản phẩm" required>
                                 </base-input>
                             </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <base-input v-model="BAOHANH" type="number" label="Thời gian bảo hành" required>
+                                </base-input>
+                            </div>
+                            <!-- <div class="row"> -->
+                            <div class="col-md-8">
+                                <label for="formFile" class="form-label">Ảnh sản phẩm</label>
+                                <base-input v-model="ANH" @change="onFileChange" type="file">
+                                </base-input>
+                            </div>
+                            <!-- </div> -->
                         </div>
                         <div class="row">
                             <div class="col-md-4">
@@ -93,19 +101,18 @@
                                 </base-input>
                             </div>
                         </div>
-                        <div class="row">
+                        <!-- <div class="row">
                             <div class="col-md-12">
                                 <label for="formFile" class="form-label">Ảnh sản phẩm</label>
                                 <base-input v-model="ANH" @change="onFileChange" type="file">
                                 </base-input>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="exampleFormControlTextarea1">Mô tả</label>
-                                    <textarea v-model="MOTA" class="form-control" id="exampleFormControlTextarea1"
-                                        rows="6"></textarea>
+                                    <textarea v-model="MOTA" class="form-control" rows="6"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -143,6 +150,7 @@ export default {
             DUNGLUONGRAM: null,
             MOTA: null,
             ANH: null,
+            BAOHANH: null,
             LIST_HEDIEUHANH: [],
             LIST_THUONGHIEU: [],
             LIST_CPU: [],
@@ -215,7 +223,8 @@ export default {
                 !this.RAM ||
                 !this.DUNGLUONGRAM ||
                 !this.MOTA ||
-                !this.ANH) {
+                !this.ANH ||
+                !this.BAOHANH) {
                 alert("KHÔNG ĐƯỢC ĐỂ TRỐNG");
             } else {
                 const token = localStorage.token;
@@ -232,7 +241,8 @@ export default {
                         RAM_ID: this.RAM,
                         DUNGLUONGRAM: this.DUNGLUONGRAM,
                         MOTA: this.MOTA,
-                        ANH: this.ANH
+                        ANH: this.ANH,
+                        BAOHANH: this.BAOHANH
                     }
                     , {
                         headers: {

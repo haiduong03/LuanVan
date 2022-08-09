@@ -235,7 +235,7 @@
 </template>
 <script>
 import axios from "axios";
-import LTable from "src/components/Table.vue";
+// import LTable from "src/components/Table.vue";
 import Card from "src/components/Cards/Card.vue";
 
 const customLabels = {
@@ -248,7 +248,7 @@ const customLabels = {
 
 export default {
     components: {
-        LTable,
+        // LTable,
         Card,
     },
     data() {

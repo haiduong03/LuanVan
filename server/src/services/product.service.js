@@ -23,6 +23,7 @@ async function getAllPro() {
 			SP.DUNGLUONGRAM,
 			SP.MOTA,
 			SP.ANH,
+			SP.BAOHANH,
 			SP.TRANGTHAI
 		FROM
 			SANPHAM SP
@@ -51,6 +52,7 @@ async function getAllProActive(page) {
 			SP.DUNGLUONGRAM,
 			SP.MOTA,
 			SP.ANH,
+			SP.BAOHANH,
 			SP.TRANGTHAI
 		FROM
 			SANPHAM SP
@@ -92,6 +94,7 @@ async function findProById(id) {
 			SP.DUNGLUONGRAM,
 			SP.MOTA,
 			SP.ANH,
+			SP.BAOHANH,
 			SP.TRANGTHAI
 		FROM
 			SANPHAM SP
@@ -124,6 +127,7 @@ async function findProByName(name) {
 			SP.DUNGLUONGRAM,
 			SP.MOTA,
 			SP.ANH,
+			SP.BAOHANH,
 			SP.TRANGTHAI
 		FROM
 			SANPHAM SP
@@ -155,6 +159,7 @@ async function findProByBrand(id) {
 			SP.DUNGLUONGRAM,
 			SP.MOTA,
 			SP.ANH,
+			SP.BAOHANH,
 			SP.TRANGTHAI
 		FROM
 			SANPHAM SP
@@ -186,6 +191,7 @@ async function findProByCpu(id) {
 			SP.DUNGLUONGRAM,
 			SP.MOTA,
 			SP.ANH,
+			SP.BAOHANH,
 			SP.TRANGTHAI
 		FROM
 			SANPHAM SP
@@ -217,6 +223,7 @@ async function findProByRam(id) {
 			SP.DUNGLUONGRAM,
 			SP.MOTA,
 			SP.ANH,
+			SP.BAOHANH,
 			SP.TRANGTHAI
 		FROM
 			SANPHAM SP
@@ -248,6 +255,7 @@ async function findProByDrive(id) {
 			SP.DUNGLUONGRAM,
 			SP.MOTA,
 			SP.ANH,
+			SP.BAOHANH,
 			SP.TRANGTHAI
 		FROM
 			SANPHAM SP
@@ -279,6 +287,7 @@ async function findProByOS(id) {
 			SP.DUNGLUONGRAM,
 			SP.MOTA,
 			SP.ANH,
+			SP.BAOHANH,
 			SP.TRANGTHAI
 		FROM
 			SANPHAM SP
@@ -319,9 +328,10 @@ async function addProduct(product) {
 			DUNGLUONGRAM,
 			MOTA,
 			ANH,
+			BAOHANH,
 			TRANGTHAI)
 		VALUES
-			(?,?,?,?,?,?,?,?,?,?,?,?,0)`,
+			(?,?,?,?,?,?,?,?,?,?,?,?,?,0)`,
 		[
 			product.TEN.toUpperCase(),
 			product.HEDIEUHANH_ID,
@@ -335,6 +345,7 @@ async function addProduct(product) {
 			product.DUNGLUONGRAM,
 			product.MOTA.toUpperCase(),
 			product.ANH.replace("C:\\fakepath\\", " ").trimStart(),
+			product.BAOHANH,
 		],
 	);
 	if (result.affectedRows) {
@@ -360,7 +371,8 @@ async function updateProduct(id, product) {
 				RAM_ID=?,
 				DUNGLUONGRAM=?,
 				MOTA=?,
-				ANH=?
+				ANH=?,
+				BAOHANH=?
 		WHERE
 			ID = ?`,
 		[
@@ -376,6 +388,7 @@ async function updateProduct(id, product) {
 			product.DUNGLUONGRAM,
 			product.MOTA.toUpperCase(),
 			product.ANH.replace("C:\\fakepath\\", " ").trimStart(),
+			product.BAOHANH,
 			id,
 		],
 	);

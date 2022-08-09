@@ -1,6 +1,6 @@
 <template>
-    <div class="content">
 
+    <div class="content"><br>
         <!-- <div class="container-fluid"> -->
         <div class="container">
             <nav aria-label="breadcrumb">
@@ -11,30 +11,32 @@
                 </ol>
             </nav>
             <div class="row">
-                <h5 class="card-title" style="font-weight: bold">
-                    <!-- Laptop Asus TUF Gaming FX506LHB-HN188W i5 10300H/8GB/512GB/15.6"FHD/GTX 1650 4GB/Win11 -->
+                <!-- <h4 class="card-title" style="font-weight: bold; text-align: center;">
                     LAPTOP
                     {{ THUONGHIEU + " " + TEN + " " + CPU + " " + THONGTINCPU + "/" + DUNGLUONGRAM + "GB/" +
                             DUNGLUONGOCUNG + "GB/" + HEDIEUHANH
                     }}
-                </h5>
-            </div>
+                </h4> -->
+            </div><br>
             <div class="row">
                 <!-- left -->
                 <div class="col-md-6">
                     <div class="col-12">
-                        <div class="card" style="">
+                        <div class="container"><br><br>
                             <img class="img-fluid" :src="'http://localhost:3000/' + ANH + ''" alt="..." />
                         </div>
                     </div>
                 </div>
                 <!--right-->
                 <div class="col-md-6">
+                    <div class="card-title" style="font-weight: bold; text-align: center; font-size: 20px;">
+                        <!-- LAPTOP -->
+                        {{ THUONGHIEU + " " + TEN }}
+                        <br>
+                        {{ CPU + " " + THONGTINCPU + "/" + DUNGLUONGRAM + "GB/" + DUNGLUONGOCUNG + "GB/" + HEDIEUHANH }}
+                    </div>
                     <div class="col-12">
-                        <!-- <h5 class="card-title" style="font-weight: bold">
-                            &nbsp;
-                        </h5> -->
-                        <table class="table table-bordered">
+                        <table class="table table-bordered  ">
                             <thead>
                                 <tr>
                                     <td colspan="2" style="font-weight: bold; text-align: center!important;">Thông số
@@ -58,7 +60,7 @@
                                 <tr>
                                     <td>RAM</td>
                                     <td>
-                                        {{ RAM + " " + DUNGLUONGRAM }}GB BUSS 3200MHz
+                                        {{ RAM + " " + DUNGLUONGRAM }}GB
                                     </td>
                                 </tr>
                                 <tr>
@@ -76,6 +78,10 @@
                                 <tr>
                                     <td>Hệ điều hành</td>
                                     <td>{{ HEDIEUHANH }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Bảo hành</td>
+                                    <td>{{ BAOHANH }} tháng</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -134,6 +140,7 @@ export default {
             THONGTINCPU: null,
             THUONGHIEU: null,
             ANH: null,
+            BAOHANH: null,
         }
     },
     mounted() {
@@ -167,6 +174,9 @@ export default {
             this.THONGTINCPU = result.data[0].THONGTINCPU;
             this.THUONGHIEU = result.data[0].THUONGHIEU;
             this.ANH = result.data[0].ANH;
+            this.BAOHANH = result.data[0].BAOHANH;
+            console.log(result.data);
+
         },
 
         addToCart() {
@@ -216,5 +226,5 @@ export default {
 };
 
 </script>
-<!-- <style lang="scss">
-</style> -->
+<style>
+</style>

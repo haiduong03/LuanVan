@@ -36,12 +36,12 @@
                       {{ index + 1 }}
                     </th>
                     <td>
-                      <img @click="detail(cart.ID)" class=" img-fluid" :src="'http://localhost:3000/' + cart.ANH + ''"
-                        alt="..." />
+                      <img @click="detail(cart.ID)" class="img-fluid mouse-hover"
+                        :src="'http://localhost:3000/' + cart.ANH + ''" alt="..." />
                     </td>
-                    <td @click="detail(cart.ID)">{{ cart.THUONGHIEU + cart.TEN }}</td>
+                    <td @click="detail(cart.ID)" class="mouse-hover">{{ cart.THUONGHIEU + cart.TEN }}</td>
                     <td style="text-align: center !important">
-                      <input type="number" label="Số lượng" min="0" step="1" v-model="cart.SL"
+                      <input type="number" label="Số lượng" min="1" max="10" step="1" v-model="cart.SL"
                         style=" width:70%; line-height: 30px; text-align: center;" @change="update(cart.ID, cart.SL)">
                     </td>
                     <td style="text-align: center !important">{{ cart.GIA * cart.SL | numeral("0,0") }} VND</td>
@@ -146,24 +146,28 @@ export default {
     },
 
     update(id, qty) {
-      const cart = JSON.parse(localStorage.cart);
-      for (let index = 0; index < cart.length; index++) {
-        if (cart[index].ID == id) {
-          cart[index].SL = parseInt(qty);
-          localStorage.setItem("cart", JSON.stringify(cart));
+      if (parseInt(qty) <= 0 && parseInt(id) > 10) {
+        alert("Số lượng sản phẩm chỉ được từ 1 đến 10 ")
+      } else {
+        const cart = JSON.parse(localStorage.cart);
+        for (let index = 0; index < cart.length; index++) {
+          if (cart[index].ID == id) {
+            cart[index].SL = parseInt(qty);
+            localStorage.setItem("cart", JSON.stringify(cart));
+          }
         }
+        this.$notifications.notify(
+          {
+            message: `<span>Cập nhật sản phẩm hàng thành công !!</span>`,
+            icon: 'nc-icon nc-cart-simple',
+            horizontalAlign: 'right',
+            verticalAlign: 'top',
+            type: 'success'
+          })
+        setTimeout(function () {
+          window.location.reload();
+        }, 1000);
       }
-      this.$notifications.notify(
-        {
-          message: `<span>Cập nhật sản phẩm hàng thành công !!</span>`,
-          icon: 'nc-icon nc-cart-simple',
-          horizontalAlign: 'right',
-          verticalAlign: 'top',
-          type: 'success'
-        })
-      setTimeout(function () {
-        window.location.reload();
-      }, 1000);
     },
     paid() {
 
@@ -187,5 +191,8 @@ export default {
   }
 };
 </script>
-<style lang="scss">
+<style >
+.mouse-hover {
+  cursor: pointer;
+}
 </style>
