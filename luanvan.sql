@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 09, 2022 at 01:36 PM
+-- Generation Time: Aug 09, 2022 at 02:28 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -28,11 +28,21 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `chitietdonhang` (
+  `ID` int(11) NOT NULL,
   `ID_DONHANG` varchar(100) NOT NULL,
   `ID_SANPHAM` int(11) NOT NULL,
   `SOLUONG` int(11) NOT NULL,
   `GIA` decimal(11,0) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `chitietdonhang`
+--
+
+INSERT INTO `chitietdonhang` (`ID`, `ID_DONHANG`, `ID_SANPHAM`, `SOLUONG`, `GIA`) VALUES
+(1, '202289192128', 5, 1, '20000000'),
+(2, '202289192132', 5, 1, '20000000'),
+(3, '202289192529', 5, 4, '20000000');
 
 -- --------------------------------------------------------
 
@@ -76,6 +86,15 @@ CREATE TABLE `donhang` (
   `NGAYDAT` datetime NOT NULL,
   `TRANGTHAI` smallint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `donhang`
+--
+
+INSERT INTO `donhang` (`ID`, `ID_NGUOIDUNG`, `SOLUONG`, `TONG`, `NGAYDAT`, `TRANGTHAI`) VALUES
+('202289192128', 4, 1, 20100000, '2022-08-09 19:21:28', 4),
+('202289192132', 4, 1, 20100000, '2022-08-09 19:21:32', 0),
+('202289192529', 4, 4, 80100000, '2022-08-09 19:25:29', 0);
 
 -- --------------------------------------------------------
 
@@ -242,6 +261,7 @@ INSERT INTO `sanpham` (`ID`, `TEN`, `HEDIEUHANH_ID`, `THUONGHIEU_ID`, `CPU_ID`, 
 -- Indexes for table `chitietdonhang`
 --
 ALTER TABLE `chitietdonhang`
+  ADD PRIMARY KEY (`ID`),
   ADD KEY `ID_DONHANG` (`ID_DONHANG`),
   ADD KEY `ID_sanpham` (`ID_SANPHAM`);
 
@@ -302,6 +322,12 @@ ALTER TABLE `sanpham`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `chitietdonhang`
+--
+ALTER TABLE `chitietdonhang`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `cpu`
